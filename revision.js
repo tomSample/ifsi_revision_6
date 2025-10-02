@@ -245,7 +245,7 @@ function checkAnswer() {
 }
 
 // Auto-évaluation de l'utilisateur
-function evaluate(evaluation) {
+function evaluateTerm(evaluation) {
     const currentTerm = currentSession[currentTermIndex];
     
     // Enregistrer le résultat
