@@ -126,6 +126,7 @@ header h2 {
     justify-content: center;
     align-items: center;
     min-height: 70vh;
+    width: 100%;
 }
 
 .term-card {
@@ -134,7 +135,8 @@ header h2 {
     padding: 2.5rem;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .term-header {
@@ -277,6 +279,12 @@ header h2 {
 }
 
 .eval-btn.wrong {
+    background: #ffebee;
+    color: #c62828;
+    border: 2px solid #ef5350;
+}
+
+.eval-btn.incorrect {
     background: #ffebee;
     color: #c62828;
     border: 2px solid #ef5350;
