@@ -1,0 +1,37 @@
+# Fichiers temporaires
+*.tmp
+*.temp
+temp_*
+
+# Fichiers de test
+test_*.txt
+exemple_*.txt
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+
+# Logs
+*.log
+
+# Fichiers Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environnements virtuels
+venv/
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

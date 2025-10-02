@@ -1,0 +1,1431 @@
+{
+  "exportDate": "2025-10-02T15:02:07.706068",
+  "courses": [
+    [
+      "ue_2_2_s1_organisation_de_la_cellule_au_tissu",
+      {
+        "title": "Organisation de la cellule au tissu",
+        "date": "22/09/2025",
+        "ue": "2.2.S1",
+        "author": "capsule",
+        "definitions": [
+          {
+            "definition": "Plus petite unité de base d’un organisme vivant, capable d’accomplir les fonctions nécessaires au métabolisme et à la vie.",
+            "term": "Cellule"
+          },
+          {
+            "definition": "Cellule sans noyau ni organites membranaires, avec le matériel génétique situé dans le cytoplasme (dans une zone appelée nucléoïde), généralement unicellulaire (exemple : bactéries).",
+            "term": "Cellule procaryote"
+          },
+          {
+            "definition": "Cellule possédant un noyau délimité par une double membrane contenant l’ADN, ainsi que des organites complexes (exemple : cellules humaines).",
+            "term": "Cellule eucaryote"
+          },
+          {
+            "definition": "Organite le plus volumineux chez les eucaryotes, contenant l’ADN et contrôlant les fonctions cellulaires.",
+            "term": "Noyau"
+          },
+          {
+            "definition": "Support de l’information génétique codant pour la synthèse des protéines.",
+            "term": "ADN (Acide désoxyribonucléique)"
+          },
+          {
+            "definition": "Complexe d’ADN associé à des protéines (histones) dans le noyau, réparti en euchromatine (active) et hétérochromatine (inactive).",
+            "term": "Chromatine"
+          },
+          {
+            "definition": "Partie de la cellule hors noyau, comprenant le cytosol, le cytosquelette et les organites.",
+            "term": "Cytoplasme"
+          },
+          {
+            "definition": "Milieu aqueux intra-cellulaire, siège de nombreuses réactions métaboliques.",
+            "term": "Cytosol"
+          },
+          {
+            "definition": "Réseau de protéines fibreuses assurant la forme, la rigidité, la motilité et le soutien de la cellule.",
+            "term": "Cytosquelette"
+          },
+          {
+            "definition": "Organites synthétisant les protéines selon les instructions de l’ARN.",
+            "term": "Ribosomes"
+          },
+          {
+            "definition": "Réseau membranaire subdivisé en RE rugueux (portant des ribosomes, synthèse des protéines) et RE lisse (synthèse des lipides).",
+            "term": "Réticulum endoplasmique (RE)"
+          },
+          {
+            "definition": "Organite chargé de modifier, maturer, trier et distribuer les protéines.",
+            "term": "Appareil de Golgi"
+          },
+          {
+            "definition": "Organites contenant des enzymes hydrolytiques dégradant les déchets cellulaires (présents uniquement chez les cellules animales).",
+            "term": "Lysosomes"
+          },
+          {
+            "definition": "Organites produisant l’énergie cellulaire sous forme d’ATP.",
+            "term": "Mitochondries"
+          },
+          {
+            "definition": "Vésicules enzymatiques intervenant dans la détoxification des déchets cellulaires.",
+            "term": "Peroxysomes"
+          },
+          {
+            "definition": "Barrière lipidique régulant les échanges entre la cellule et son environnement, supportant aussi des activités enzymatiques, énergétiques et le transfert d’informations.",
+            "term": "Membrane plasmique"
+          },
+          {
+            "definition": "Structures membranaires assurant la cohésion et la communication entre cellules (jonctions serrées, adhérentes, desmosomes, communicantes).",
+            "term": "Jonctions cellulaires"
+          },
+          {
+            "definition": "Ensemble de cellules partageant une structure et une fonction communes, avec une substance intercellulaire variable.",
+            "term": "Tissu"
+          },
+          {
+            "definition": "Tissu formé de cellules jointives reposant sur une membrane basale, jouant des rôles de protection, sécrétion, absorption.",
+            "term": "Tissu épithélial"
+          },
+          {
+            "definition": "Couche de macromolécules (collagène notamment) séparant le tissu épithélial du tissu conjonctif sous-jacent.",
+            "term": "Membrane basale"
+          },
+          {
+            "definition": "Tissu constitué de cellules dispersées dans une matrice extracellulaire, jouant un rôle de soutien et de structure.",
+            "term": "Tissu conjonctif"
+          },
+          {
+            "definition": "Cellule spécialisée dans la réception et la transmission des influx nerveux.",
+            "term": "Neurone"
+          },
+          {
+            "definition": "Cellules fournissant un soutien et une protection aux neurones.",
+            "term": "Cellules gliales"
+          },
+          {
+            "definition": "Glandes sécrétant des hormones directement dans le sang.",
+            "term": "Glandes endocrines"
+          },
+          {
+            "definition": "Glandes sécrétant des substances via des canaux vers la surface de la peau ou des muqueuses.",
+            "term": "Glandes exocrines"
+          },
+          {
+            "definition": "Étude microscopique de la structure, de l’organisation et de la fonction des tissus biologiques.",
+            "term": "Histologie"
+          },
+          {
+            "definition": "Ensemble des cellules responsables de la fonction spécifique d’un organe.",
+            "term": "Parenchyme"
+          },
+          {
+            "definition": "Partie du tissu conjonctif formant la trame de l’organe, contenant vaisseaux et nerfs.",
+            "term": "Stroma"
+          },
+          {
+            "definition": "Espace entre les cellules rempli par la substance intercellulaire, jouant un rôle dans les échanges et la mécanique des tissus.",
+            "term": "Espace intercellulaire"
+          },
+          {
+            "definition": "Différence morphologique et fonctionnelle entre le pôle apical (orienté vers la lumière) et le pôle basal (orienté vers le tissu conjonctif).",
+            "term": "Polarité cellulaire (épithélium)"
+          },
+          {
+            "definition": "Jonctions cellulaires renforçant adhésion et communication, comprenant jonctions serrées (barrière), jonctions adhérentes, desmosomes, jonctions communicantes (passage molécules).",
+            "term": "Complexes jonctionnels"
+          },
+          {
+            "definition": "Hémidesmosomes assurant l’attachement des filaments intermédiaires de la cellule à la membrane basale.",
+            "term": "Jonctions d’ancrage cellule-substrat"
+          },
+          {
+            "definition": "Selon forme cellulaire (pavimenteux, cubique, cylindrique), nombre de couches (simple, stratifié, pseudostratifié), et structures (cils, microvillosités).",
+            "term": "Classification des tissus épithéliaux"
+          },
+          {
+            "definition": "Cellules épithéliales spécialisées dans la sécrétion, divisées en endocrines, exocrines ou amphicrines (activités combinées).",
+            "term": "Épithéliums glandulaires"
+          }
+        ],
+        "filename": "Organisation de la cellule au tissu.odt"
+      }
+    ],
+    [
+      "ue_2_2_s1_hmatologie",
+      {
+        "title": "Hématologie",
+        "date": "",
+        "ue": "2.2.S1",
+        "author": "capsule",
+        "definitions": [
+          {
+            "definition": "C'est la production quotidienne des cellules sanguines par les celles souches hématopoïétiques. Ce processus produit 50 millions de cellules chaque seconde",
+            "term": "Hématopoïèse"
+          },
+          {
+            "definition": "C'est la cellule d'origine de toutes les cellules (myéloïdes et lymphoïdes), qui se trouvent dans la moelle osseuse",
+            "term": "Cellule souche hématopoïétique (CSH)"
+          },
+          {
+            "definition": "se forme entièrement dans la moelle osseuse",
+            "term": "Cellule myéloïde"
+          },
+          {
+            "definition": "termine sa formation dans le thymus et les ganglions",
+            "term": "Cellule lymphoïde"
+          },
+          {
+            "definition": "Le sang total est composé de plasma et de cellules sanguines",
+            "term": "Sang total"
+          },
+          {
+            "definition": "Il s'agit du plasma sans le fibrinogène et sans les protéines de la coagulation.",
+            "term": "Sérum"
+          },
+          {
+            "definition": "Ce sont les cellules sanguines, qui comprennent les globules rouges, les globules blancs et les plaquettes.",
+            "term": "Éléments figurés du sang"
+          },
+          {
+            "definition": "Composant liquide du sang, non cellulaire contient toutes les protéines solubles du sang.",
+            "term": "Plasma"
+          },
+          {
+            "definition": "Leur rôle est le transport de l'oxygène (O2) et du dioxyde de carbone (CO2). Produits dans la moelle osseuse à partir de vitamine B9 et B12, du fer, de l’EPO produite par le rein.",
+            "term": "Globules rouges (érythrocytes)"
+          },
+          {
+            "definition": "Ils assurent la défense de l'organisme contre les infections (virales, bactériennes, parasitaires). Ils sont stockés dans la rate avant toute réponse à des antigènes.",
+            "term": "Globules blancs (leucocytes)"
+          },
+          {
+            "definition": "Elles sont responsables de l'hémostase primaire et de l'initiation de la coagulation.",
+            "term": "Plaquettes"
+          },
+          {
+            "definition": "Protéine renfermant du fer, contenue dans les globules rouges auxquels elle donne sa couleur, et qui véhicule l'oxygène dans le sang.",
+            "term": "Hémoglobine"
+          },
+          {
+            "definition": "C'est une baisse du taux d'hémoglobine.",
+            "term": "Anémie"
+          },
+          {
+            "definition": "Un type d'anémie caractérisé par un volume globulaire moyen (VGM) diminué (<80 fL).",
+            "term": "Anémie microcytaire"
+          },
+          {
+            "definition": "Un type d'anémie caractérisé par un volume globulaire moyen (VGM) augmenté (>100 fL).",
+            "term": "Anémie macrocytaire"
+          },
+          {
+            "definition": "Un manque de polynucléaires neutrophiles, lorsque le nombre de PNN est inférieur à 0,5 G/L. ⇒ risque infectieux majeur (isolement, avis hémato...)",
+            "term": "Aplasie médullaire (neutropénie profonde)"
+          },
+          {
+            "definition": "Quasi absence de polynucléaires neutrophiles, lorsque le nombre de PNN est inférieur à 0,2 G/L.",
+            "term": "Agranulocytose"
+          },
+          {
+            "definition": "Excès de polynucléaires neutrophiles (infections, tabac, cancer...)",
+            "term": "Hyperleucocytose à PNN"
+          },
+          {
+            "definition": "Numération Formule Sanguine des globules rouges, nombre et type de blancs, plaquettes et hémoglobine.",
+            "term": "NFS - tube EDTA (violet)"
+          },
+          {
+            "definition": "Ponction de moelle osseuse avec un trocart soit dans le sternum (adulte) soit dans le bassin (adulte / enfant)",
+            "term": "Myélogramme"
+          },
+          {
+            "definition": "Ponction osseuse + moelle épinière (carottage) pour visualiser l’architecture en 3D des tribulations osseuses et de la répartition des cellules de la moelle.",
+            "term": "Biopsie ostéo-médullaire"
+          },
+          {
+            "definition": "injection de produit de contraste à base de glucose dont les cellules K sont friandes.",
+            "term": "TEP scanner"
+          },
+          {
+            "definition": "C'est un processus physiologique qui permet de limiter les saignements en cas de brèche vasculaire. Se déroule en 3 étapes (primaire, coagulation, fibrinolyse)",
+            "term": "Hémostase"
+          },
+          {
+            "definition": "Première étape de l'hémostase, dont l'objectif est la formation du clou plaquettaire (vasoconstriction, adhésion des plaquettes au site de la lésion) // quantifiée avec une simple NFS.",
+            "term": "Hémostase primaire"
+          },
+          {
+            "definition": "Deuxième étape de l'hémostase, dont l'objectif est la formation d'un réseau de fibrine qui enserre le clou plaquettaire. (Réaction en cascade ⇒ cascade de la coagulation) // évaluée avec TCA ou TP qui vont couvrir 2 parties différentes de la cascade //peut-être complété par un dosage du fibrinogène et des facteurs de la coagulation (produits par le foie donc si maladie du foie hémostase peut être perturbée ou si prise d’anti-vitamine K souvent prescrits après une phlébite )",
+            "term": "Hémostase secondaire (coagulation)"
+          },
+          {
+            "definition": "Troisième et dernière étape de l'hémostase. Elle consiste en la dissolution du caillot de fibrine et la limitation de son extension pour que les vaisseaux sanguins ne se bouchent pas.",
+            "term": "Fibrinolyse"
+          },
+          {
+            "definition": "comme l’aspirine, empêche les plaquettes de se coller entre elle et donc empêche/ralentit l’hémostase primaire",
+            "term": "Antiagrégant"
+          },
+          {
+            "definition": "comme l’anti-vitamine K qui empêche les facteurs de coagulation de s’activer",
+            "term": "Anticoagulant"
+          },
+          {
+            "definition": "Système de défense de l'organisme contre les agents pathogènes tels que les bactéries, les virus, les parasites, les champignons et les cellules cancéreuses. Il est composé de structures physiques, de molécules et de cellules qui assurent la protection de l'organisme.",
+            "term": "Système immunitaire"
+          },
+          {
+            "definition": "polynucléaires, macrophages, cellules dendritiques, lymphocyte T NK (natural killer)",
+            "term": "Cellules de l’immunité innée"
+          },
+          {
+            "definition": "lymphocytes B peuvent se transformer en plasmocytes puis qui fabriquent des anticorps spécifiques // lymphocytes LT4 (orchestre) // LT8 (cytotoxique) // LT régulateur (empêche emballement de la réponse immune)",
+            "term": "Cellules de l’immunité adaptative"
+          },
+          {
+            "definition": "C'est une immunité non spécifique, qui est fonctionnelle dès la naissance, sans exposition préalable à un agent pathogène. C'est la première ligne de défense de l'organisme. Peu efficace et n’a pas de mémoire.",
+            "term": "Immunité innée"
+          },
+          {
+            "definition": "C'est une immunité spécifique qui s'active avec un certain délai. C'est la deuxième ligne de défense, qui est très efficace et qui possède une mémoire immunitaire.",
+            "term": "Immunité adaptative"
+          },
+          {
+            "definition": "macrophages sécrètent cytokine et chimiokines ⇒ entraîne dilatation + perméabilité des vaisseaux (rougeur, gonflement) ⇒ migration des cellules inflammatoires (douleur) // 2e temps les cellules présentatrices d’Ag migrent dans les vaisseaux lymphatiques puis dans les ganglions ce qui va permettre l’entraînement et la libération de lymphocytes ciblant l’agent pathogène.",
+            "term": "Etapes de la réponse immune"
+          },
+          {
+            "definition": "peau (plusieurs couches kératinisés), muqueuse et particulièrement le mucus qui les tapisse en bloquant les bactéries, larmes, salive, cils, poils.",
+            "term": "Barrière physique"
+          },
+          {
+            "definition": "Tout ce qui caractérise l'organisme.",
+            "term": "Le Soi"
+          },
+          {
+            "definition": "Tout ce qui est différent de l'organisme.",
+            "term": "Le Non-soi"
+          },
+          {
+            "definition": "multiples causes (infectieuse comme le VIH ou des ttmts anti-rejet, chimiothérapie…)",
+            "term": "Immunodépression"
+          },
+          {
+            "definition": "Perte de la tolérance des cellules du soi. Multifactoriel (prédisposition génétique, infection, environnement…).",
+            "term": "Maladie auto-immune"
+          }
+        ],
+        "filename": "Hématologie.odt"
+      }
+    ],
+    [
+      "ue_2_2_s1_histologie_locomoteur",
+      {
+        "title": "Histologie locomoteur",
+        "date": "",
+        "ue": "2.2.S1",
+        "author": "capsule",
+        "definitions": [
+          {
+            "definition": "peut se différencier en ostéoblaste (osseuse), chondroblaste (cartilage), myoblaste (muscle) et en adipoblaste.",
+            "term": "Cellule souche mésenchymateuse"
+          },
+          {
+            "definition": "cellule responsable de la fabrication osseuse (ostéoformation)",
+            "term": "Ostéoblaste"
+          },
+          {
+            "definition": "cellule multinuclée dérivant de la lignée monocytaire. Rôle important dans la dégradation de l’os (résorption). Après résorption, libère le matériel nécessaire à la maturation des ostéoblaste.",
+            "term": "Ostéoclaste"
+          },
+          {
+            "definition": "cellule dormante située sur le bord osseux",
+            "term": "Cellule bordante"
+          },
+          {
+            "definition": "cellule sentinelle intra-osseuse, émet des RANK ligand (RANK L) permettant la maturation des ostéoblaste (permet résorption osseuse)",
+            "term": "Ostéocyte"
+          },
+          {
+            "definition": "os incomplet, non minéralisé",
+            "term": "Os juvénile"
+          },
+          {
+            "definition": "os définitif, minéralisé. Composition : matrice inorganique (60 % masse osseuse, cristaux d’hydroxyapatite) + matrice organique (30 %, protéines) + 10 % eau.",
+            "term": "Os minéralisé"
+          },
+          {
+            "definition": "20 % zone trabeculaire (centre, enchevêtrement osseux) + 80 % zone corticale (périphérique, structures vasculo-nerveuses au sein des canaux de Havers)",
+            "term": "Structure osseuse"
+          },
+          {
+            "definition": "pathologique. Exple ostéoporose (R > F par augmentation de R due à carence oestrogénique",
+            "term": "Déséquilibre résorption/formation osseuse"
+          },
+          {
+            "definition": "ossification endomembraneuse (os plats, matrice fibreuse) ou ossification endochondrale (os long, matrice cartilagineuse)",
+            "term": "Formation osseuse"
+          },
+          {
+            "definition": "ossification démarre au centre de la diaphyse, croissance entraine appel vasculaire au centre de la diaphyse et aux épiphyses ce qui entraîne une ossification épiphysaire.",
+            "term": "Ostéogenèse endochondrale"
+          },
+          {
+            "definition": "très peu voire pas du tout vascularisé ni innervé ce qui explique sa faible capacité de récupération/réparation. Composé à 80 % d’eau. Rôle d’absorption des contraintes mécaniques",
+            "term": "Particularité du cartilage articulaire"
+          },
+          {
+            "definition": "superficielle (zone de frottement), intermédiaire (résistance mécanique), profonde (attachement à la structure osseuse), tide mark (jonction entre cartilage calcifié et structure osseuse",
+            "term": "Structure du cartilage articulaire (4 zones)"
+          },
+          {
+            "definition": "Cellule adulte du tissu cartilagineux, produit le collagène II (le plus présent dans le cartilage) et les protéines (agrécane et hyaluronate) permettant la fixation de l’eau et donnant la propriété de résistance à la compression",
+            "term": "Chondrocyte"
+          },
+          {
+            "definition": "enferme la structure osseuse + cartilage. Contient la synovie (ou liquide synovial) qui a un rôle de lubrifiant",
+            "term": "Membrane synoviale"
+          },
+          {
+            "definition": "structure entourant l’ensemble de l’articulation",
+            "term": "Capsule"
+          },
+          {
+            "definition": "maladie du cartilage osseux dûe à un stress mécanique entraînant un dysfonctionnement des chondrocytes et aboutissant à la destruction du cartilage.",
+            "term": "Arthrose"
+          },
+          {
+            "definition": "maladie de la membrane synoviale (épaississement + production de synovie = inflammation)",
+            "term": "Arthrite"
+          },
+          {
+            "definition": "cartilage + membrane synoviale d’une articulation permettant la mobilité",
+            "term": "Espace articulaire"
+          },
+          {
+            "definition": "ligaments + tendons d’une articulation permettant la stabilité",
+            "term": "Espace abarticulaire"
+          },
+          {
+            "definition": "tendon / épimysium (enveloppe engainant le muscle) / périmysium (gaine de tissu conjonctif) / endomysium (gaine de tissu conjonctif entourant les fibres musculaires) / fibre musculaire / myofribille",
+            "term": "Structure du muscle (du macro au micro)"
+          },
+          {
+            "definition": "impliqué dans la contraction volontaire. Calcium permet le mouvement de l’actine sur la myosine (raccourcissement des sarcomères = contraction)",
+            "term": "Muscle strié"
+          },
+          {
+            "definition": "impliqué dans la contraction involontaire (tube digestif, sphincter, vaisseaux…)",
+            "term": "Muscle lisse"
+          },
+          {
+            "definition": "hybride strié + lisse",
+            "term": "Muscle cardiaque"
+          }
+        ],
+        "filename": "Histologie locomoteur.odt"
+      }
+    ],
+    [
+      "ue_2_2_s1_molcules_constitutives_du_vivant",
+      {
+        "title": "Molécules constitutives du vivant",
+        "date": "13/09/2025",
+        "ue": "2.2.S1",
+        "author": "capsule",
+        "definitions": [
+          {
+            "definition": "élément chimique (= atome) / cellule / tissus / organe (au moins 2 types de tissus + ayant un fonctionnement spécifique) / système / organisme",
+            "term": "Structure (du plus petit au plus grand)"
+          },
+          {
+            "definition": "osseux / vasculaire / lymphatique / musculaire / tégumentaire / nerveux / endocrinien / respiratoire / digestif / urinaire / reproducteur",
+            "term": "Systèmes chez l’homme (11)"
+          },
+          {
+            "definition": "La plus petite partie d'un élément chimique, ne peut se transformer en un autre atome. Il est constitué d'un noyau central (protons et neutrons) et d'un nuage électronique (électrons) en orbite autour de lui. Z = numéro atomique (nbre de protons), M = masse atomique (nbre de protons + neutrons)",
+            "term": "Atome"
+          },
+          {
+            "definition": "atome qui a perdu sa neutralité (Cation + / Anion -)",
+            "term": "Ion"
+          },
+          {
+            "definition": "La partie centrale de l'atome, chargée positivement, qui regroupe les protons (charge positive, définit l'élément) et les neutrons (charge neutre, contribue à la masse).",
+            "term": "Noyau"
+          },
+          {
+            "definition": "Particule élémentaire de charge électrique négative, beaucoup plus légère que les protons et les neutrons, qui gravite autour du noyau sur des couches électroniques.",
+            "term": "Électron"
+          },
+          {
+            "definition": "Les électrons situés sur la couche électronique la plus externe (la dernière couche). Ce sont ces électrons qui sont impliqués dans les liaisons chimiques.",
+            "term": "Électrons de valence"
+          },
+          {
+            "definition": "oxygène > carbone > hydrogène > azote = 95 % des molécules. Le reste est composé du calcium, fer, chlore…",
+            "term": "Composition du corps humain (OCHA)"
+          },
+          {
+            "definition": "Z identique mais M différent (utilisés en médecine nucléaire)",
+            "term": "Isotope"
+          },
+          {
+            "definition": "Un assemblage d'au moins deux atomes liés par des liaisons covalentes ou ioniques",
+            "term": "Molécule"
+          },
+          {
+            "definition": "Elle implique le partage d'une ou plusieurs paires d'électrons (doublets liants) entre deux atomes pour qu'ils satisfassent la règle de l'octet/duet.",
+            "term": "Liaison Covalente"
+          },
+          {
+            "definition": "Se produit lorsque la différence d'électronégativité est faible. Le partage des électrons est équitable.",
+            "term": "Liaison Covalente Non-polaire"
+          },
+          {
+            "definition": "Se produit lorsque la différence d'électronégativité est moyenne. L'atome le plus électronégatif attire plus fortement les électrons, créant des charges partielles (δ− et δ+) sur les atomes. Exemple : H−Cl",
+            "term": "Liaison Covalente Polaire"
+          },
+          {
+            "definition": "Se forme généralement entre un métal et un non-métal (grande différence d'électronégativité. Elle implique le transfert d'un ou plusieurs électrons d'un atome à l'autre, formant des ions (cations positifs et anions négatifs) qui s'attirent par force électrostatique. Exemple : Na+Cl−",
+            "term": "Liaison Ionique"
+          },
+          {
+            "definition": "Tendance des atomes à chercher à saturer leur dernière couche d’électron, c'est-à-dire 8 électrons de valence (octet) ou 2 électrons de valence pour les atomes légers comme l'Hydrogène (duet), en formant des liaisons.",
+            "term": "Règle de l'Octet/Duet"
+          },
+          {
+            "definition": "C'est la capacité d'un atome à attirer à lui les électrons. Plus un atome est électronégatif, plus il \"tire\" le doublet d'électrons vers lui. Elle est mesurée sur des échelles (comme l'échelle de Pauling). En moyenne, les éléments à gauche dans le tableau périodique sont moins électronégatif et les éléments situés à gauche sont les plus électronégatifs. Le Fluor (F) est l'élément le plus électronégatif.",
+            "term": "Électronégativité"
+          },
+          {
+            "definition": "Une interaction de forces attractives qui maintient ensemble deux ou plusieurs atomes, leur permettant de former des structures stables (molécules ou composés ioniques). Elle résulte de l'interaction des électrons de valence.",
+            "term": "Liaison chimique"
+          },
+          {
+            "definition": "eau, oxygène, sels minéraux, oligo-éléments (dépourvues de carbone) + monoxyde et dioxyde de carbone.",
+            "term": "Molécules inorganiques"
+          },
+          {
+            "definition": "65 % de la masse corporelle humaine, présente dans le liquide intra/extracellulaire + plasma + lymphe + cérébro-spinal + synovial. Rôles : réactions chimiques, solvant, lubrifiant, transport, thermorégulation, protection (liquide amniotique, moelle épinière)",
+            "term": "Eau"
+          },
+          {
+            "definition": "4 à 5 % de la masse corporelle humaine. Na +, K+ (muscle et système nerveux), Cl- (estomac), Ca²+ (os, dents, muscles), Mg²+ (métabolisme)",
+            "term": "Sels minéraux"
+          },
+          {
+            "definition": "faible quantité, certains sont toxiques si en trop grande quantité. I (thyroïde), Fe (hémoglobine), Cu, Zn…",
+            "term": "Oligo-éléments"
+          },
+          {
+            "definition": "glucides, lipides, protéines, acides nucléiques (ADN, ARN). Elles contiennent du carbone lié à l’hydrogène et éventuellement à d’autres atomes. On parle de molécule avec un squelette carboné parmi lesquelles des monomères et des polymères.",
+            "term": "Molécules inorganiques"
+          },
+          {
+            "definition": "source d’énergie. Sont distinguées selon leur taille et solubilité. Monosaccharides (glucose, fructose), Disaccharides (lactose, maltose, saccharose), Polysaccharides (amidon, glycogène). Mono et Di doivent être découpés par une enzyme pour passer la membrane cellulaire.",
+            "term": "Glucides"
+          },
+          {
+            "definition": "rôles variés. Sont insolubles dans l’eau mais solubles avec d’autres lipides. Trigrlycérides, phospholipides, stéroïdes, vitamines liposolubles",
+            "term": "Lipides"
+          },
+          {
+            "definition": "glycérol et acide gras (AG). Se retrouvent dans le tissus adipeux et autour de certains organes. Sont une protection et une ressource d’énergie",
+            "term": "Triglycérides"
+          },
+          {
+            "definition": "rôle essentiel dans la composition de la membrane cellulaire, des tissus nerveux et de l’encéphale.",
+            "term": "Phospholipides"
+          },
+          {
+            "definition": "rôles divers et essentiels. Cholestérol (HDL/LDL), corticostéroïdes (cortisol, aldostérone), hormones sexuelles (oestro/progé/testo), sels biliaires (dégradation du cholestérol)",
+            "term": "Stéroïdes"
+          },
+          {
+            "definition": "A (rétinol), D (os, croissance), E (anti oxydant), K (coagulation)",
+            "term": "Vitamines liposolubles"
+          },
+          {
+            "definition": "représente plus de 50 % de la masse organique du corps humain. Rôle de réserve énergétique, d’anticorps, d’enzyme, d’hormone. Sont des polymères et constituées d’acides aminés (AA). 20 AA composent les protéines du corps. Si < de 60 AA = petpide, sinon protéine. Sources variées (animale, végétale).",
+            "term": "Protéines"
+          },
+          {
+            "definition": "dictent la structure des protéines.",
+            "term": "Acides nucléiques"
+          },
+          {
+            "definition": "monomère d’acide nucléique, constitutif d’une molécule d’ADN ou d’ARN (Adénine, Guanine, Cytosine, Thymine, Uracile)",
+            "term": "Nucléotide"
+          },
+          {
+            "definition": "fournit les instructions de synthèse des protéines. Se réplique avant division cellulaire = matériel identique entre mère et filles.",
+            "term": "ADN"
+          },
+          {
+            "definition": "assure la synthèse des protéines (exécute). Structure simple brin, se trouve essentiellement à l’extérieur du noyau",
+            "term": "ARN"
+          }
+        ],
+        "filename": "Molécules constitutives du vivant.odt"
+      }
+    ],
+    [
+      "ue_2_4_s1_examens_biologiques_en_traumatologie",
+      {
+        "title": "Examens biologiques en traumatologie",
+        "date": "22/09/2025",
+        "ue": "2.4.S1",
+        "author": "KM",
+        "definitions": [
+          {
+            "definition": "numération formule sanguine (hématies, leucocytes, thrombocytes). BUT => dénombrer cellules + certains autres paramètres.",
+            "term": "NFS (ou hémogramme) - tube violet"
+          },
+          {
+            "definition": "cellule anuclée, forme biconcave, fabriqué ds moelle osseuse, contient hémoglobine qui assure le transfert de l’O2 et élimination CO2 // NORMES = 4,6 a 6 millions/mm³ (H) // 4 à 5,4 millions/mm³ (F)",
+            "term": "Hématie (ou Erythrocyte)"
+          },
+          {
+            "definition": "diminution nbre hématie (hémorragie, hémolyse, maladie hématologique ou médullaire)",
+            "term": "Anémie"
+          },
+          {
+            "definition": "augmentation du nbre d’hématie (tabagisme, altitude, maladie rénale, tumeur)",
+            "term": "Polyglobulie"
+          },
+          {
+            "definition": "protéine, rentre dans la compo du sang, donne couleur rouge (fiche en fer), indicateur de l’anémie. NORMES = 13 à 18 g/dL (H) // 11,5 à 17,5g/dL (F)",
+            "term": "Hémoglobine"
+          },
+          {
+            "definition": "indicateur biologique d’infection. Rôle clé (polynucléaires neutrophiles, éosinophiles, basophiles, lymphocytes, monocytes) // NORMES = 4 à 11g/L (H) // F 3,8 à 11g/L (F)",
+            "term": "Leucocytes"
+          },
+          {
+            "definition": "augmentation du nbre des leucocytes = signe d’infection (bactérie, virus, parasite…) ou induit par la prise médicamenteuse",
+            "term": "Hyperleucocytose"
+          },
+          {
+            "definition": "baisse du nbre de leucocytes = effet secondaire d’un ttmt",
+            "term": "Leucopénie"
+          },
+          {
+            "definition": "cellule anuclée, fabriquée dans la moelle osseuse // NORMES = 50 000 à 400 000/mm3 (H) et jusqu a 445 000/m³ (F)",
+            "term": "Thrombocyte"
+          },
+          {
+            "definition": "diminution de nbre de thrombocytes = risque d’hémorragie",
+            "term": "Thrombopénie"
+          },
+          {
+            "definition": "augmentation du nbre de thrombocytes = risque de thrombose",
+            "term": "Thrombocytose"
+          },
+          {
+            "definition": "processus de coagulation du sang pour éviter les hémorragies tout en maintenant le sang fluide. Le tube de prélèvement contient un anti-coagulant (citrate de sodium). Se déroule en 3 phases (primaire = agrégation plaquettaire, secondaire = coagulation (formation thrombus), fibrinolyse = lyse du caillot une fois le vaisseau réparé",
+            "term": "Hémostase – tube bleu rempli à 4,5ml"
+          },
+          {
+            "definition": "Temps de Céphaline Activée ou Kaolin. Examen pour mesurer la vitesse de coagulation du plasma = permet de savoir si l’orga a les ressources pour coaguler normalement // NORMES = 0,8 à 1,2 secondes temps ratio (s’exprime selon un ration temps témoin/temps patient)",
+            "term": "TCA ou TCK (selon réactif utilisé)"
+          },
+          {
+            "definition": "Taux de Prothrombine. Examen pour évaluer la coagulation sanguine // NORMES = entre 70 et 100 %",
+            "term": "TP"
+          },
+          {
+            "definition": "International Normalized Ratio. Examen pour évaluer la coagulation sanguine d’un patient sous ttmt anti-coagulant. // NORMES = avec un ttmt AVK = INR dépend de la valeur cible selon les indications du ttmt par AVK (exemple si valeur entre 2 et 3 avec une valeur sible vers 2,5 = Si < 2 ttmt sous dosé. Si > 3 ttmt sur-dosage ⇒ origine de troubles hémorragiques donc nécessaire ds bilan pré op",
+            "term": "INR"
+          },
+          {
+            "definition": "connaître présence/absence des Ag A et B et présence/absence de l’Ag rhésus standard D. Loi = 2 prélèvements par 2 IDE différentes en 2 temps différents",
+            "term": "Groupe sanguin - tube violet"
+          },
+          {
+            "definition": "Recherche des Agglutinines Irrégulières. Obligatoire avant toute transfusion ou acte chirurgical et doit être renouvelée tous les 3 jours (validité de 72h). Sont opposées aux agglutinines régulières (anticorps naturel présents dans le système ABO)",
+            "term": "RAI"
+          },
+          {
+            "definition": "Protéine C Réactive. Examen pour évaluer l’état inflammatoire (synthétisée par le foie). Est un indicateur sensible mais n’oriente pas vers une pathologie // NORMES = < 5mg/L (infection peu probable) mais peut rapidement évoluer.",
+            "term": "CRP - tube vert (citraté) ou tube sec"
+          }
+        ],
+        "filename": "Examens biologiques en traumatologie.odt"
+      }
+    ],
+    [
+      "ue_2_4_s1_gnralits_pidmiologie_smiologie",
+      {
+        "title": "Généralités, épidémiologie, sémiologie",
+        "date": "12/09/2025",
+        "ue": "2.4.S1",
+        "author": "SC",
+        "definitions": [
+          {
+            "definition": "enchaînement ordonné de faits ou de phénomènes répondant à un schéma et aboutissant à quelque chose",
+            "term": "Processus"
+          },
+          {
+            "definition": "Repérage des mécanismes d’apparition / Mécanismes physiopathologiques / Sémiologie, signes cliniques, symptômes / Diagnostic médical / Traitements / Complications",
+            "term": "Approche par processus"
+          },
+          {
+            "definition": "dommage physique à une personne lorsque son corps a été soumis de façon soudaine ou brève à un niveau d’énergie intolérable et provoquant des lésions",
+            "term": "Traumatisme"
+          },
+          {
+            "definition": "succession de modifications anatomiques et physiologiques faisant suite à une agression physique de l’organisme par un agent extérieur",
+            "term": "Processus traumatique"
+          },
+          {
+            "definition": "âge, pathologies, obésité, sédentarité, traitement en cours, localisation et étendue de la blessure",
+            "term": "Facteurs favorisants"
+          },
+          {
+            "definition": "cutané, osseux & articulo-ligamentaire, thoraco-abdominal, crâniens & médullaire, polytraumatique, psychologique",
+            "term": "Caractéristiques du processus traumatique"
+          },
+          {
+            "definition": "direct, indirect, sans notion de choc",
+            "term": "Contexte de choc"
+          },
+          {
+            "definition": "selon différents critères (mécanisme en cause (chute, noyade…), intentionnel ou non, zone du corps atteinte, type de blessure, lieu de survenue), selon les systèmes atteints (cutané = brûlure, plaie, vasculaire = hémorragie, osseux, ligamentaire = fracture, entorse, luxation, respiratoire, cardiaque = trauma thoracique, digestif, génito-urinaire = abdomino-pelvien, neurologique, autres = crânien, polytraumatisme), selon les contextes (accident de vie courante, AVP, accident du travail, agression, terrorisme, homicide, autolyse)",
+            "term": "Classification d’un traumatisme"
+          },
+          {
+            "definition": "âge, hérédité, fragilité osseuse, pathologies",
+            "term": "Facteurs de risques"
+          },
+          {
+            "definition": "comportement à risque, activité professionnelle",
+            "term": "Facteurs précipitant (déclencheurs)"
+          },
+          {
+            "definition": "étude des symptômes et des signes cliniques traduisant la lésion d’un organe ou le trouble d’une fonction",
+            "term": "Sémiologie"
+          },
+          {
+            "definition": "altération morphologique d’un tissu ou d’un organe dont la cause peut être connue ou inconnue pouvant se manifester par des signes physiques ou des symptômes (Toute blessure entraîne des lésions tissulaires. Possibilité de lésions indirectes associées)",
+            "term": "Lésion"
+          },
+          {
+            "definition": "rupture de la continuité osseuse",
+            "term": "Fracture"
+          },
+          {
+            "definition": "lésion produite par pression brutale ou choc sans déchirure de la peau",
+            "term": "Contusion"
+          },
+          {
+            "definition": "perte totale ou partielle des rapports anatomiques normaux entre les extrêmités d’une articulation. Par extension déplacement d’un organe hors de sa loge ou position normale",
+            "term": "Luxation"
+          },
+          {
+            "definition": "lésion traumatique d’un ou plusieurs ligaments",
+            "term": "Entorse"
+          },
+          {
+            "definition": "lésion de la région du tronc et des organes compris entre le diaphragme et le plancher pelvien",
+            "term": "Traumatisme abdomino-pelvien"
+          },
+          {
+            "definition": "lésion du thorax et des organes",
+            "term": "Traumatisme thoracique"
+          },
+          {
+            "definition": "lésion du crâne et de l’encéphale",
+            "term": "Traumatisme crânien"
+          },
+          {
+            "definition": "trouble présenté par une personne ayant vécu un ou plusieurs événements traumatiques ayant menacé son intégrité physique ou psychique et ayant provoqué une peur intense, un sentiment d’impuissance ou d’horreur et ayant développé des troubles psychiques liés à ce traumatisme",
+            "term": "Traumatisme psychologique"
+          }
+        ],
+        "filename": "Généralités, épidémiologie, sémiologie.odt"
+      }
+    ],
+    [
+      "ue_3_1_s1_vocabulaire_du_raisonnement_clinique",
+      {
+        "title": "Vocabulaire du raisonnement clinique",
+        "date": "08/09/2025",
+        "ue": "3.1.S1",
+        "author": "GN",
+        "definitions": [
+          {
+            "definition": "est une discipline à part entière (sciences infirmières). Cette discipline comporte plusieurs niveaux de savoir (métaparadigme, philosophies de soins infirmiers, modèles conceptuels, théories, méthodes de recherches). S’intéresse au soin des personnes. Se dirige vers les EBN (données probantes)",
+            "term": "Nursology"
+          },
+          {
+            "definition": "est une succession d’opération mentales qui permettent de recueillir des données cliniques et paracliniques, des les analyser, les interpréter pour mettre en œuvre des actions de soins auprès du patient.",
+            "term": "Raisonnement clinique"
+          },
+          {
+            "definition": "englobe les concepts centraux (santé, environnement, personne, soins) qui sont propres à la discipline infirmière. Influencé par les sciences humaines et sociales.",
+            "term": "Métaparadigme"
+          },
+          {
+            "definition": "philosophie du soin (cadre de référence singulier) est évolutif par exemple avec l’arrivée des IPA. Sont au nombre de 4 (catégorisation, intégration, transformation, complexité)",
+            "term": "Paradigme"
+          },
+          {
+            "definition": "outils (pyramide des besoins, modèle tri focal…)",
+            "term": "Modèles conceptuels"
+          }
+        ],
+        "filename": "Vocabulaire du raisonnement clinique.odt"
+      }
+    ],
+    [
+      "ue_3_10_s1_ecologie_microbienne_infection_et_allergies",
+      {
+        "title": "Ecologie microbienne, infection et allergies",
+        "date": "18/09/2025",
+        "ue": "3.10.S1",
+        "author": "EXT",
+        "definitions": [
+          {
+            "definition": "organisme unicellulaire autonome ayant un chromosome unique. Peut être commensale (de la personne) ou pathogène (environnement). Taille 0,5 à 5 um.",
+            "term": "Bactérie"
+          },
+          {
+            "definition": "a 1 seul type d’acide nucléique (ADN ou ARN). N’a pas de structure cellulaire. Ne se divise que dans la cellule de l’hôte. Ne peut se reproduire ni croître seul. Ne peut fabriquer ses métabolites (composé organique produit intermédiaire ou final du métabolisme ). Taille 1nm à 1um",
+            "term": "Virus"
+          },
+          {
+            "definition": "uni ou pluricellulaire organisé, eucaryote (a une membrane nucléaire). Être vivant qui vit aux dépens d’autres êtres pendant une partie ou la totalité de sa vie.",
+            "term": "Parasite"
+          },
+          {
+            "definition": "eucaryote (a une membrane nucléaire), reproduction par émission de spores",
+            "term": "Champignon"
+          },
+          {
+            "definition": "Agent Transmissible Non Conventionnel (ATNC)",
+            "term": "Prion"
+          },
+          {
+            "definition": "étude de la distribution des micro-organisme dans les milieux et de leurs interactions avec les autres êtres vivants",
+            "term": "Écologie microbienne"
+          },
+          {
+            "definition": "présente sur la peau et les muqueuses",
+            "term": "Flore commensale"
+          },
+          {
+            "definition": "naturellement présente",
+            "term": "Flore résidente"
+          },
+          {
+            "definition": "de l’environnement ou de contact ⇒ à l’origine de transmission croisée",
+            "term": "Flore transitoire"
+          },
+          {
+            "definition": "environnementale (eau, air, terre…)",
+            "term": "Flore saprophyte"
+          },
+          {
+            "definition": "agent infectieux présent sans dommage pour l’organisme hôte",
+            "term": "Colonisation"
+          },
+          {
+            "definition": "dommages causés par un agent infectieux entraînant une réponse inflammatoire",
+            "term": "Infection"
+          },
+          {
+            "definition": "douleur + rougeur + gonflement + oedème",
+            "term": "Réponse inflammatoire"
+          },
+          {
+            "definition": "aéroporté (expulsion gouttelettes) / aérosol (suspension longue dans l’air) / manu-porté / contact (relation sexuelle)",
+            "term": "Transmission directe"
+          },
+          {
+            "definition": "via un vecteur",
+            "term": "Transmission indirecte"
+          },
+          {
+            "definition": "agent infectieux ⇒ réservoir ⇒ porte de sortie ⇒ transmission ⇒ entrée ⇒ hôte réceptif",
+            "term": "Chaîne de transmission"
+          },
+          {
+            "definition": "hôte (état, âge, pathologies, traitement,…)",
+            "term": "Récepteur"
+          },
+          {
+            "definition": "incubation ⇒ contagiosité ⇒ invasion (signes d’infection) ⇒ période d’état (apogée des symptômes) ⇒ période de défervescence ⇒ terminaison",
+            "term": "Étapes de l’infection"
+          },
+          {
+            "definition": "non spécifique (peau, larmes, pH, réaction de fièvre, leucocytes…)",
+            "term": "Immunité naturelle ou innée"
+          },
+          {
+            "definition": "ciblée grâce à la vaccination et/ou sérothérapie",
+            "term": "Immunité adaptative"
+          },
+          {
+            "definition": "réponse immédiate, entraînera la création de défenses spécifiques + mémorisation",
+            "term": "Phagocytose"
+          },
+          {
+            "definition": "transmission rare et épisodique",
+            "term": "Sporadique"
+          },
+          {
+            "definition": "transmission facile, expression permanente, quelques cas",
+            "term": "Endémique"
+          },
+          {
+            "definition": "transmission très contagieuse, plusieurs cas dans un temps et sur un territoire limités",
+            "term": "Épidémique"
+          },
+          {
+            "definition": "dissémination rapide (nation, continent, monde)",
+            "term": "Pandémique"
+          },
+          {
+            "definition": "dérèglement du système immunitaire qui entraîne une perte de tolérance face à des substances a priori inoffensives : les allergènes",
+            "term": "Allergie"
+          },
+          {
+            "definition": "air, eau, alimentation… tout !",
+            "term": "Origine des allergènes"
+          },
+          {
+            "definition": "1er contact avec l’allergène",
+            "term": "Sensibilisation"
+          },
+          {
+            "definition": "2e contact avec l’allergène",
+            "term": "Symptômes allergique"
+          },
+          {
+            "definition": "bilan sanguin (recherche d’immunoglobuline spécifique E (Ig-E) et/ou tests cutanés",
+            "term": "Bilan allergologique"
+          },
+          {
+            "definition": "prédisposition génétique + sensibilisation préalable (1ere rencontre avec l’allergène)",
+            "term": "Causes de l’allergie"
+          },
+          {
+            "definition": "Succession des phases de sensibilisation (fabrication sans réaction d’IgE) et de la phase de symptômes allergiques (stimulation des cellules et libération massive d’histamine) = réaction inflammatoire < 2 heures",
+            "term": "Allergie immédiate (terrain atopique)"
+          },
+          {
+            "definition": "pas de prédisposition génétique. Cible principalement la peau (allergie «de contact») = réaction inflammatoire > 2h",
+            "term": "Allergie retardée"
+          },
+          {
+            "definition": "par voie aérienne",
+            "term": "Pneumallergène"
+          },
+          {
+            "definition": "alimentaires, médicamenteux, venin (guêpe, serpent…). Tout aliment peut déclencher une allergie.",
+            "term": "Trophallergène"
+          },
+          {
+            "definition": "rhinite, conjonctivite, urticaire (prurit)",
+            "term": "Signes cliniques localisés"
+          },
+          {
+            "definition": "choc anaphylactique, œdème de Quincke, détresse respiratoire, collapsus cardio-vasculaire.",
+            "term": "Signes cliniques généralisés"
+          }
+        ],
+        "filename": "Ecologie microbienne, infection et allergies.odt"
+      }
+    ],
+    [
+      "ue_3_10_s1_les_bactries",
+      {
+        "title": "Les bactéries",
+        "date": "19/09/2025",
+        "ue": "3.10.S1",
+        "author": "EXT",
+        "definitions": [
+          {
+            "definition": "Semmelweiss (lavage de main) + Koch (terme de « bactérie ») + Pasteur",
+            "term": "Histoire"
+          },
+          {
+            "definition": "micro-organisme eurcaryote avec un chromosome d’ADN libr dans le cytoplasme. Se reproduit par simple division",
+            "term": "Bactérie"
+          },
+          {
+            "definition": "amas de cellules bactériennes enrobés d’une matrice ⇒ difficile à déloger",
+            "term": "Biofilm"
+          },
+          {
+            "definition": "toute bactérie peut devenir opportuniste (s’installer) ou pathogène (néfaste) peu importe l’état du patient",
+            "term": "Déséquilibre relation hôte-bactérie"
+          },
+          {
+            "definition": "par forme (cocci, bacille…), pas coloration Gram (+ ou -), par observation (isolée, amas (=staph), chainettes (=strepto), par 2 (diplocoques) , mobile ou non… ⇒ oriente le médecin",
+            "term": "Regroupement des bactéries"
+          },
+          {
+            "definition": "dépister la sépticémie (prélever 1 flacon aérobie puis 1 fl anaérobie dans cet ordre) répéter 2 à 3 fois soit 4 à 6 fl pour 1 hémoculture",
+            "term": "Hémoculture"
+          },
+          {
+            "definition": "bactériostatique (stoppe la multiplication) ou bactéricide (tue la bactérie)",
+            "term": "Type d’antibiotique"
+          },
+          {
+            "definition": "vise un grand nombre de bactéries",
+            "term": "Spectre large"
+          },
+          {
+            "definition": "vise une cible restreinte de bactéries",
+            "term": "Spectre étroit"
+          },
+          {
+            "definition": "permet de déterminer la sensibilité ou non d’une bactérie à un ou des antibiotiques",
+            "term": "Antibiogramme"
+          },
+          {
+            "definition": "les bactéries peuvent présenter des résistances naturelles et/ou acquises. L’usage trop fréquent d’antibiotiques à spectre large créé une pression de sélection forte favorisant la sélection de bactéries résistantes",
+            "term": "Antibiorésistance"
+          },
+          {
+            "definition": "résistances naturelles et acquises cumulées",
+            "term": "Multirésistance"
+          },
+          {
+            "definition": "Staph Aureus Résistant à la Méticilline (infection urinaire ++, cutanée, site opérateoire…)",
+            "term": "SARM"
+          },
+          {
+            "definition": "Bactérie productrice des beta-Lactamases à Spectre Etendu (réduit ou annule l’efficacité de nombreux ATB)",
+            "term": "BLSE"
+          },
+          {
+            "definition": "Bactérie Multi Résistante",
+            "term": "BMR"
+          },
+          {
+            "definition": "Bactéri Hautement Résistante Emergente",
+            "term": "BHRE"
+          },
+          {
+            "definition": "chez qui la BHRE a été mise en évidence",
+            "term": "Patient porteur"
+          },
+          {
+            "definition": "ayant été pris en soin par la même équipe médicale que le porteur SANS précautions complémentaires",
+            "term": "Patient contact"
+          },
+          {
+            "definition": "au moins 2 cas dans le même service, pour la même BHRE, au même moment.",
+            "term": "Epidémie"
+          }
+        ],
+        "filename": "Les bactéries.odt"
+      }
+    ],
+    [
+      "ue_3_10_s1_virologie_mycoparasitologie_atnc_23092025_ext",
+      {
+        "title": "Virologie, Myco-parasitologie, ATNC 23/09/2025 EXT",
+        "date": "23/09/2025",
+        "ue": "3.10.S1",
+        "author": "",
+        "definitions": [
+          {
+            "definition": "fixation → pénétration → décapsidation → multiplication (réplication du génome, synthèse des protéines virales) → assemblage → libération des nouveaux virions",
+            "term": "Réplication virale (étapes)"
+          },
+          {
+            "definition": "respiratoire (grippe, VZV, coronavirus…), digestive (rotavirus, entérovirus, hépatites), cutanée (piqûres, contacts), génito-urinaire (VIH, HSV), conjonctive",
+            "term": "Portes d’entrées virales"
+          },
+          {
+            "definition": "quasiment tout le corps (SNC, sang, peau, appareil respiratoire, digestif, urinaire, foie, embryon…)",
+            "term": "Organes cibles virales"
+          },
+          {
+            "definition": "organismes eucaryotes uni/pluricellulaires, noyau entouré d’une enveloppe",
+            "term": "Champignons"
+          },
+          {
+            "definition": "Candida albicans) : candidose cutanée, muqueuses (bouche, vagin, œsophage), urgence vitale si hémoculture positive ; traitement = antifongique IV si grave",
+            "term": "Levures (champignons unicellulaires, ex"
+          },
+          {
+            "definition": "peau, cheveux, ongles (herpès circiné, pied d’athlète, teigne, onyxis…)",
+            "term": "Dermatophytes (champignons kératinophiles)"
+          },
+          {
+            "definition": "Aspergillus) : pathogènes chez immunodéprimés (aspergillose broncho-pulmonaire)",
+            "term": "Moisissures (champignons filamenteux, ex"
+          },
+          {
+            "definition": "Organismes vivant au dépens de leur hôte sans forcément le détruire // Ectoparasites : à l’extérieur (ex : gale, poux, puces, morpions) // Endoparasites : à l’intérieur (sang, intestin…)",
+            "term": "Parasites"
+          },
+          {
+            "definition": "parasite. Plasmodium (paludisme) : transmission par femelle moustique Anopheles, diagnostic par frottis sanguin ou présence d’antigène. Complications : anémie, thrombopénie, défaillance multiviscérale. // Toxoplasma gondii (toxoplasmose) : surtout via excréments de chats ; peut franchir la barrière placentaire et infecter le fœtus ; diagnostic par PCR sur liquide amniotique",
+            "term": "Protozoaires"
+          }
+        ],
+        "filename": "Virologie, Myco-parasitologie, ATNC 23/09/2025 EXT.odt"
+      }
+    ],
+    [
+      "ue_4_1_s1_critres_de_qualit_dun_soin",
+      {
+        "title": "Critères de qualité d’un soin",
+        "date": "05/09/2025",
+        "ue": "4.1.S1",
+        "author": "E",
+        "definitions": [
+          {
+            "definition": "curative, préventive, éducative, palliative, réhabilitation, maintenance",
+            "term": "6 dimensions d’un soin"
+          },
+          {
+            "definition": "Organisation (matériel, temps…) Réalisation (action, maîtrise du geste…) Relation (communication soignant-soigné)",
+            "term": "ORR (3 éléments d’un soin)"
+          },
+          {
+            "definition": "Relation (identito, consentement) Efficacité (pertinence du geste) Confort (soignant & soigné) Organisation (temps, matériel) Responsabilité (des soins prodigués) Sécurité (maîtrise, règles hygiène) Economie (de geste, en temps) Transmission (écrites, complètes, précises)",
+            "term": "RECORSET (qualité d’un soin)"
+          }
+        ],
+        "filename": "Critères de qualité d’un soin.odt"
+      }
+    ],
+    [
+      "ue_4_4_s1_iatrognie_mdicamenteuse",
+      {
+        "title": "Iatrogénie médicamenteuse",
+        "date": "22/09/2025",
+        "ue": "4.4.S1",
+        "author": "",
+        "definitions": [
+          {
+            "definition": "« qui est provoqué par le médecin/médicament ». Regroupe les effets indésirables et erreur médicamenteuse",
+            "term": "Iatrogénie"
+          },
+          {
+            "definition": "pédiatrie (organes non matures), femme enceinte/allaitement (expo fœtus), personnes âgée (élimination médicament)",
+            "term": "Population à risque"
+          },
+          {
+            "definition": "surveillance du risque d’effet indésirable résultant de l’utilisation des médicaments et produits à usage humain. Obligation de signalement pr prescripteur et pharmacien (site ANSM), possible pour professionnels de santé et patient également ⇒ outil de décision sanitaire (suspension AMM, modification notice, restriction de prescription, retrait de lots...)",
+            "term": "Pharmacovigilance"
+          },
+          {
+            "definition": "écart par rapport à ce qui aurait dû être fait au cours de la prise en charge thérapeutique du patient (omission ou réalisation non intentionnelle). Elle est toujours évitable. (erreur de prescription, de délivrance, d’administration)",
+            "term": "Erreur médicamenteuse"
+          },
+          {
+            "definition": "s’est produite et est parvenue jusqu’à l’administration au patient (= accident ou accident majeur)",
+            "term": "Erreur avérée"
+          },
+          {
+            "definition": "a été détectée et interceptée (= presque accident)",
+            "term": "Erreur potentielle"
+          },
+          {
+            "definition": "exemple de 2 médicaments au même nom, même format mais pas au même dosage",
+            "term": "Risque d’erreur"
+          },
+          {
+            "definition": "réaction nocive ou non voulue aux posologies normalement utilisées ou résultant d’un mésusage du médicamenteuse",
+            "term": "Effet indésirable"
+          },
+          {
+            "definition": "Prescription ⇒ Dispensation ⇒ Préparation des doses à administrer ⇒ Transport/Stockage ⇒ Administration (tâche la plus à risque) ⇒ Suivi/surveillance",
+            "term": "Circuit du médicament"
+          },
+          {
+            "definition": "analyser, comprendre, découvrir facteurs contributifs, voies d’amélioration pour dégager un plan d’action concernant la survenue d’un événement indésirable",
+            "term": "CREX (comité de retour d’expérience)"
+          },
+          {
+            "definition": "arrêt inopiné entrainant (à compléter par slide), 50 % des administrations de médicament sont concernées",
+            "term": "Interruptions de tâches (IT)"
+          },
+          {
+            "definition": "2 circuits : logistique (pharmacie) + distribution (IDE)",
+            "term": "Sécurisation du circuit du médicament"
+          },
+          {
+            "definition": "apparaissent pour beaucoup après la commercialisation (hépatotoxicité, néphrotoxicité, hématotoxicité, allergie… Il existe des EI létaux ou suscitant anomalie congénitale (tératogénicité)",
+            "term": "Effets indésirables"
+          },
+          {
+            "definition": "pénurie personnel, absence de procédure, charge de travail, interruption de tâche, manque de communication…",
+            "term": "Causes des erreurs médicamenteuses"
+          },
+          {
+            "definition": "comité de retour d’expérience après survenue d’une évènement indésirable (analyse, compréhension, recherche de facteurs contributifs, voies d’amélioration, plan d’aciton) ⇒ en France 1 EI grave tous les 5 jours ds un service de 30 lits",
+            "term": "CREX"
+          },
+          {
+            "definition": "Rx illisible, rédigée par plusieurs médecins, reprise des ttmts de ville par les patients entrant à l’hôpital, erreur patient, Rx orale, défaut de connaissance du médicament",
+            "term": "Facteurs favorisants l’erreur médicamenteuse"
+          },
+          {
+            "definition": "analyse de l’ordo, prépa des doses (poso, VA, indications, incompatibilités), délivrance, mise à dispo d’info pour bon usage ⇒ surveiller en particulier la compatibilité avec la fct rénale, AntiVitK, voriconazole adapté à la fct hépatique, clozapine vérifier leucocytes (aggravation risque agranulocytose) // Facteurs favorisants l’erreur médicamenteuse : absence de synchro entre visite médecin et prépa en pharmacie ⇒ doses préparées ne correspondent plus à la Rx en cours // prépa de dose individuelle ⇒ mal étiqueté, absence d’identification, produit exposé à l’air ou à la lumière",
+            "term": "Dispensation par la PUI (pharma usage intérieur de l’hôpital)"
+          },
+          {
+            "definition": "sécurité faible",
+            "term": "Délivrance globale des traitements (pas en lien avec l’ordo)"
+          },
+          {
+            "definition": "sécurité intermédiaire",
+            "term": "Délivrance globalisée à partir de l’ensemble des ordonnances"
+          },
+          {
+            "definition": "niveau de sécu maximal.",
+            "term": "Dispensation nominative (à partir des ordonnances préparées pour chaque patient)"
+          },
+          {
+            "definition": "erreurs d’approvisionnement / forme galénique / dosage, liées au conditionnement, liées au mode de conservation (médicament sensible température)",
+            "term": "Autres facteurs d’erreurs médicamenteuses"
+          },
+          {
+            "definition": "règle de 7B, et des 3 P (patient, prescription, produit) + Ide participent si possible aux réunions de services pour connaître les projets de soin des px + nécessaire de prendre en connaissance de la prescription + vérifier concordance Rx et médicament préparé, date péremption… + identitovigilance + vérifier si allergie + respecter vitesse d’injection IV + enregistrer en temps réel toute administration médicamenteuse",
+            "term": "Administration (règles)"
+          },
+          {
+            "definition": "vérifier efficacité thérapeutique, détecter réactions inattendues… (engage la rep de l’IDE)",
+            "term": "Suivi/surveillance"
+          },
+          {
+            "definition": "nécessite une vigilance particulière = potassium injectable, colchicine, digoxine, héparin sodique...",
+            "term": "Médicaments à risque"
+          }
+        ],
+        "filename": "Iatrogénie médicamenteuse.odt"
+      }
+    ],
+    [
+      "ue_4_4_s1_introduction_la_pharmacologie",
+      {
+        "title": "Introduction à la pharmacologie",
+        "date": "03/09/2025",
+        "ue": "4.4.S1",
+        "author": "GN",
+        "definitions": [
+          {
+            "definition": "produit utilisé dans la prévention, le diagnostic et le traitement des maladies",
+            "term": "Médicament"
+          },
+          {
+            "definition": "confère l’effet thérapeutique, celui qui agit sur l’organisme",
+            "term": "Principe actif"
+          },
+          {
+            "definition": "partie inactive du médicament pour la forme galénique. Effets nocifs possibles.",
+            "term": "Excipients"
+          },
+          {
+            "definition": "médicament original protégé par brevet pendant 20 ans (10 d’expérimentation + 10 de commercialisation)",
+            "term": "Princeps"
+          },
+          {
+            "definition": "doit être de même composition qualitative et quantitative en principe actif. L’efficacité thérapeutique doit être la même et ceci doit être démontré. La forme et les excipients peuvent varier",
+            "term": "Générique"
+          },
+          {
+            "definition": "végétale, animale, synthétique, génie génétique",
+            "term": "Origine d’un médicament"
+          },
+          {
+            "definition": "composition + forme du médicament. Destiné à cibler l’organe ou la zone à traiter",
+            "term": "Forme galénique"
+          },
+          {
+            "definition": "Dénomination Commune Internationale (nom scientifique du principe actif)",
+            "term": "DCI"
+          },
+          {
+            "definition": "systémique ou locale",
+            "term": "Voies d’administration"
+          },
+          {
+            "definition": "voie orale",
+            "term": "Per os"
+          },
+          {
+            "definition": "IV, IM, SC (évite la voie entérale)",
+            "term": "Parentéral"
+          },
+          {
+            "definition": "collyre, spray, suppositoires, gel...",
+            "term": "Transmuqueuse"
+          },
+          {
+            "definition": "aérosol",
+            "term": "Pulmonaire"
+          },
+          {
+            "definition": "pommage, crème",
+            "term": "Percutané"
+          },
+          {
+            "definition": "préventif, substitutif, étiologique/curatif (ATB), symptomatique, additif, diagnostic (pduit de contraste), placebo",
+            "term": "Effets"
+          }
+        ],
+        "filename": "Introduction à la pharmacologie.odt"
+      }
+    ],
+    [
+      "ue_4_4_s1_pharmacodynamie_pharmacocintique_effets_indsirables_et_interaction_mdicamenteuses",
+      {
+        "title": "Pharmacodynamie, pharmacocinétique, effets indésirables et interaction médicamenteuses",
+        "date": "08/09/2025",
+        "ue": "4.4.S1",
+        "author": "EXT",
+        "definitions": [
+          {
+            "definition": "étude de la pharmacodynamique et de la pharmacocinétique des médicaments",
+            "term": "Phamarcologie"
+          },
+          {
+            "definition": "étude des effets du médicament (thérapeutique, secondaire, indésirable (positif ou néfaste), interactions)",
+            "term": "Pharmacodynamique"
+          },
+          {
+            "definition": "étude du devenir du médicament (étapes Absorption, Distribution, Métabolisme, Elimination)",
+            "term": "Pharmacocinétique"
+          },
+          {
+            "definition": "intéraction entre les médicaments et une structure biologique",
+            "term": "Mécanismes d’action d’un médicament"
+          },
+          {
+            "definition": "récepteurs, canaux ioniques, protéines de transport, enzymes, récepteurs régulant la transcription de l’ADN",
+            "term": "Structures cibles des médicaments"
+          },
+          {
+            "definition": "est dite large si la dose efficace est très inférieure à la dose toxique. est dite étroite si la dose efficace est proche de la dose toxique",
+            "term": "Marge thérapeutique"
+          },
+          {
+            "definition": "favorable si les effets bénéfiques du médicament sont plus important que les effets néfastes",
+            "term": "Balance bénéfice/risque"
+          },
+          {
+            "definition": "lorsque l’augmentation de la dose du médicament n’augmente plus l’effet thérapeutique (mais peut augmenter les risques d’effet indésirable)",
+            "term": "Effet plafond"
+          },
+          {
+            "definition": "se dit d’un ligand activant les récepteurs de cellules ciblées",
+            "term": "Agoniste"
+          },
+          {
+            "definition": "augmente la vitesse de métabolisation = risque de sous-dosage d’autres médicaments",
+            "term": "Inducteur enzymatique"
+          },
+          {
+            "definition": "diminue la vitesse de métabolisation = risque de sur-dosage d’autres médicaments",
+            "term": "Inhibiteur enzymatique"
+          },
+          {
+            "definition": "impacté par l’âge, le poids, l’ethnie, pathologie, grossesse, génétique…",
+            "term": "Variabilité individuelle de la réponse au médicament"
+          },
+          {
+            "definition": "ou effet secondaire néfaste. Est inhérent à tout médicament, est caractérisé par sa gravité et sa fréquence. Certains sont attendus (décrits) et d’autres sont inattendus (inconnus)",
+            "term": "Effet indésirable"
+          },
+          {
+            "definition": "surveillance des effets indésirables avec obligation de déclaration pour les inattendus",
+            "term": "Pharmacovigilance"
+          },
+          {
+            "definition": "propriétés du médicament, surdosage/mésusage, toxicité cumulative, excipients/mode d’administration, facteurs propres au patient.",
+            "term": "Facteurs favorisants l’effet indésirable"
+          },
+          {
+            "definition": "peuvent être dues à des incompatibilités physico-chimiques entre médicaments, peuvent survenir à différents stades du cycle ADME (pharmacocinétique), peuvent aussi être positive parfois si un médicament potentialise l’effet d’un autre. Certains aliments/boissons (jus de pamplemousse,…) peuvent inactiver certains médicaments.",
+            "term": "Interactions médicamenteuses"
+          }
+        ],
+        "filename": "Pharmacodynamie, pharmacocinétique, effets indésirables et interaction médicamenteuses.odt"
+      }
+    ],
+    [
+      "ue_4_4_s1_prescription_mdicale_fondamentaux",
+      {
+        "title": "Prescription médicale – fondamentaux",
+        "date": "17/09/2025",
+        "ue": "4.4.S1",
+        "author": "KM",
+        "definitions": [
+          {
+            "definition": "Acte rédigé par un professionnel de santé qui permet la délivrance de médicaments, d’examens ou d’actes médicaux ; doit comporter toutes les mentions nécessaires et répondre à la réglementation. La PM est soumise au secret médical, fait partie du dossier patient et doit être archivée.",
+            "term": "Prescription médicale (PM)"
+          },
+          {
+            "definition": "prescripteur (nom, prénom, spécialité/qualité, identifiant RPPS, numéro ADELI, adresse professionnelle (mention France), coordonnées (téléphone, mail), signature manuscrite, date + patient (nom, prénom (et nom de naissance), date de naissance ou âge, sexe, taille, poids (si pertinent ou <14 ans)) + médicament (dénomination commune internationale (DCI), posologie, répartition des prises, voie d’administration (forme galénique), durée de traitement, nombre de renouvellements.",
+            "term": "Mentions obligatoires sur l’ordonnance"
+          },
+          {
+            "definition": "o : 3 mois sauf mention contraire, d : 12 mois., s : exécutée dans les 3 jours pour les stupéfiants, codéinés ou tramadol, durée max 28 jours.",
+            "term": "Validité de la PM"
+          },
+          {
+            "definition": "pour la plupart des prescriptions, sur papier ou informatique ; mentions obligatoires, pas de sécurité renforcée.",
+            "term": "PM ordinaire"
+          },
+          {
+            "definition": "pour stupéfiants, codéinés, tramadol ; papier spécial, numérotation, durée stricte et exécution rapide ; infalsifiable.",
+            "term": "PM sécurisée"
+          },
+          {
+            "definition": "sépare les traitements pour ALD exonérante (100%) des soins courants ; deux zones distinctes sur l’ordonnance.",
+            "term": "PM Bi-zone"
+          },
+          {
+            "definition": "utilisée pour traitements coûteux ou à règles de remboursement particulières, comporte plusieurs volets administratifs.",
+            "term": "PM d’exception"
+          },
+          {
+            "definition": "rédigée et transmise informatiquement, traçabilité et partage facilités, réduit les fraudes.",
+            "term": "PM électronique/dématérialisée"
+          },
+          {
+            "definition": "papier (identité et coordonnées du patient, signature du médecin, de l’IDE si la PM est relevée.) et/ou informatique (dossier patient informatisé (traçabilité, lisibilité, vision globale du parcours de soins).",
+            "term": "Supports de l’ordonnance"
+          },
+          {
+            "definition": "non valable ni autorisée sauf urgence absolue (à contresigner le plus tôt possible). Majore les risques d’erreur et d’incompréhension.",
+            "term": "PM verbale"
+          },
+          {
+            "definition": "permet à l’IDE d’administrer un traitement selon un protocole standardisé et validé pour une situation précise. Doit être tracée, datée, signée et revue annuellement ; s’applique à un ou plusieurs patients, diffusée à tout le personnel concerné.",
+            "term": "PM anticipée (protocole anticipé)"
+          },
+          {
+            "definition": "prescription pour administration uniquement en fonction de l’évolution d’un paramètre clinique prévisible, avec intervalle, durée maximale, nombre maximum d’administration, et critères évaluables précis.",
+            "term": "Prescription conditionnelle (« si besoin »)"
+          },
+          {
+            "definition": "reconduction ou justification des modifications thérapeutiques à l’entrée, lors d’un transfert ou à la sortie, avec information du patient et transmission au médecin traitant/spécialistes.",
+            "term": "Continuité de la prise en charge"
+          },
+          {
+            "definition": "l’IDE n’a pas le droit de modifier une PM. En cas de doute, doit refuser la réalisation, en référer au prescripteur, tracer et informer le cadre si nécessaire. Vigilance, esprit critique et respect des compétences professionnelles sont exigés",
+            "term": "Rôle et responsabilité de l’IDE liés à la PM"
+          }
+        ],
+        "filename": "Prescription médicale – fondamentaux.odt"
+      }
+    ]
+  ],
+  "stats": {
+    "totalTerms": 310,
+    "studiedTerms": 0,
+    "correctAnswers": 0,
+    "wrongAnswers": 0
+  }
+}
