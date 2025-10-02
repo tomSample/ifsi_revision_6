@@ -77,20 +77,29 @@ function saveUserProgress() {
 // Mettre à jour l'affichage des statistiques
 function updateStatsDisplay() {
     const totalTermsElement = document.getElementById('totalTermsPreview');
-    const remainingTermsElement = document.getElementById('remainingTerms');
+    const masteredTermsElement = document.getElementById('masteredTerms');
+    const priorityTermsElement = document.getElementById('priorityTerms');
     const globalProgressElement = document.getElementById('globalProgress');
     
     if (totalTermsElement) {
         totalTermsElement.textContent = globalStats.totalTerms;
     }
     
-    if (remainingTermsElement) {
-        const remaining = globalStats.totalTerms - usedTerms.length;
-        remainingTermsElement.textContent = remaining;
+    // Calculer les termes maîtrisés et prioritaires
+    const masteredCount = allTerms.filter(term => isMasteredTerm(term)).length;
+    const priorityCount = globalStats.totalTerms - masteredCount;
+    
+    if (masteredTermsElement) {
+        masteredTermsElement.textContent = masteredCount;
+    }
+    
+    if (priorityTermsElement) {
+        priorityTermsElement.textContent = priorityCount;
     }
     
     if (globalProgressElement) {
-        globalProgressElement.textContent = `Global : ${globalStats.seenTerms}/${globalStats.totalTerms} termes`;
+        const masteryRate = globalStats.totalTerms > 0 ? Math.round((masteredCount / globalStats.totalTerms) * 100) : 0;
+        globalProgressElement.textContent = `Maîtrise : ${masteryRate}% (${masteredCount}/${globalStats.totalTerms})`;
     }
 }
 
@@ -114,25 +123,78 @@ function startRevision() {
     showCurrentTerm();
 }
 
-// Sélectionner 10 termes pour la session (rotation complète)
+// Sélectionner 10 termes pour la session (priorité aux non maîtrisés)
 function selectTermsForSession() {
-    const availableTerms = allTerms.filter(term => 
-        !usedTerms.some(usedTerm => usedTerm.term === term.term)
-    );
+    // Séparer les termes selon leur statut de maîtrise
+    const priorityTerms = allTerms.filter(term => !isMasteredTerm(term));
+    const masteredTerms = allTerms.filter(term => isMasteredTerm(term));
     
-    // Si tous les termes ont été utilisés, réinitialiser
-    if (availableTerms.length === 0) {
-        usedTerms = [];
-        console.log('Tous les termes ont été vus. Réinitialisation de la rotation.');
+    console.log(`Termes prioritaires: ${priorityTerms.length}, Termes maîtrisés: ${masteredTerms.length}`);
+    
+    let sessionTerms = [];
+    
+    // D'abord, prendre jusqu'à 10 termes prioritaires
+    if (priorityTerms.length > 0) {
+        const shuffledPriority = priorityTerms.sort(() => 0.5 - Math.random());
+        sessionTerms = shuffledPriority.slice(0, 10);
+    }
+    
+    // Si moins de 10 termes prioritaires, compléter avec des termes maîtrisés
+    if (sessionTerms.length < 10 && masteredTerms.length > 0) {
+        const needed = 10 - sessionTerms.length;
+        const shuffledMastered = masteredTerms.sort(() => 0.5 - Math.random());
+        sessionTerms = sessionTerms.concat(shuffledMastered.slice(0, needed));
+    }
+    
+    // Si tous les termes sont maîtrisés, recommencer le cycle
+    if (sessionTerms.length === 0) {
+        console.log('Tous les termes sont maîtrisés ! Réinitialisation du cycle.');
+        resetMasteryStatus();
         return selectTermsForSession();
     }
     
-    // Si moins de 10 termes disponibles, prendre tous les disponibles
-    const numberOfTerms = Math.min(10, availableTerms.length);
+    console.log(`Session générée avec ${sessionTerms.length} termes`);
+    return sessionTerms;
+}
+
+// Vérifier si un terme est maîtrisé
+function isMasteredTerm(term) {
+    const termKey = generateTermKey(term);
+    const masteredTerms = JSON.parse(localStorage.getItem('masteredTerms') || '[]');
+    return masteredTerms.includes(termKey);
+}
+
+// Marquer un terme comme maîtrisé
+function markTermAsMastered(term) {
+    const termKey = generateTermKey(term);
+    let masteredTerms = JSON.parse(localStorage.getItem('masteredTerms') || '[]');
     
-    // Mélanger et sélectionner
-    const shuffled = availableTerms.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, numberOfTerms);
+    if (!masteredTerms.includes(termKey)) {
+        masteredTerms.push(termKey);
+        localStorage.setItem('masteredTerms', JSON.stringify(masteredTerms));
+        console.log(`Terme marqué comme maîtrisé: ${term.term}`);
+    }
+}
+
+// Marquer un terme comme non maîtrisé (retirer de la liste des maîtrisés)
+function markTermAsNotMastered(term) {
+    const termKey = generateTermKey(term);
+    let masteredTerms = JSON.parse(localStorage.getItem('masteredTerms') || '[]');
+    
+    masteredTerms = masteredTerms.filter(key => key !== termKey);
+    localStorage.setItem('masteredTerms', JSON.stringify(masteredTerms));
+    console.log(`Terme marqué comme non maîtrisé: ${term.term}`);
+}
+
+// Générer une clé unique pour un terme
+function generateTermKey(term) {
+    return `${term.term}_${term.ue}`.replace(/\s+/g, '_').toLowerCase();
+}
+
+// Réinitialiser le statut de maîtrise (quand tout est maîtrisé)
+function resetMasteryStatus() {
+    localStorage.removeItem('masteredTerms');
+    console.log('Statut de maîtrise réinitialisé - nouveau cycle commencé');
 }
 
 // Afficher le terme actuel
@@ -193,18 +255,22 @@ function evaluate(evaluation) {
         evaluation: evaluation
     });
     
-    // Marquer le terme comme utilisé
-    usedTerms.push(currentTerm);
+    // Gérer le statut de maîtrise
+    if (evaluation === 'correct') {
+        markTermAsMastered(currentTerm);
+        globalStats.correctAnswers++;
+    } else {
+        markTermAsNotMastered(currentTerm);
+        globalStats.wrongAnswers++;
+    }
+    
+    // Marquer le terme comme vu dans cette session
+    if (!usedTerms.some(used => used.term === currentTerm.term)) {
+        usedTerms.push(currentTerm);
+    }
     
     // Mettre à jour les statistiques globales
     globalStats.seenTerms++;
-    if (evaluation === 'correct') {
-        globalStats.correctAnswers++;
-    } else if (evaluation === 'partial') {
-        globalStats.partialAnswers++;
-    } else {
-        globalStats.wrongAnswers++;
-    }
     
     // Passer au terme suivant ou terminer la session
     currentTermIndex++;

@@ -13,7 +13,7 @@
             <h2>Révisions - Test de connaissances</h2>
             <div class="progress-info">
                 <span id="sessionProgress">Session : 0/10</span>
-                <span id="globalProgress">Global : 0/XXX termes</span>
+                <span id="globalProgress">Maîtrise : 0% (0/XXX)</span>
             </div>
         </header>
 
@@ -29,8 +29,12 @@
                             <span class="stat-label">Termes total</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number" id="remainingTerms">-</span>
-                            <span class="stat-label">Non vus</span>
+                            <span class="stat-number" id="masteredTerms">-</span>
+                            <span class="stat-label">Maîtrisés</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="priorityTerms">-</span>
+                            <span class="stat-label">Prioritaires</span>
                         </div>
                     </div>
                     <button class="start-btn" onclick="startRevision()">
@@ -79,16 +83,13 @@
                         </div>
 
                         <div class="self-evaluation">
-                            <p>Comment évaluez-vous votre réponse ?</p>
+                            <p>Maîtrisez-vous ce terme ?</p>
                             <div class="evaluation-buttons">
-                                <button class="eval-btn wrong" onclick="evaluate('wrong')">
-                                    ❌ Incorrecte
-                                </button>
-                                <button class="eval-btn partial" onclick="evaluate('partial')">
-                                    🟡 Partielle
+                                <button class="eval-btn incorrect" onclick="evaluate('incorrect')">
+                                    🔄 Non maîtrisé - Revoir plus tard
                                 </button>
                                 <button class="eval-btn correct" onclick="evaluate('correct')">
-                                    ✅ Correcte
+                                    ✅ Maîtrisé - Terme acquis
                                 </button>
                             </div>
                         </div>
