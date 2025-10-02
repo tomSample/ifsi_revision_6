@@ -31,12 +31,21 @@ Interface web moderne pour extraire et gérer les cours IFSI au format ODT.
 
 ## 🚀 Installation et Utilisation
 
-### Prérequis
+### 🌐 **Utilisation en ligne (GitHub Pages)**
+- **Consultation des cours** : https://tomsample.github.io/ifsi_revision_6/
+- **Navigation** : https://tomsample.github.io/ifsi_revision_6/navigation.html
+- ✅ Fonctionne directement sans installation
+- ✅ Statistiques et recherche en temps réel
+- ❌ Upload de nouveaux cours non disponible
+
+### 💻 **Utilisation locale (Fonctionnalités complètes)**
+
+#### Prérequis
 ```bash
 pip install -r requirements.txt
 ```
 
-### Lancement
+#### Lancement
 ```bash
 python app.py
 ```
@@ -45,9 +54,9 @@ ou
 start.bat
 ```
 
-### Accès
-- Interface web : http://localhost:5000
-- API disponible sur tous les endpoints /api/*
+#### Accès
+- Interface complète : http://localhost:5000
+- Upload + consultation : toutes fonctionnalités disponibles
 
 ## 📁 Structure du Projet
 
