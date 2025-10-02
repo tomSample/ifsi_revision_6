@@ -72,6 +72,11 @@
             color: white;
         }
         
+        .nav-btn.revision {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+        
         .nav-btn-icon {
             font-size: 2rem;
             margin-right: 1rem;
@@ -139,11 +144,19 @@
                     <p>Parcourir et rechercher dans la base de données existante</p>
                 </div>
             </a>
+            
+            <a href="revision.html" class="nav-btn revision">
+                <div class="nav-btn-icon">🎯</div>
+                <div class="nav-btn-content">
+                    <h3>Révisions Quotidiennes</h3>
+                    <p>Tester ses connaissances sur 10 termes aléatoires</p>
+                </div>
+            </a>
         </div>
         
         <div class="info">
             <p><strong>💡 Note :</strong> L'upload nécessite le serveur Flask local (python app.py). 
-            La consultation fonctionne directement en ligne.</p>
+            La consultation et les révisions fonctionnent directement en ligne.</p>
         </div>
     </div>
 </body>

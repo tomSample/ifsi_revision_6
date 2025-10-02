@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFSI Lannion - Révisions Quotidiennes</title>
+    <link rel="stylesheet" href="style-revision.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 IFSI Lannion 2025</h1>
+            <h2>Révisions - Test de connaissances</h2>
+            <div class="progress-info">
+                <span id="sessionProgress">Session : 0/10</span>
+                <span id="globalProgress">Global : 0/XXX termes</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Écran de démarrage -->
+            <div class="start-screen" id="startScreen">
+                <div class="welcome-card">
+                    <h3>🎯 Prêt pour vos révisions ?</h3>
+                    <p>Vous allez être testé sur <strong>10 termes</strong> tirés aléatoirement de toutes les UE.</p>
+                    <div class="stats-preview" id="statsPreview">
+                        <div class="stat-item">
+                            <span class="stat-number" id="totalTermsPreview">-</span>
+                            <span class="stat-label">Termes total</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="remainingTerms">-</span>
+                            <span class="stat-label">Non vus</span>
+                        </div>
+                    </div>
+                    <button class="start-btn" onclick="startRevision()">
+                        🚀 Commencer la révision
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interface de révision -->
+            <div class="revision-screen" id="revisionScreen" style="display: none;">
+                <div class="term-card">
+                    <div class="term-header">
+                        <span class="term-ue" id="termUE">UE X.X</span>
+                        <span class="term-number" id="termNumber">1/10</span>
+                    </div>
+                    
+                    <div class="term-question">
+                        <h3 id="termName">Terme à définir</h3>
+                        <p class="instruction">Écrivez votre définition ci-dessous :</p>
+                    </div>
+
+                    <div class="answer-section">
+                        <textarea 
+                            id="userAnswer" 
+                            placeholder="Tapez votre définition ici..."
+                            rows="4"
+                        ></textarea>
+                        
+                        <div class="answer-actions">
+                            <button class="check-btn" onclick="checkAnswer()">
+                                ✅ Vérifier ma réponse
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Section de correction -->
+                    <div class="correction-section" id="correctionSection" style="display: none;">
+                        <div class="user-answer-display">
+                            <h4>📝 Votre réponse :</h4>
+                            <div class="answer-box user" id="userAnswerDisplay"></div>
+                        </div>
+                        
+                        <div class="correct-answer-display">
+                            <h4>✅ Définition correcte :</h4>
+                            <div class="answer-box correct" id="correctAnswerDisplay"></div>
+                        </div>
+
+                        <div class="self-evaluation">
+                            <p>Comment évaluez-vous votre réponse ?</p>
+                            <div class="evaluation-buttons">
+                                <button class="eval-btn wrong" onclick="evaluate('wrong')">
+                                    ❌ Incorrecte
+                                </button>
+                                <button class="eval-btn partial" onclick="evaluate('partial')">
+                                    🟡 Partielle
+                                </button>
+                                <button class="eval-btn correct" onclick="evaluate('correct')">
+                                    ✅ Correcte
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Écran de résultats -->
+            <div class="results-screen" id="resultsScreen" style="display: none;">
+                <div class="results-card">
+                    <h3>🎉 Session terminée !</h3>
+                    <div class="session-stats">
+                        <div class="stat-circle">
+                            <div class="circle-progress" id="scoreCircle">
+                                <span id="scorePercentage">0%</span>
+                            </div>
+                            <p>Score de la session</p>
+                        </div>
+                        
+                        <div class="detailed-stats">
+                            <div class="stat-row">
+                                <span>✅ Correctes :</span>
+                                <span id="correctCount">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>🟡 Partielles :</span>
+                                <span id="partialCount">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>❌ Incorrectes :</span>
+                                <span id="wrongCount">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="new-session-btn" onclick="startNewSession()">
+                            🔄 Nouvelle session (10 termes)
+                        </button>
+                        <button class="review-btn" onclick="reviewSession()">
+                            📋 Revoir les réponses
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Écran de révision des réponses -->
+            <div class="review-screen" id="reviewScreen" style="display: none;">
+                <div class="review-header">
+                    <h3>📋 Révision de vos réponses</h3>
+                    <button class="close-review-btn" onclick="closeReview()">✖</button>
+                </div>
+                <div class="review-content" id="reviewContent">
+                    <!-- Le contenu sera généré dynamiquement -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="revision.js"></script>
+</body>
+</html>
