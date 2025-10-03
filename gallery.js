@@ -6,6 +6,10 @@ let selectedFile = null;
 document.addEventListener('DOMContentLoaded', function() {
     initializeGallery();
     setupUpload();
+    // Vérifier l'authentification pour afficher les boutons admin
+    if (typeof authManager !== 'undefined') {
+        authManager.checkAuthStatus();
+    }
 });
 
 // Initialisation de la galerie
@@ -262,11 +266,14 @@ function displayImages(categoryFilter) {
                     </div>
                 ` : ''}
                 <div class="image-actions">
-                    <button class="action-btn view-btn" onclick="viewImage('${img.id}')">
+                    <button class="action-btn view-btn" onclick="viewImageInModal('images/${img.category}/${img.filename}', ${JSON.stringify(img).replace(/"/g, '&quot;')})">
                         👁️ Voir
                     </button>
                     <button class="action-btn download-btn" onclick="downloadImage('${img.id}')">
                         ⬇️ Télécharger
+                    </button>
+                    <button class="action-btn delete-btn" onclick="deleteImage('images/${img.category}/${img.filename}', ${JSON.stringify(img).replace(/"/g, '&quot;')})">
+                        🗑️ Supprimer
                     </button>
                 </div>
             </div>
@@ -393,5 +400,142 @@ document.addEventListener('keydown', function(event) {
         if (modal) {
             document.body.removeChild(modal);
         }
+        closeImageModal();
+        cancelDelete();
     }
 });
+
+// Variables pour la navigation d'images
+let currentImageIndex = 0;
+let currentImagesList = [];
+let imageToDelete = null;
+
+// Fonction pour visualiser l'image dans la modal
+function viewImageInModal(imagePath, imageData) {
+    openImageModal(imagePath, imageData);
+}
+
+// Fonction pour ouvrir l'image avec navigation
+function openImageModal(imagePath, imageData) {
+    // Mettre à jour la liste des images actuelles
+    const currentCategory = document.querySelector('.category-tab.active').dataset.category || 
+                           document.querySelector('.category-tab.active').onclick.toString().match(/showCategory\('(.+?)'\)/)[1];
+    
+    if (currentCategory === 'all') {
+        currentImagesList = imagesData.images;
+    } else {
+        currentImagesList = imagesData.images.filter(img => img.category === currentCategory);
+    }
+    
+    // Trouver l'index de l'image actuelle
+    currentImageIndex = currentImagesList.findIndex(img => img.path === imagePath);
+    
+    // Afficher la modal
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    
+    modalImage.src = imagePath;
+    modalTitle.textContent = imageData.description || imageData.filename;
+    modalDescription.textContent = `Catégorie: ${imageData.category} | Tags: ${(imageData.tags || []).join(', ')}`;
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Fermer la modal d'image
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Navigation vers l'image précédente
+function previousImage() {
+    if (currentImagesList.length === 0) return;
+    
+    currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : currentImagesList.length - 1;
+    const currentImage = currentImagesList[currentImageIndex];
+    
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    
+    modalImage.src = currentImage.path;
+    modalTitle.textContent = currentImage.description || currentImage.filename;
+    modalDescription.textContent = `Catégorie: ${currentImage.category} | Tags: ${(currentImage.tags || []).join(', ')}`;
+}
+
+// Navigation vers l'image suivante
+function nextImage() {
+    if (currentImagesList.length === 0) return;
+    
+    currentImageIndex = currentImageIndex < currentImagesList.length - 1 ? currentImageIndex + 1 : 0;
+    const currentImage = currentImagesList[currentImageIndex];
+    
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    
+    modalImage.src = currentImage.path;
+    modalTitle.textContent = currentImage.description || currentImage.filename;
+    modalDescription.textContent = `Catégorie: ${currentImage.category} | Tags: ${(currentImage.tags || []).join(', ')}`;
+}
+
+// Fonction pour initier la suppression d'image (protégée par authentification)
+function deleteImage(imagePath, imageData) {
+    authManager.adminAction(() => {
+        imageToDelete = { path: imagePath, data: imageData };
+        
+        const deleteConfirm = document.getElementById('deleteConfirm');
+        const deleteImageName = document.getElementById('deleteImageName');
+        
+        deleteImageName.textContent = imageData.description || imageData.filename;
+        deleteConfirm.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    });
+}
+
+// Annuler la suppression
+function cancelDelete() {
+    const deleteConfirm = document.getElementById('deleteConfirm');
+    deleteConfirm.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    imageToDelete = null;
+}
+
+// Confirmer la suppression
+async function confirmDelete() {
+    if (!imageToDelete) return;
+    
+    try {
+        const response = await fetch('/api/delete_image', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                imagePath: imageToDelete.path
+            })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showStatus('Image supprimée avec succès', 'success');
+            cancelDelete();
+            // Recharger la galerie
+            await loadImages();
+            const activeTab = document.querySelector('.category-tab.active');
+            const category = activeTab.dataset.category || 
+                           activeTab.onclick.toString().match(/showCategory\('(.+?)'\)/)[1];
+            displayImages(category);
+        } else {
+            showStatus('Erreur lors de la suppression: ' + result.error, 'error');
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        showStatus('Erreur lors de la suppression', 'error');
+    }
+}

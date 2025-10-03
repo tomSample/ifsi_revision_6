@@ -635,6 +635,11 @@ def update_course():
     try:
         data = request.get_json()
         
+        # Nouveau format simplifié depuis l'interface d'édition
+        if 'key' in data and 'data' in data:
+            return update_course_simple(data)
+        
+        # Ancien format (compatibilité)
         if not data or 'metadata' not in data or 'definitions' not in data:
             return jsonify({'error': 'Données invalides'}), 400
         
@@ -691,6 +696,51 @@ def update_course():
         print(f"Erreur dans update_course: {e}")
         import traceback
         traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+def update_course_simple(data):
+    """Mise à jour simplifiée depuis l'interface d'édition"""
+    try:
+        course_key = data['key']
+        course_data = data['data']
+        
+        # Lire le fichier JSON existant
+        json_data = read_json_file()
+        
+        # Trouver le cours à mettre à jour
+        course_index = None
+        for i, course in enumerate(json_data['courses']):
+            if course[0] == course_key:
+                course_index = i
+                break
+        
+        if course_index is None:
+            return jsonify({'error': 'Cours non trouvé'}), 404
+        
+        # Mettre à jour les données du cours
+        updated_course_data = {
+            'title': course_data.get('title', ''),
+            'ue': course_data.get('ue', ''),
+            'author': course_data.get('author', ''),
+            'definitions': course_data.get('definitions', []),
+            'date': course_data.get('date', ''),
+            'filename': json_data['courses'][course_index][1].get('filename', f"{course_data.get('title', '')}.odt")
+        }
+        
+        # Remplacer les données du cours
+        json_data['courses'][course_index] = [course_key, updated_course_data]
+        
+        # Mettre à jour les statistiques
+        total_terms = sum(len(course[1].get('definitions', [])) for course in json_data['courses'])
+        json_data['stats']['totalTerms'] = total_terms
+        json_data['exportDate'] = datetime.now().isoformat()
+        
+        # Sauvegarder
+        write_json_file(json_data)
+        
+        return jsonify({'success': True, 'message': 'Cours mis à jour avec succès'})
+    
+    except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 # Configuration pour les images
@@ -820,6 +870,86 @@ def get_images():
         return jsonify(metadata)
     except Exception as e:
         print(f"Erreur dans get_images: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/delete_image', methods=['DELETE'])
+def delete_image():
+    """Supprimer une image"""
+    try:
+        data = request.get_json()
+        image_path = data.get('imagePath')
+        
+        if not image_path:
+            return jsonify({'error': 'Chemin d\'image manquant'}), 400
+        
+        # Enlever le préfixe 'images/' si présent
+        if image_path.startswith('images/'):
+            image_path = image_path[7:]
+        
+        # Construire le chemin complet
+        full_path = os.path.join('images', image_path)
+        
+        # Vérifier que le fichier existe
+        if not os.path.exists(full_path):
+            return jsonify({'error': 'Image non trouvée'}), 404
+        
+        # Supprimer le fichier physique
+        os.remove(full_path)
+        
+        # Mettre à jour les métadonnées
+        metadata = load_images_metadata()
+        
+        # Trouver et supprimer l'image des métadonnées
+        original_count = len(metadata['images'])
+        metadata['images'] = [img for img in metadata['images'] 
+                            if not (img['category'] + '/' + img['filename']) == image_path]
+        
+        if len(metadata['images']) == original_count:
+            return jsonify({'error': 'Image non trouvée dans les métadonnées'}), 404
+        
+        # Sauvegarder les métadonnées mises à jour
+        save_images_metadata(metadata)
+        
+        return jsonify({'success': True, 'message': 'Image supprimée avec succès'})
+        
+    except Exception as e:
+        print(f"Erreur dans delete_image: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/delete_course', methods=['DELETE'])
+def delete_course():
+    """Supprimer un cours"""
+    try:
+        data = request.get_json()
+        course_key = data.get('courseKey')
+        
+        if not course_key:
+            return jsonify({'error': 'Clé de cours manquante'}), 400
+        
+        # Lire le fichier JSON
+        json_data = read_json_file()
+        
+        # Trouver et supprimer le cours
+        original_count = len(json_data['courses'])
+        json_data['courses'] = [course for course in json_data['courses'] if course[0] != course_key]
+        
+        if len(json_data['courses']) == original_count:
+            return jsonify({'error': 'Cours non trouvé'}), 404
+        
+        # Mettre à jour les statistiques
+        json_data['stats']['totalTerms'] = sum(len(course[1]['definitions']) for course in json_data['courses'])
+        
+        # Sauvegarder le fichier
+        write_json_file(json_data)
+        
+        return jsonify({'success': True, 'message': 'Cours supprimé avec succès'})
+        
+    except Exception as e:
+        print(f"Erreur dans delete_course: {e}")
+        import traceback
+        traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':

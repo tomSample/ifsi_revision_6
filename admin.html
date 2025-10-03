@@ -6,6 +6,91 @@
     <title>IFSI Lannion - Administration</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Styles d'authentification */
+        .auth-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .auth-dialog {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-dialog h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .auth-dialog p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .auth-error {
+            color: #dc3545;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            background: #f8d7da;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Interface admin cachée par défaut */
+        .admin-interface {
+            display: none;
+        }
         .admin-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -17,16 +102,31 @@
             padding: 1rem;
             background: #f8f9fa;
             border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .breadcrumb a {
             color: #667eea;
             text-decoration: none;
-            margin-right: 0.5rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .breadcrumb a:hover {
+            color: #5a6fd8;
             text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            color: #6c757d;
+            font-weight: bold;
+        }
+
+        .breadcrumb .current {
+            color: #495057;
+            font-weight: 600;
         }
 
         /* Onglets d'administration */
@@ -329,14 +429,110 @@
                 padding: 2rem 1rem;
             }
         }
+
+        /* Modal de connexion */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .login-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-form h2 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .login-error {
+            color: #dc3545;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .admin-content {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
-    <div class="admin-container">
+    <script src="auth.js"></script>
+    
+    <!-- Modal d'authentification -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-dialog">
+            <h2>🔐 Authentification Administrateur</h2>
+            <p>Cette interface permet de gérer les cours et les images de la plateforme IFSI Lannion.<br>
+            Veuillez saisir le mot de passe administrateur pour continuer.</p>
+            <form onsubmit="return handleAuth(event)">
+                <input type="password" id="adminPassword" placeholder="Mot de passe administrateur" class="auth-input" required autocomplete="current-password">
+                <button type="submit" class="auth-btn">🚀 Se connecter</button>
+            </form>
+            <div id="authError" class="auth-error" style="display: none;"></div>
+            
+            <p style="margin-top: 2rem; font-size: 0.8rem; color: #999;">
+                Une fois connecté, vous aurez accès aux fonctions d'édition et de suppression sur toutes les pages.
+            </p>
+        </div>
+    </div>
+
+    <!-- Interface admin (cachée par défaut) -->
+    <div id="adminInterface" class="admin-interface">
         <header>
             <h1>⚙️ Administration IFSI Lannion</h1>
             <nav class="breadcrumb">
-                <a href="navigation.html">🏠 Accueil</a> › Administration
+                <a href="navigation.html">🏠 Accueil</a>
+                <span class="separator">›</span>
+                <span class="current">Administration</span>
             </nav>
         </header>
 
@@ -445,7 +641,56 @@
 
         <div id="status"></div>
     </div>
+    </div>
 
+    <script>
+        // Vérifier l'authentification au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            if (authManager.isAdmin()) {
+                showAdminInterface();
+            } else {
+                showAuthModal();
+            }
+        });
+
+        function handleAuth(event) {
+            event.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            const errorDiv = document.getElementById('authError');
+            
+            if (authManager.authenticate(password)) {
+                showAdminInterface();
+                errorDiv.style.display = 'none';
+            } else {
+                errorDiv.textContent = '❌ Mot de passe incorrect. Veuillez réessayer.';
+                errorDiv.style.display = 'block';
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminPassword').focus();
+            }
+        }
+
+        function showAuthModal() {
+            document.getElementById('authModal').style.display = 'flex';
+            document.getElementById('adminInterface').style.display = 'none';
+            setTimeout(() => {
+                document.getElementById('adminPassword').focus();
+            }, 100);
+        }
+
+        function showAdminInterface() {
+            document.getElementById('authModal').style.display = 'none';
+            document.getElementById('adminInterface').style.display = 'block';
+            
+            // Notification de connexion réussie
+            const status = document.getElementById('status');
+            if (status) {
+                status.innerHTML = '<div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: 8px; margin: 1rem 0;">✅ Connexion administrateur réussie ! Vous avez maintenant accès aux fonctions d\'édition et de suppression sur toutes les pages.</div>';
+                setTimeout(() => {
+                    status.innerHTML = '';
+                }, 5000);
+            }
+        }
+    </script>
     <script src="admin.js"></script>
 </body>
 </html>

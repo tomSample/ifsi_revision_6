@@ -17,16 +17,31 @@
             padding: 1rem;
             background: #f8f9fa;
             border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .breadcrumb a {
             color: #667eea;
             text-decoration: none;
-            margin-right: 0.5rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .breadcrumb a:hover {
+            color: #5a6fd8;
             text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            color: #6c757d;
+            font-weight: bold;
+        }
+
+        .breadcrumb .current {
+            color: #495057;
+            font-weight: 600;
         }
 
         /* Onglets catégories */
@@ -157,9 +172,155 @@
             color: white;
         }
 
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
         .action-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal pour visualisation et navigation */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-nav:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-prev {
+            left: -70px;
+        }
+
+        .modal-next {
+            right: -70px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+
+        .modal-info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 80%;
+        }
+
+        /* Confirmation de suppression */
+        .delete-confirm {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .confirm-dialog {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .confirm-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .confirm-cancel {
+            background: #6c757d;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         /* Status et messages */
@@ -214,11 +375,14 @@
     </style>
 </head>
 <body>
+    <script src="auth.js"></script>
     <div class="gallery-container">
         <header>
             <h1>🖼️ Galerie d'Images IFSI Lannion</h1>
             <nav class="breadcrumb">
-                <a href="navigation.html">🏠 Accueil</a> › Galerie d'Images
+                <a href="navigation.html">🏠 Accueil</a>
+                <span class="separator">›</span>
+                <span class="current">Galerie d'Images</span>
             </nav>
         </header>
 
@@ -251,6 +415,34 @@
         </section>
 
         <div id="status"></div>
+    </div>
+
+    <!-- Modal de visualisation avec navigation -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeImageModal()">✕</button>
+            <button class="modal-nav modal-prev" onclick="previousImage()">‹</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <button class="modal-nav modal-next" onclick="nextImage()">›</button>
+            <div class="modal-info" id="modalInfo">
+                <h4 id="modalTitle"></h4>
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation de suppression -->
+    <div class="delete-confirm" id="deleteConfirm">
+        <div class="confirm-dialog">
+            <h3>🗑️ Confirmer la suppression</h3>
+            <p>Êtes-vous sûr de vouloir supprimer cette image ?</p>
+            <p><strong id="deleteImageName"></strong></p>
+            <p style="color: #dc3545; font-size: 0.9rem;">⚠️ Cette action est irréversible</p>
+            <div class="confirm-buttons">
+                <button class="confirm-btn confirm-cancel" onclick="cancelDelete()">Annuler</button>
+                <button class="confirm-btn confirm-delete" onclick="confirmDelete()">Supprimer</button>
+            </div>
+        </div>
     </div>
 
     <script src="gallery.js"></script>
