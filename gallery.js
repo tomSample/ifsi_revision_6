@@ -6,10 +6,6 @@ let selectedFile = null;
 document.addEventListener('DOMContentLoaded', function() {
     initializeGallery();
     setupUpload();
-    // Vérifier l'authentification pour afficher les boutons admin
-    if (typeof authManager !== 'undefined') {
-        authManager.checkAuthStatus();
-    }
 });
 
 // Initialisation de la galerie
@@ -224,9 +220,21 @@ function populateCategories() {
     // Actuellement les catégories sont codées en dur dans le HTML
 }
 
+// Fonction utilitaire pour vérifier l'état d'authentification
+function safeGetElement(id) {
+    const element = document.getElementById(id);
+    if (!element) {
+        console.warn(`Élément ${id} non trouvé dans le DOM`);
+        return null;
+    }
+    return element;
+}
+
 // Affichage des images selon la catégorie
 function displayImages(categoryFilter) {
-    const grid = document.getElementById('imagesGrid');
+    const grid = safeGetElement('imagesGrid');
+    if (!grid) return;
+    
     let filteredImages = imagesData.images;
     
     if (categoryFilter !== 'all') {
@@ -272,13 +280,53 @@ function displayImages(categoryFilter) {
                     <button class="action-btn download-btn" onclick="downloadImage('${img.id}')">
                         ⬇️ Télécharger
                     </button>
-                    <button class="action-btn delete-btn" onclick="deleteImage('images/${img.category}/${img.filename}', ${JSON.stringify(img).replace(/"/g, '&quot;')})">
-                        🗑️ Supprimer
-                    </button>
                 </div>
             </div>
         </div>
     `).join('');
+    
+    // Ajouter les boutons admin si l'utilisateur est connecté comme admin
+    addAdminButtonsToImages();
+}
+
+// Fonction pour ajouter les boutons admin aux images
+function addAdminButtonsToImages() {
+    // Vérifier si l'utilisateur est admin
+    if (typeof authManager !== 'undefined' && authManager.isAdmin()) {
+        // Parcourir toutes les cartes d'images
+        document.querySelectorAll('.image-card').forEach((card, index) => {
+            const actionsDiv = card.querySelector('.image-actions');
+            if (actionsDiv && !actionsDiv.querySelector('.delete-btn')) {
+                // Récupérer les données de l'image pour ce card
+                const img = getCurrentFilteredImages()[index];
+                if (img) {
+                    // Créer le bouton de suppression
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'action-btn delete-btn';
+                    deleteBtn.innerHTML = '🗑️ Supprimer';
+                    deleteBtn.onclick = () => deleteImage(`images/${img.category}/${img.filename}`, img);
+                    
+                    // Ajouter le bouton
+                    actionsDiv.appendChild(deleteBtn);
+                }
+            }
+        });
+    }
+}
+
+// Fonction pour obtenir les images filtrées actuelles
+function getCurrentFilteredImages() {
+    const activeTab = document.querySelector('.category-tab.active');
+    if (!activeTab) return imagesData.images;
+    
+    const categoryFilter = activeTab.onclick.toString().match(/showCategory\('(.+?)'\)/);
+    const category = categoryFilter ? categoryFilter[1] : 'all';
+    
+    if (category === 'all') {
+        return imagesData.images;
+    } else {
+        return imagesData.images.filter(img => img.category === category);
+    }
 }
 
 // Changer de catégorie
@@ -483,18 +531,18 @@ function nextImage() {
     modalDescription.textContent = `Catégorie: ${currentImage.category} | Tags: ${(currentImage.tags || []).join(', ')}`;
 }
 
-// Fonction pour initier la suppression d'image (protégée par authentification)
+// Fonction pour initier la suppression d'image
 function deleteImage(imagePath, imageData) {
-    authManager.adminAction(() => {
-        imageToDelete = { path: imagePath, data: imageData };
-        
-        const deleteConfirm = document.getElementById('deleteConfirm');
-        const deleteImageName = document.getElementById('deleteImageName');
-        
+    imageToDelete = { path: imagePath, data: imageData };
+    
+    const deleteConfirm = safeGetElement('deleteConfirm');
+    const deleteImageName = safeGetElement('deleteImageName');
+    
+    if (deleteConfirm && deleteImageName) {
         deleteImageName.textContent = imageData.description || imageData.filename;
         deleteConfirm.style.display = 'flex';
         document.body.style.overflow = 'hidden';
-    });
+    }
 }
 
 // Annuler la suppression

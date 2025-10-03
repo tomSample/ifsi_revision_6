@@ -67,27 +67,26 @@ class AuthManager {
 
     // Afficher les boutons admin
     showAdminButtons() {
-        document.querySelectorAll('.admin-only').forEach(el => {
-            // Utiliser le bon type d'affichage selon l'élément
-            if (el.classList.contains('course-admin-actions')) {
-                el.style.display = 'flex';
-            } else {
-                el.style.display = 'inline-block';
-            }
-        });
-        document.querySelectorAll('.admin-section').forEach(el => {
-            el.style.display = 'block';
-        });
+        // Ajouter la classe pour activer l'affichage des éléments admin
+        document.body.classList.add('admin-authenticated');
+        
+        // Déclencher l'ajout des boutons admin spécifiques à la galerie
+        if (typeof addAdminButtonsToImages === 'function') {
+            addAdminButtonsToImages();
+        }
+        
+        console.log('🔓 Boutons admin activés');
     }
 
     // Masquer les boutons admin
     hideAdminButtons() {
-        document.querySelectorAll('.admin-only').forEach(el => {
-            el.style.display = 'none';
-        });
-        document.querySelectorAll('.admin-section').forEach(el => {
-            el.style.display = 'none';
-        });
+        // Retirer la classe pour désactiver l'affichage des éléments admin
+        document.body.classList.remove('admin-authenticated');
+        
+        // Supprimer tous les boutons de suppression ajoutés dynamiquement
+        document.querySelectorAll('.delete-btn').forEach(btn => btn.remove());
+        
+        console.log('🔒 Boutons admin masqués');
     }
 
     // Action protégée
@@ -181,6 +180,17 @@ class AuthManager {
 
 // Instance globale
 const authManager = new AuthManager();
+
+// Initialisation automatique au chargement
+document.addEventListener('DOMContentLoaded', function() {
+    // Vérifier l'état d'authentification au chargement
+    authManager.checkAuthStatus();
+    
+    // S'assurer que les boutons admin sont correctement masqués par défaut
+    if (!authManager.isAdmin()) {
+        authManager.hideAdminButtons();
+    }
+});
 
 // Vérifier périodiquement l'expiration (toutes les minutes)
 setInterval(() => {

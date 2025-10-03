@@ -837,3 +837,44 @@ main {
         width: 100%;
     }
 }
+
+/* =================================
+   SÉCURITÉ ADMIN - AUTHENTIFICATION
+   ================================= */
+
+/* Masquer par défaut tous les éléments admin-only avec priorité maximale */
+.admin-only,
+.delete-btn.admin-only,
+button.admin-only,
+.action-btn.admin-only {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Afficher les éléments admin seulement quand authentifié */
+.admin-authenticated .admin-only,
+.admin-authenticated .delete-btn.admin-only,
+.admin-authenticated button.admin-only,
+.admin-authenticated .action-btn.admin-only {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.admin-authenticated .admin-only.course-admin-actions {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Style pour les sections admin */
+.admin-section {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.admin-authenticated .admin-section {
+    display: block !important;
+    visibility: visible !important;
+}

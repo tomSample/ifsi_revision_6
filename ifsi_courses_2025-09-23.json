@@ -1,5 +1,5 @@
 {
-  "exportDate": "2025-10-03T20:48:47.531566",
+  "exportDate": "2025-10-03T21:27:26.131324",
   "courses": [
     [
       "ue_2_2_s1_organisation_de_la_cellule_au_tissu",
@@ -1448,9 +1448,10 @@
     [
       "ue_3_10_s1_isolement_protecteur_pose_et_dpose_epi",
       {
-        "title": "isolement protecteur & EPI",
+        "title": "isolement protecteur (pose et dépose EPI)",
+        "date": "03/10/2025",
         "ue": "3.10.S1",
-        "author": "SC/KM",
+        "author": "SC/",
         "definitions": [
           {
             "definition": "Mise en place prescription médicale. A pour but d’éviter la transmission à un patient immunodéprimé de tout agent potentiellement infectieux extérieur, y compris des agents habituellement peu ou pas pathogènes. Repose également sur l’isolement du patient en chambre individuelle avec éviction de tout déplacement (sauf nécessité médicale). L’explication des mesures au patient et à l’entourage est essentiel",
@@ -1501,7 +1502,6 @@
             "term": "UMP / « tour »"
           }
         ],
-        "date": "03/10/2025",
         "filename": "isolement protecteur (pose et dépose EPI).odt"
       }
     ]
