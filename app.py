@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
+from werkzeug.utils import secure_filename
 import json
 import os
 import re
@@ -690,6 +691,135 @@ def update_course():
         print(f"Erreur dans update_course: {e}")
         import traceback
         traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+# Configuration pour les images
+IMAGES_METADATA_FILE = 'images_metadata.json'
+IMAGES_FOLDER = 'images'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf'}
+
+def allowed_file(filename):
+    """Vérifier si l'extension du fichier est autorisée"""
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def load_images_metadata():
+    """Charger les métadonnées des images"""
+    try:
+        with open(IMAGES_METADATA_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {
+            "images": [],
+            "categories": {
+                "anatomie-physiologie": {
+                    "name": "Anatomie & Physiologie",
+                    "icon": "🫀",
+                    "description": "Schémas anatomiques et mécanismes physiologiques"
+                },
+                "systemes": {
+                    "name": "Systèmes & Processus",
+                    "icon": "⚙️", 
+                    "description": "Processus pathologiques et systémiques"
+                },
+                "normes": {
+                    "name": "Normes & Protocoles",
+                    "icon": "📋",
+                    "description": "Valeurs de référence et protocoles de soins"
+                }
+            }
+        }
+
+def save_images_metadata(data):
+    """Sauvegarder les métadonnées des images"""
+    with open(IMAGES_METADATA_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+@app.route('/api/upload_image', methods=['POST'])
+def upload_image():
+    """Upload d'une image avec métadonnées"""
+    try:
+        # Vérifier qu'un fichier est présent
+        if 'file' not in request.files:
+            return jsonify({'error': 'Aucun fichier fourni'}), 400
+        
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({'error': 'Aucun fichier sélectionné'}), 400
+        
+        if not allowed_file(file.filename):
+            return jsonify({'error': 'Type de fichier non autorisé'}), 400
+        
+        # Récupérer les métadonnées
+        category = request.form.get('category')
+        subcategory = request.form.get('subcategory', '').strip()
+        description = request.form.get('description', '').strip()
+        tags_input = request.form.get('tags', '').strip()
+        
+        if not category or not description:
+            return jsonify({'error': 'Catégorie et description obligatoires'}), 400
+        
+        # Traiter les tags
+        tags = [tag.strip() for tag in tags_input.split(',') if tag.strip()] if tags_input else []
+        
+        # Créer le dossier de catégorie si nécessaire
+        category_folder = os.path.join(IMAGES_FOLDER, category)
+        os.makedirs(category_folder, exist_ok=True)
+        
+        # Sécuriser le nom de fichier et sauvegarder
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(category_folder, filename)
+        
+        # Vérifier si le fichier existe déjà et renommer si nécessaire
+        base_name, ext = os.path.splitext(filename)
+        counter = 1
+        while os.path.exists(filepath):
+            filename = f"{base_name}_{counter}{ext}"
+            filepath = os.path.join(category_folder, filename)
+            counter += 1
+        
+        file.save(filepath)
+        
+        # Charger les métadonnées existantes
+        metadata = load_images_metadata()
+        
+        # Créer l'entrée pour la nouvelle image
+        new_image = {
+            'id': f"img_{len(metadata['images']) + 1:03d}",
+            'filename': filename,
+            'original_name': file.filename,
+            'category': category,
+            'subcategory': subcategory if subcategory else None,
+            'description': description,
+            'tags': tags,
+            'uploaded_date': datetime.now().strftime('%Y-%m-%d'),
+            'size': f"{os.path.getsize(filepath)/1024:.1f}KB",
+            'type': file.content_type.split('/')[-1] if file.content_type else filename.split('.')[-1].lower()
+        }
+        
+        # Ajouter à la liste et sauvegarder
+        metadata['images'].append(new_image)
+        save_images_metadata(metadata)
+        
+        return jsonify({
+            'success': True,
+            'message': f'Image "{description}" uploadée avec succès !',
+            'image': new_image
+        })
+        
+    except Exception as e:
+        print(f"Erreur dans upload_image: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/images')
+def get_images():
+    """Récupérer la liste des images"""
+    try:
+        metadata = load_images_metadata()
+        return jsonify(metadata)
+    except Exception as e:
+        print(f"Erreur dans get_images: {e}")
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':

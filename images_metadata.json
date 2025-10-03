@@ -1,0 +1,20 @@
+{
+  "images": [],
+  "categories": {
+    "anatomie-physiologie": {
+      "name": "Anatomie & Physiologie",
+      "icon": "🫀",
+      "description": "Schémas anatomiques et mécanismes physiologiques"
+    },
+    "systemes": {
+      "name": "Systèmes & Processus",
+      "icon": "⚙️", 
+      "description": "Processus pathologiques et systémiques"
+    },
+    "normes": {
+      "name": "Normes & Protocoles",
+      "icon": "📋",
+      "description": "Valeurs de référence et protocoles de soins"
+    }
+  }
+}

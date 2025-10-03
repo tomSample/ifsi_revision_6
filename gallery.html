@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFSI Lannion - Galerie d'Images</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+            margin-right: 0.5rem;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Zone d'upload */
+        .upload-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .upload-area.dragover {
+            border-color: #28a745;
+            background: #e8f5e8;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .browse-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .browse-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Formulaire métadonnées */
+        .metadata-form {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Aperçu fichier */
+        .file-preview {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .file-preview img {
+            max-width: 100px;
+            max-height: 80px;
+            border-radius: 4px;
+        }
+
+        .pdf-icon {
+            font-size: 3rem;
+            color: #dc3545;
+        }
+
+        /* Onglets catégories */
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .category-tab:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .category-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Grille d'images */
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .image-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .image-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-thumbnail {
+            height: 200px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .image-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pdf-thumbnail {
+            font-size: 4rem;
+            color: #dc3545;
+        }
+
+        .image-info {
+            padding: 1.5rem;
+        }
+
+        .image-info h4 {
+            margin: 0 0 0.5rem 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .image-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .image-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #e9ecef;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #495057;
+        }
+
+        .image-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .download-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Status et messages */
+        .status {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .gallery-container {
+                padding: 1rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .category-tabs {
+                justify-content: center;
+            }
+
+            .images-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <header>
+            <h1>🖼️ Galerie d'Images IFSI Lannion</h1>
+            <nav class="breadcrumb">
+                <a href="navigation.html">🏠 Accueil</a> › <a href="index.html">📖 Cours</a> › Galerie d'Images
+            </nav>
+        </header>
+
+        <!-- Section d'upload -->
+        <section class="upload-section">
+            <h3>📤 Ajouter une nouvelle image</h3>
+            
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">🖼️</div>
+                <h4>Glissez une image ici</h4>
+                <p>Formats acceptés : PNG, JPG, PDF (max 5MB)</p>
+                <button class="browse-btn" onclick="document.getElementById('fileInput').click()">
+                    📁 Parcourir les fichiers
+                </button>
+                <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.pdf" style="display: none;">
+            </div>
+
+            <!-- Formulaire métadonnées -->
+            <div class="metadata-form" id="metadataForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="categorySelect">Catégorie :</label>
+                        <select id="categorySelect">
+                            <option value="">Choisir une catégorie</option>
+                            <option value="anatomie-physiologie">🫀 Anatomie & Physiologie</option>
+                            <option value="systemes">⚙️ Systèmes & Processus</option>
+                            <option value="normes">📋 Normes & Protocoles</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subcategoryInput">Sous-catégorie :</label>
+                        <input type="text" id="subcategoryInput" placeholder="ex: système cardiovasculaire">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="descriptionInput">Description :</label>
+                        <input type="text" id="descriptionInput" placeholder="Description de l'image">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tagsInput">Tags (séparés par des virgules) :</label>
+                        <input type="text" id="tagsInput" placeholder="ex: coeur, anatomie, cardiovasculaire">
+                    </div>
+                </div>
+
+                <button class="upload-btn" onclick="uploadImage()">
+                    🚀 Uploader l'image
+                </button>
+            </div>
+        </section>
+
+        <!-- Section galerie -->
+        <section class="gallery-section">
+            <h3>📁 Images par catégorie</h3>
+            
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="showCategory('all')">
+                    📚 Toutes les images
+                </button>
+                <button class="category-tab" onclick="showCategory('anatomie-physiologie')">
+                    🫀 Anatomie & Physiologie
+                </button>
+                <button class="category-tab" onclick="showCategory('systemes')">
+                    ⚙️ Systèmes & Processus
+                </button>
+                <button class="category-tab" onclick="showCategory('normes')">
+                    📋 Normes & Protocoles
+                </button>
+            </div>
+
+            <div class="images-grid" id="imagesGrid">
+                <div class="empty-state">
+                    <div class="empty-state-icon">🖼️</div>
+                    <h4>Aucune image pour le moment</h4>
+                    <p>Commencez par uploader votre première image !</p>
+                </div>
+            </div>
+        </section>
+
+        <div id="status"></div>
+    </div>
+
+    <script src="gallery.js"></script>
+</body>
+</html>
