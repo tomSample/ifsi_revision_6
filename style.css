@@ -41,6 +41,32 @@ header h2 {
     opacity: 0.9;
 }
 
+/* Breadcrumb navigation */
+.breadcrumb {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.breadcrumb .current {
+    color: white;
+    font-weight: 600;
+}
+
 /* Main content */
 main {
     padding: 2rem;
@@ -810,4 +836,45 @@ main {
     .update-btn, .cancel-btn {
         width: 100%;
     }
+}
+
+/* =================================
+   SÉCURITÉ ADMIN - AUTHENTIFICATION
+   ================================= */
+
+/* Masquer par défaut tous les éléments admin-only avec priorité maximale */
+.admin-only,
+.delete-btn.admin-only,
+button.admin-only,
+.action-btn.admin-only {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Afficher les éléments admin seulement quand authentifié */
+.admin-authenticated .admin-only,
+.admin-authenticated .delete-btn.admin-only,
+.admin-authenticated button.admin-only,
+.admin-authenticated .action-btn.admin-only {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.admin-authenticated .admin-only.course-admin-actions {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Style pour les sections admin */
+.admin-section {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.admin-authenticated .admin-section {
+    display: block !important;
+    visibility: visible !important;
 }

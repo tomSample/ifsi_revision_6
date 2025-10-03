@@ -22,26 +22,26 @@
             padding: 3rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
             text-align: center;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
         }
         
         .nav-container h1 {
             color: #2c3e50;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             font-size: 2.5rem;
         }
         
         .nav-container h2 {
             color: #7f8c8d;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             font-weight: 400;
         }
         
         .nav-buttons {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
         }
         
         .nav-btn {
@@ -50,7 +50,7 @@
             padding: 1.5rem 2rem;
             border: none;
             border-radius: 15px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -58,11 +58,11 @@
         }
         
         .nav-btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
         
-        .nav-btn.upload {
+        .nav-btn.admin {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
@@ -77,29 +77,29 @@
             color: white;
         }
         
+        .nav-btn.gallery {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%);
+            color: white;
+        }
+        
         .nav-btn-icon {
             font-size: 2rem;
             margin-right: 1rem;
         }
         
+        .nav-btn-content {
+            text-align: left;
+        }
+        
         .nav-btn-content h3 {
             margin: 0 0 0.5rem 0;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
         }
         
         .nav-btn-content p {
             margin: 0;
             opacity: 0.9;
-            font-size: 0.9rem;
-        }
-        
-        .info {
-            margin-top: 2rem;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            color: #666;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         @media (max-width: 600px) {
@@ -114,6 +114,7 @@
             .nav-btn {
                 flex-direction: column;
                 text-align: center;
+                padding: 1rem;
             }
             
             .nav-btn-icon {
@@ -126,14 +127,14 @@
 <body>
     <div class="nav-container">
         <h1>📚 IFSI Lannion 2025</h1>
-        <h2>Interface de gestion des cours</h2>
+        <h2>Interface de révision et de gestion</h2>
         
         <div class="nav-buttons">
-            <a href="index-upload.html" class="nav-btn upload">
-                <div class="nav-btn-icon">⬆️</div>
+            <a href="admin.html" class="nav-btn admin">
+                <div class="nav-btn-icon">⚙️</div>
                 <div class="nav-btn-content">
-                    <h3>Upload de Cours</h3>
-                    <p>Ajouter de nouveaux fichiers .odt à la base de données</p>
+                    <h3>Administration</h3>
+                    <p>Gestion des cours et des images</p>
                 </div>
             </a>
             
@@ -141,22 +142,25 @@
                 <div class="nav-btn-icon">📖</div>
                 <div class="nav-btn-content">
                     <h3>Consulter les Cours</h3>
-                    <p>Parcourir et rechercher dans la base de données existante</p>
+                    <p>Parcourir et rechercher dans la base de données</p>
                 </div>
             </a>
             
             <a href="revision.html" class="nav-btn revision">
                 <div class="nav-btn-icon">🎯</div>
                 <div class="nav-btn-content">
-                    <h3>Révisions Quotidiennes</h3>
+                    <h3>Révisions</h3>
                     <p>Tester ses connaissances sur 10 termes aléatoires</p>
                 </div>
             </a>
-        </div>
-        
-        <div class="info">
-            <p><strong>💡 Note :</strong> L'upload nécessite le serveur Flask local (python app.py). 
-            La consultation et les révisions fonctionnent directement en ligne.</p>
+            
+            <a href="gallery.html" class="nav-btn gallery">
+                <div class="nav-btn-icon">🖼️</div>
+                <div class="nav-btn-content">
+                    <h3>Galerie d'Images</h3>
+                    <p>Visualiser schémas et supports par catégorie</p>
+                </div>
+            </a>
         </div>
     </div>
 </body>

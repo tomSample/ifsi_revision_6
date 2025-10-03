@@ -38,6 +38,32 @@ header h2 {
     margin-bottom: 1rem;
 }
 
+/* Breadcrumb navigation */
+.breadcrumb {
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.breadcrumb .current {
+    color: white;
+    font-weight: 600;
+}
+
 .progress-info {
     display: flex;
     justify-content: center;

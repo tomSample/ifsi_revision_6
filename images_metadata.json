@@ -1,0 +1,52 @@
+{
+  "images": [
+    {
+      "id": "img_001",
+      "filename": "97.-Vertebre-cervicale-vue-superieure-1024x694.png",
+      "original_name": "97.-Vertèbre-cervicale-vue-supérieure-1024x694.png",
+      "category": "anatomie-physiologie",
+      "subcategory": "os",
+      "description": "coupe transversale d'une vertèbre",
+      "tags": [
+        "os",
+        "vertèbre",
+        "système nerveux"
+      ],
+      "uploaded_date": "2025-10-03",
+      "size": "108.1KB",
+      "type": "png"
+    },
+    {
+      "id": "img_002",
+      "filename": "84.-Cage-thoracique-1024x768.png",
+      "original_name": "84.-Cage-thoracique-1024x768.png",
+      "category": "anatomie-physiologie",
+      "subcategory": null,
+      "description": "cage thoracique vue antérieure",
+      "tags": [
+        "os",
+        "cage thoracique"
+      ],
+      "uploaded_date": "2025-10-03",
+      "size": "266.4KB",
+      "type": "png"
+    }
+  ],
+  "categories": {
+    "anatomie-physiologie": {
+      "name": "Anatomie & Physiologie",
+      "icon": "🫀",
+      "description": "Schémas anatomiques et mécanismes physiologiques"
+    },
+    "systemes": {
+      "name": "Systèmes & Processus",
+      "icon": "⚙️",
+      "description": "Processus pathologiques et systémiques"
+    },
+    "normes": {
+      "name": "Normes & Protocoles",
+      "icon": "📋",
+      "description": "Valeurs de référence et protocoles de soins"
+    }
+  }
+}

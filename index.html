@@ -5,12 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IFSI Lannion - Révisions 2025</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles pour les boutons admin */
+        .course-admin-actions {
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.3rem;
+            justify-content: flex-end;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .course-card:hover .course-admin-actions {
+            opacity: 1;
+        }
+
+        .admin-btn {
+            padding: 0.3rem 0.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            background: rgba(108, 117, 125, 0.1);
+            color: #6c757d;
+            border: 1px solid rgba(108, 117, 125, 0.2);
+        }
+
+        .admin-btn:hover {
+            background: rgba(108, 117, 125, 0.2);
+            color: #495057;
+            transform: translateY(-1px);
+        }
+
+        /* Badge administrateur */
+        .admin-badge {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+    </style>
 </head>
 <body>
+    <script src="auth.js"></script>
+    
+    <!-- Badge administrateur -->
+    <div id="adminBadge" class="admin-badge admin-only">
+        🔐 Mode Administrateur
+    </div>
     <div class="container">
         <header>
             <h1>📚 IFSI Lannion 2025</h1>
             <h2>Révisions - Base de données des cours</h2>
+            <nav class="breadcrumb">
+                <a href="navigation.html">🏠 Accueil</a> › <span class="current">Consultation Cours</span>
+            </nav>
         </header>
 
         <main>
@@ -128,6 +187,7 @@
 
             grid.innerHTML = courses.map(course => {
                 const [key, data] = course;
+                const courseTitle = (data.title || 'Titre non défini').replace(/'/g, '\\\'');
                 return `
                     <div class="course-card" onclick="showCourseDetails('${key}')">
                         <div class="course-header">
@@ -139,9 +199,22 @@
                             <span class="course-author">👤 ${data.author || 'Non défini'}</span>
                             <span class="course-terms">📝 ${data.definitions ? data.definitions.length : 0} termes</span>
                         </div>
+                        
+                        <!-- Boutons admin (masqués par défaut) -->
+                        <div class="course-admin-actions admin-only">
+                            <button onclick="event.stopPropagation(); editCourse('${key}', '${courseTitle}')" class="admin-btn edit-btn" title="Éditer le cours">
+                                ✏️
+                            </button>
+                            <button onclick="event.stopPropagation(); deleteCourse('${key}', '${courseTitle}')" class="admin-btn delete-btn" title="Supprimer le cours">
+                                🗑️
+                            </button>
+                        </div>
                     </div>
                 `;
             }).join('');
+            
+            // Réactiver les boutons admin si connecté
+            authManager.checkAuthStatus();
         }
 
         // Filtrer les cours
@@ -204,6 +277,226 @@
         function hideTerms() {
             document.getElementById('termsSection').style.display = 'none';
         }
+
+        // Fonctions d'administration des cours
+        function editCourse(courseKey, courseTitle) {
+            authManager.adminAction(() => {
+                const course = coursesData.courses.find(c => c[0] === courseKey);
+                if (!course) return;
+
+                const [key, data] = course;
+                
+                // Créer la modal d'édition
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.5); z-index: 1000; display: flex;
+                    align-items: center; justify-content: center; padding: 20px;
+                `;
+                
+                modal.innerHTML = `
+                    <div style="background: white; border-radius: 12px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 0;">
+                        <div style="padding: 20px; border-bottom: 1px solid #e9ecef;">
+                            <h3 style="margin: 0; color: #2c3e50;">✏️ Éditer le cours</h3>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #495057;">Titre du cours :</label>
+                                <input type="text" id="editTitle" value="${data.title}" style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #495057;">UE :</label>
+                                <input type="text" id="editUE" value="${data.ue || ''}" style="width: 100px; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #495057;">Auteur :</label>
+                                <input type="text" id="editAuthor" value="${data.author || ''}" style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px;">
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <label style="font-weight: 600; color: #495057;">Termes et définitions :</label>
+                                    <button onclick="addNewTerm()" style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">+ Ajouter un terme</button>
+                                </div>
+                                <div id="termsEditContainer">
+                                    ${(data.definitions || []).map((def, index) => `
+                                        <div class="term-edit-item" style="border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; margin-bottom: 12px; background: #f8f9fa;">
+                                            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+                                                <div style="flex: 1;">
+                                                    <label style="display: block; font-weight: 500; margin-bottom: 5px; color: #6c757d;">Terme :</label>
+                                                    <input type="text" value="${def.term}" onchange="updateTerm(${index}, 'term', this.value)" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 4px;">
+                                                </div>
+                                                <button onclick="removeTerm(${index})" style="background: #dc3545; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; margin-top: 24px;">🗑️</button>
+                                            </div>
+                                            <div style="margin-top: 10px;">
+                                                <label style="display: block; font-weight: 500; margin-bottom: 5px; color: #6c757d;">Définition :</label>
+                                                <textarea onchange="updateTerm(${index}, 'definition', this.value)" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 4px; min-height: 80px; resize: vertical;">${def.definition}</textarea>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 30px;">
+                                <button onclick="closeEditModal()" style="background: #6c757d; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer;">Annuler</button>
+                                <button onclick="saveEditedCourse('${courseKey}')" style="background: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer;">💾 Sauvegarder</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                document.getElementById('editTitle').focus();
+                
+                // Variables globales pour l'édition
+                window.currentEditData = JSON.parse(JSON.stringify(data));
+                window.editModal = modal;
+            });
+        }
+
+        function deleteCourse(courseKey, courseTitle) {
+            authManager.adminAction(() => {
+                if (confirm(`⚠️ SUPPRESSION DE COURS\n\nÊtes-vous sûr de vouloir supprimer le cours:\n"${courseTitle}"\n\n❌ Cette action est IRRÉVERSIBLE !`)) {
+                    if (confirm(`🚨 CONFIRMATION FINALE\n\nDernière chance pour annuler.\n\nSupprimer définitivement "${courseTitle}" ?`)) {
+                        // Appel API de suppression
+                        fetch('/api/delete_course', {
+                            method: 'DELETE',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ courseKey: courseKey })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('✅ Cours supprimé avec succès !');
+                                location.reload(); // Recharger la page
+                            } else {
+                                alert('❌ Erreur lors de la suppression:\n' + (data.error || 'Erreur inconnue'));
+                            }
+                        })
+                        .catch(error => {
+                            alert('❌ Erreur de connexion:\n' + error.message);
+                            console.error('Erreur:', error);
+                        });
+                    }
+                }
+            });
+        }
+
+        // Fonctions auxiliaires pour l'édition des termes
+        function updateTerm(index, field, value) {
+            if (!window.currentEditData.definitions) {
+                window.currentEditData.definitions = [];
+            }
+            if (!window.currentEditData.definitions[index]) {
+                window.currentEditData.definitions[index] = {};
+            }
+            window.currentEditData.definitions[index][field] = value;
+        }
+
+        function addNewTerm() {
+            if (!window.currentEditData.definitions) {
+                window.currentEditData.definitions = [];
+            }
+            
+            const newIndex = window.currentEditData.definitions.length;
+            window.currentEditData.definitions.push({
+                term: '',
+                definition: ''
+            });
+            
+            // Reconstruire le container des termes
+            refreshTermsContainer();
+        }
+
+        function removeTerm(index) {
+            if (confirm('Supprimer ce terme et sa définition ?')) {
+                window.currentEditData.definitions.splice(index, 1);
+                refreshTermsContainer();
+            }
+        }
+
+        function refreshTermsContainer() {
+            const container = document.getElementById('termsEditContainer');
+            if (!container || !window.currentEditData.definitions) return;
+            
+            container.innerHTML = window.currentEditData.definitions.map((def, index) => `
+                <div class="term-edit-item" style="border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; margin-bottom: 12px; background: #f8f9fa;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+                        <div style="flex: 1;">
+                            <label style="display: block; font-weight: 500; margin-bottom: 5px; color: #6c757d;">Terme :</label>
+                            <input type="text" value="${def.term || ''}" onchange="updateTerm(${index}, 'term', this.value)" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 4px;">
+                        </div>
+                        <button onclick="removeTerm(${index})" style="background: #dc3545; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; margin-top: 24px;">🗑️</button>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label style="display: block; font-weight: 500; margin-bottom: 5px; color: #6c757d;">Définition :</label>
+                        <textarea onchange="updateTerm(${index}, 'definition', this.value)" style="width: 100%; padding: 8px; border: 1px solid #dee2e6; border-radius: 4px; min-height: 80px; resize: vertical;">${def.definition || ''}</textarea>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function closeEditModal() {
+            if (window.editModal) {
+                document.body.removeChild(window.editModal);
+                window.editModal = null;
+                window.currentEditData = null;
+            }
+        }
+
+        function saveEditedCourse(courseKey) {
+            // Récupérer les données du formulaire
+            const title = document.getElementById('editTitle').value.trim();
+            const ue = document.getElementById('editUE').value.trim();
+            const author = document.getElementById('editAuthor').value.trim();
+            
+            if (!title) {
+                alert('Le titre est obligatoire !');
+                return;
+            }
+            
+            // Préparer les données à envoyer
+            const updatedCourse = {
+                title: title,
+                ue: ue,
+                author: author,
+                definitions: window.currentEditData.definitions || [],
+                date: window.currentEditData.date || new Date().toISOString().split('T')[0]
+            };
+            
+            // Appel API pour sauvegarder
+            fetch('/api/update_course', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    key: courseKey,
+                    data: updatedCourse
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('✅ Cours mis à jour avec succès !');
+                    closeEditModal();
+                    loadCourses(); // Recharger la liste
+                } else {
+                    alert('❌ Erreur : ' + (data.error || 'Impossible de mettre à jour le cours'));
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('❌ Erreur de connexion au serveur');
+            });
+        }
+
+        // Vérifier l'authentification au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            authManager.checkAuthStatus();
+        });
     </script>
 </body>
 </html>

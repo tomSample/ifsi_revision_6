@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
+from werkzeug.utils import secure_filename
 import json
 import os
 import re
@@ -449,8 +450,8 @@ def generate_course_key(metadata):
 
 @app.route('/')
 def index():
-    """Sert la page principale"""
-    return send_from_directory('.', 'index.html')
+    """Sert la page d'administration pour l'interface locale"""
+    return send_from_directory('.', 'admin.html')
 
 @app.route('/<path:filename>')
 def serve_static(filename):
@@ -634,6 +635,11 @@ def update_course():
     try:
         data = request.get_json()
         
+        # Nouveau format simplifié depuis l'interface d'édition
+        if 'key' in data and 'data' in data:
+            return update_course_simple(data)
+        
+        # Ancien format (compatibilité)
         if not data or 'metadata' not in data or 'definitions' not in data:
             return jsonify({'error': 'Données invalides'}), 400
         
@@ -688,6 +694,260 @@ def update_course():
         
     except Exception as e:
         print(f"Erreur dans update_course: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+def update_course_simple(data):
+    """Mise à jour simplifiée depuis l'interface d'édition"""
+    try:
+        course_key = data['key']
+        course_data = data['data']
+        
+        # Lire le fichier JSON existant
+        json_data = read_json_file()
+        
+        # Trouver le cours à mettre à jour
+        course_index = None
+        for i, course in enumerate(json_data['courses']):
+            if course[0] == course_key:
+                course_index = i
+                break
+        
+        if course_index is None:
+            return jsonify({'error': 'Cours non trouvé'}), 404
+        
+        # Mettre à jour les données du cours
+        updated_course_data = {
+            'title': course_data.get('title', ''),
+            'ue': course_data.get('ue', ''),
+            'author': course_data.get('author', ''),
+            'definitions': course_data.get('definitions', []),
+            'date': course_data.get('date', ''),
+            'filename': json_data['courses'][course_index][1].get('filename', f"{course_data.get('title', '')}.odt")
+        }
+        
+        # Remplacer les données du cours
+        json_data['courses'][course_index] = [course_key, updated_course_data]
+        
+        # Mettre à jour les statistiques
+        total_terms = sum(len(course[1].get('definitions', [])) for course in json_data['courses'])
+        json_data['stats']['totalTerms'] = total_terms
+        json_data['exportDate'] = datetime.now().isoformat()
+        
+        # Sauvegarder
+        write_json_file(json_data)
+        
+        return jsonify({'success': True, 'message': 'Cours mis à jour avec succès'})
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Configuration pour les images
+IMAGES_METADATA_FILE = 'images_metadata.json'
+IMAGES_FOLDER = 'images'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf'}
+
+def allowed_file(filename):
+    """Vérifier si l'extension du fichier est autorisée"""
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def load_images_metadata():
+    """Charger les métadonnées des images"""
+    try:
+        with open(IMAGES_METADATA_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {
+            "images": [],
+            "categories": {
+                "anatomie-physiologie": {
+                    "name": "Anatomie & Physiologie",
+                    "icon": "🫀",
+                    "description": "Schémas anatomiques et mécanismes physiologiques"
+                },
+                "systemes": {
+                    "name": "Systèmes & Processus",
+                    "icon": "⚙️", 
+                    "description": "Processus pathologiques et systémiques"
+                },
+                "normes": {
+                    "name": "Normes & Protocoles",
+                    "icon": "📋",
+                    "description": "Valeurs de référence et protocoles de soins"
+                }
+            }
+        }
+
+def save_images_metadata(data):
+    """Sauvegarder les métadonnées des images"""
+    with open(IMAGES_METADATA_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+@app.route('/api/upload_image', methods=['POST'])
+def upload_image():
+    """Upload d'une image avec métadonnées"""
+    try:
+        # Vérifier qu'un fichier est présent
+        if 'file' not in request.files:
+            return jsonify({'error': 'Aucun fichier fourni'}), 400
+        
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({'error': 'Aucun fichier sélectionné'}), 400
+        
+        if not allowed_file(file.filename):
+            return jsonify({'error': 'Type de fichier non autorisé'}), 400
+        
+        # Récupérer les métadonnées
+        category = request.form.get('category')
+        subcategory = request.form.get('subcategory', '').strip()
+        description = request.form.get('description', '').strip()
+        tags_input = request.form.get('tags', '').strip()
+        
+        if not category or not description:
+            return jsonify({'error': 'Catégorie et description obligatoires'}), 400
+        
+        # Traiter les tags
+        tags = [tag.strip() for tag in tags_input.split(',') if tag.strip()] if tags_input else []
+        
+        # Créer le dossier de catégorie si nécessaire
+        category_folder = os.path.join(IMAGES_FOLDER, category)
+        os.makedirs(category_folder, exist_ok=True)
+        
+        # Sécuriser le nom de fichier et sauvegarder
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(category_folder, filename)
+        
+        # Vérifier si le fichier existe déjà et renommer si nécessaire
+        base_name, ext = os.path.splitext(filename)
+        counter = 1
+        while os.path.exists(filepath):
+            filename = f"{base_name}_{counter}{ext}"
+            filepath = os.path.join(category_folder, filename)
+            counter += 1
+        
+        file.save(filepath)
+        
+        # Charger les métadonnées existantes
+        metadata = load_images_metadata()
+        
+        # Créer l'entrée pour la nouvelle image
+        new_image = {
+            'id': f"img_{len(metadata['images']) + 1:03d}",
+            'filename': filename,
+            'original_name': file.filename,
+            'category': category,
+            'subcategory': subcategory if subcategory else None,
+            'description': description,
+            'tags': tags,
+            'uploaded_date': datetime.now().strftime('%Y-%m-%d'),
+            'size': f"{os.path.getsize(filepath)/1024:.1f}KB",
+            'type': file.content_type.split('/')[-1] if file.content_type else filename.split('.')[-1].lower()
+        }
+        
+        # Ajouter à la liste et sauvegarder
+        metadata['images'].append(new_image)
+        save_images_metadata(metadata)
+        
+        return jsonify({
+            'success': True,
+            'message': f'Image "{description}" uploadée avec succès !',
+            'image': new_image
+        })
+        
+    except Exception as e:
+        print(f"Erreur dans upload_image: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/images')
+def get_images():
+    """Récupérer la liste des images"""
+    try:
+        metadata = load_images_metadata()
+        return jsonify(metadata)
+    except Exception as e:
+        print(f"Erreur dans get_images: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/delete_image', methods=['DELETE'])
+def delete_image():
+    """Supprimer une image"""
+    try:
+        data = request.get_json()
+        image_path = data.get('imagePath')
+        
+        if not image_path:
+            return jsonify({'error': 'Chemin d\'image manquant'}), 400
+        
+        # Enlever le préfixe 'images/' si présent
+        if image_path.startswith('images/'):
+            image_path = image_path[7:]
+        
+        # Construire le chemin complet
+        full_path = os.path.join('images', image_path)
+        
+        # Vérifier que le fichier existe
+        if not os.path.exists(full_path):
+            return jsonify({'error': 'Image non trouvée'}), 404
+        
+        # Supprimer le fichier physique
+        os.remove(full_path)
+        
+        # Mettre à jour les métadonnées
+        metadata = load_images_metadata()
+        
+        # Trouver et supprimer l'image des métadonnées
+        original_count = len(metadata['images'])
+        metadata['images'] = [img for img in metadata['images'] 
+                            if not (img['category'] + '/' + img['filename']) == image_path]
+        
+        if len(metadata['images']) == original_count:
+            return jsonify({'error': 'Image non trouvée dans les métadonnées'}), 404
+        
+        # Sauvegarder les métadonnées mises à jour
+        save_images_metadata(metadata)
+        
+        return jsonify({'success': True, 'message': 'Image supprimée avec succès'})
+        
+    except Exception as e:
+        print(f"Erreur dans delete_image: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/delete_course', methods=['DELETE'])
+def delete_course():
+    """Supprimer un cours"""
+    try:
+        data = request.get_json()
+        course_key = data.get('courseKey')
+        
+        if not course_key:
+            return jsonify({'error': 'Clé de cours manquante'}), 400
+        
+        # Lire le fichier JSON
+        json_data = read_json_file()
+        
+        # Trouver et supprimer le cours
+        original_count = len(json_data['courses'])
+        json_data['courses'] = [course for course in json_data['courses'] if course[0] != course_key]
+        
+        if len(json_data['courses']) == original_count:
+            return jsonify({'error': 'Cours non trouvé'}), 404
+        
+        # Mettre à jour les statistiques
+        json_data['stats']['totalTerms'] = sum(len(course[1]['definitions']) for course in json_data['courses'])
+        
+        # Sauvegarder le fichier
+        write_json_file(json_data)
+        
+        return jsonify({'success': True, 'message': 'Cours supprimé avec succès'})
+        
+    except Exception as e:
+        print(f"Erreur dans delete_course: {e}")
         import traceback
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
