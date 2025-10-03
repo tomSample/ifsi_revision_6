@@ -2,6 +2,15 @@
 let imagesData = { images: [], categories: {} };
 let selectedFile = null;
 
+// Fonction utilitaire pour vérifier l'existence d'un élément
+function safeGetElement(id) {
+    const element = document.getElementById(id);
+    if (!element) {
+        console.warn(`Élément '${id}' non trouvé dans le DOM`);
+    }
+    return element;
+}
+
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', function() {
     initializeGallery();
@@ -21,8 +30,14 @@ async function initializeGallery() {
 
 // Configuration de l'upload
 function setupUpload() {
-    const uploadArea = document.getElementById('uploadArea');
-    const fileInput = document.getElementById('fileInput');
+    const uploadArea = safeGetElement('uploadArea');
+    const fileInput = safeGetElement('fileInput');
+    
+    // Vérifier que les éléments existent avant de les utiliser
+    if (!uploadArea || !fileInput) {
+        console.log('Éléments d\'upload non trouvés - fonctionnalité d\'upload désactivée');
+        return;
+    }
     
     // Gestion du drag & drop
     uploadArea.addEventListener('dragover', (e) => {
@@ -65,7 +80,11 @@ function handleFileSelection(file) {
     
     selectedFile = file;
     showFilePreview(file);
-    document.getElementById('metadataForm').style.display = 'block';
+    
+    const metadataForm = safeGetElement('metadataForm');
+    if (metadataForm) {
+        metadataForm.style.display = 'block';
+    }
 }
 
 // Affichage de l'aperçu du fichier
@@ -226,7 +245,12 @@ function populateCategories() {
 
 // Affichage des images selon la catégorie
 function displayImages(categoryFilter) {
-    const grid = document.getElementById('imagesGrid');
+    const grid = safeGetElement('imagesGrid');
+    if (!grid) {
+        console.log('Grille d\'images non trouvée - affichage impossible');
+        return;
+    }
+    
     let filteredImages = imagesData.images;
     
     if (categoryFilter !== 'all') {
@@ -373,15 +397,24 @@ function resetUploadForm() {
 
 // Réinitialiser les champs du formulaire
 function resetForm() {
-    document.getElementById('categorySelect').value = '';
-    document.getElementById('subcategoryInput').value = '';
-    document.getElementById('descriptionInput').value = '';
-    document.getElementById('tagsInput').value = '';
+    const categorySelect = safeGetElement('categorySelect');
+    const subcategoryInput = safeGetElement('subcategoryInput');
+    const descriptionInput = safeGetElement('descriptionInput');
+    const tagsInput = safeGetElement('tagsInput');
+    
+    if (categorySelect) categorySelect.value = '';
+    if (subcategoryInput) subcategoryInput.value = '';
+    if (descriptionInput) descriptionInput.value = '';
+    if (tagsInput) tagsInput.value = '';
 }
 
 // Afficher un message de statut
 function showStatus(message, type) {
-    const statusDiv = document.getElementById('status');
+    const statusDiv = safeGetElement('status');
+    if (!statusDiv) {
+        console.log(`Status: ${message} (${type})`);
+        return;
+    }
     statusDiv.textContent = message;
     statusDiv.className = `status ${type}`;
     
