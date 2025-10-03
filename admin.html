@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFSI Lannion - Administration</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+            margin-right: 0.5rem;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Onglets d'administration */
+        .admin-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-tab {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .admin-tab:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .admin-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Conteneurs des sections */
+        .admin-section {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-header h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Zones d'upload communes */
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .upload-area.dragover {
+            border-color: #28a745;
+            background: #e8f5e8;
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .upload-area h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .browse-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .browse-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Formulaires métadonnées */
+        .metadata-form {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            display: none;
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group select,
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Aperçu fichiers */
+        .file-preview {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-preview img {
+            max-width: 120px;
+            max-height: 100px;
+            border-radius: 8px;
+        }
+
+        .file-icon {
+            font-size: 4rem;
+            color: #667eea;
+        }
+
+        .file-info h4 {
+            margin: 0 0 0.5rem 0;
+            color: #2c3e50;
+        }
+
+        .file-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .remove-file-btn {
+            margin-left: auto;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-file-btn:hover {
+            background: #c82333;
+            transform: translateY(-1px);
+        }
+
+        /* Boutons d'action */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .upload-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .reset-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+
+        /* Status et messages */
+        .status {
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #cce7ff;
+            color: #004085;
+            border: 1px solid #b3d7ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 1rem;
+            }
+
+            .admin-tabs {
+                flex-direction: column;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <header>
+            <h1>⚙️ Administration IFSI Lannion</h1>
+            <nav class="breadcrumb">
+                <a href="navigation.html">🏠 Accueil</a> › Administration
+            </nav>
+        </header>
+
+        <!-- Onglets d'administration -->
+        <div class="admin-tabs">
+            <button class="admin-tab active" onclick="switchTab('courses')">
+                📚 Upload de Cours
+            </button>
+            <button class="admin-tab" onclick="switchTab('images')">
+                🖼️ Upload d'Images
+            </button>
+        </div>
+
+        <!-- Section Upload de Cours -->
+        <section class="admin-section active" id="coursesSection">
+            <div class="section-header">
+                <h3>📚 Ajout de nouveaux cours</h3>
+                <p>Uploadez vos fichiers .odt pour enrichir la base de données des cours</p>
+            </div>
+
+            <div class="upload-area" id="courseUploadArea">
+                <div class="upload-icon">📄</div>
+                <h4>Glissez votre fichier .odt ici</h4>
+                <p>ou</p>
+                <button class="browse-btn" onclick="document.getElementById('courseFileInput').click()">
+                    📁 Parcourir les fichiers
+                </button>
+                <input type="file" id="courseFileInput" accept=".odt" style="display: none;">
+                <p style="color: #666; margin-top: 1rem;">Seuls les fichiers .odt sont acceptés</p>
+            </div>
+
+            <div class="metadata-form" id="courseMetadataForm">
+                <!-- Aperçu du fichier sera inséré ici -->
+                
+                <div class="action-buttons">
+                    <button class="upload-btn" id="courseUploadBtn" onclick="uploadCourse()" disabled>
+                        🚀 Traiter et ajouter le cours
+                    </button>
+                    <button class="reset-btn" onclick="resetCourseForm()">
+                        🔄 Recommencer
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Upload d'Images -->
+        <section class="admin-section" id="imagesSection">
+            <div class="section-header">
+                <h3>🖼️ Ajout d'images et schémas</h3>
+                <p>Uploadez vos images (PNG, JPG, PDF) organisées par catégorie thématique</p>
+            </div>
+
+            <div class="upload-area" id="imageUploadArea">
+                <div class="upload-icon">🖼️</div>
+                <h4>Glissez votre image ici</h4>
+                <p>Formats acceptés : PNG, JPG, PDF (max 5MB)</p>
+                <button class="browse-btn" onclick="document.getElementById('imageFileInput').click()">
+                    📁 Parcourir les fichiers
+                </button>
+                <input type="file" id="imageFileInput" accept=".png,.jpg,.jpeg,.pdf" style="display: none;">
+            </div>
+
+            <div class="metadata-form" id="imageMetadataForm">
+                <!-- Aperçu du fichier sera inséré ici -->
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="categorySelect">Catégorie :</label>
+                        <select id="categorySelect">
+                            <option value="">Choisir une catégorie</option>
+                            <option value="anatomie-physiologie">🫀 Anatomie & Physiologie</option>
+                            <option value="systemes">⚙️ Systèmes & Processus</option>
+                            <option value="normes">📋 Normes & Protocoles</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subcategoryInput">Sous-catégorie :</label>
+                        <input type="text" id="subcategoryInput" placeholder="ex: système cardiovasculaire">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="descriptionInput">Description :</label>
+                        <textarea id="descriptionInput" placeholder="Description détaillée de l'image"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tagsInput">Tags (séparés par des virgules) :</label>
+                        <input type="text" id="tagsInput" placeholder="ex: coeur, anatomie, cardiovasculaire">
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="upload-btn" id="imageUploadBtn" onclick="uploadImage()" disabled>
+                        🚀 Uploader l'image
+                    </button>
+                    <button class="reset-btn" onclick="resetImageForm()">
+                        🔄 Recommencer
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div id="status"></div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

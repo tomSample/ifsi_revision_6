@@ -450,8 +450,8 @@ def generate_course_key(metadata):
 
 @app.route('/')
 def index():
-    """Sert la page principale"""
-    return send_from_directory('.', 'index.html')
+    """Sert la page d'administration pour l'interface locale"""
+    return send_from_directory('.', 'admin.html')
 
 @app.route('/<path:filename>')
 def serve_static(filename):
