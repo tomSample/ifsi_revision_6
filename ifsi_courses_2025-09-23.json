@@ -1,5 +1,5 @@
 {
-  "exportDate": "2025-10-03T11:48:24.943570",
+  "exportDate": "2025-10-03T20:48:47.531566",
   "courses": [
     [
       "ue_2_2_s1_organisation_de_la_cellule_au_tissu",
@@ -1029,9 +1029,8 @@
       "ue_3_10_s1_virologie_mycoparasitologie_atnc_23092025_ext",
       {
         "title": "Virologie, Myco-parasitologie, ATNC 23/09/2025 EXT",
-        "date": "23/09/2025",
         "ue": "3.10.S1",
-        "author": "",
+        "author": "EXT",
         "definitions": [
           {
             "definition": "fixation → pénétration → décapsidation → multiplication (réplication du génome, synthèse des protéines virales) → assemblage → libération des nouveaux virions",
@@ -1070,6 +1069,7 @@
             "term": "Protozoaires"
           }
         ],
+        "date": "23/09/2025",
         "filename": "Virologie, Myco-parasitologie, ATNC 23/09/2025 EXT.odt"
       }
     ],
@@ -1101,9 +1101,8 @@
       "ue_4_4_s1_iatrognie_mdicamenteuse",
       {
         "title": "Iatrogénie médicamenteuse",
-        "date": "22/09/2025",
         "ue": "4.4.S1",
-        "author": "",
+        "author": "EXT",
         "definitions": [
           {
             "definition": "« qui est provoqué par le médecin/médicament ». Regroupe les effets indésirables et erreur médicamenteuse",
@@ -1202,6 +1201,7 @@
             "term": "Médicaments à risque"
           }
         ],
+        "date": "22/09/2025",
         "filename": "Iatrogénie médicamenteuse.odt"
       }
     ],
@@ -1444,10 +1444,70 @@
         ],
         "filename": "Laïcité et système de santé.odt"
       }
+    ],
+    [
+      "ue_3_10_s1_isolement_protecteur_pose_et_dpose_epi",
+      {
+        "title": "isolement protecteur & EPI",
+        "ue": "3.10.S1",
+        "author": "SC/KM",
+        "definitions": [
+          {
+            "definition": "Mise en place prescription médicale. A pour but d’éviter la transmission à un patient immunodéprimé de tout agent potentiellement infectieux extérieur, y compris des agents habituellement peu ou pas pathogènes. Repose également sur l’isolement du patient en chambre individuelle avec éviction de tout déplacement (sauf nécessité médicale). L’explication des mesures au patient et à l’entourage est essentiel",
+            "term": "Isolement protecteur"
+          },
+          {
+            "definition": "déficit ou quasi absence de leucocytes neutrophiles lié à une pathologie (leucémie, aplasie médullaire, SIDA, brûlures graves, prématurés) ou à un traitement (anti-rejet)",
+            "term": "Patient immunodéprimé"
+          },
+          {
+            "definition": "retient les particules, protège surtout l’interlocuteur",
+            "term": "Masque chirurgical"
+          },
+          {
+            "definition": "filtrant, protège le porteur",
+            "term": "Masque FFP2/3"
+          },
+          {
+            "definition": "filtration de l’air, surfaces désinfectés, matériel désinfecté, protocole soignant (EPI ⇒ gants, sur-chaussures, masque chirurgical, lunettes, tablier ou sur-blouse, charlotte)",
+            "term": "Chambre stérile"
+          },
+          {
+            "definition": "changement du masque de soin, port de surblouse, charlotte, hygiène des mains, frictions SHA (avant d’entrer ± lavage préalable, avant et après le port des gants, en sortant, entre 2 soins)",
+            "term": "Protocole EPI soignant dans le cadre de l’isolement protecteur"
+          },
+          {
+            "definition": "faire le lit avec un kit linge emballé spécifique, prendre du linge directement en lingerie (pas sur le chariot de soins dans le couloir), refaire le lit chaque jour.",
+            "term": "Protocole linge dans le cadre de l’isolement protecteur"
+          },
+          {
+            "definition": "maîtriser le risque sanitaire lié à la Legionella pneumophilia, Pseudomonas et autres germes hydriques ⇒ purge au moins une fois par jour ± filtre sur le robinet et flexible de douche. Pas de consommation de l’eau du robinet.",
+            "term": "Protocole eau dans le cadre de l’isolement protecteur"
+          },
+          {
+            "definition": "eau minérale, aliment cuit obligatoire et préparée industriellement sous vide, contenant désinfecté avant l’entrée dans la chambre",
+            "term": "Protocole alimentation dans le cadre de l’isolement protecteur"
+          },
+          {
+            "definition": "regrouper les soins et les examens, les faire en début de programme ; Le chariot de soins ne rentre pas dans la chambre, utiliser un adaptable désinfecté avant et après utilisation, individualisation du matériel qui restera dans la chambre (dynamap, saturomètre, thermomètre…)",
+            "term": "Protocole soins dans le cadre de l’isolement protecteur"
+          },
+          {
+            "definition": "entretien de la chambre quotidien, en début de programme avec détergent/désinfectant, insister sur les poignées de portes, téléphone… toujours abaisser la lunettes des WC, éliminer les déchets stockés dans la chambre. Effets personnels sont décontaminés avant l’entrée dans la chambre. Visites selon PM, limitées, port d’EPI et absence de syndrome infectieux",
+            "term": "Protocole en chambre dans le cadre de l’isolement protecteur"
+          },
+          {
+            "definition": "Unité Mobile de Précaution. Système sur lequel on dépose tout le matériel dont on va avoir besoin avant d’entrer en chambre",
+            "term": "UMP / « tour »"
+          }
+        ],
+        "date": "03/10/2025",
+        "filename": "isolement protecteur (pose et dépose EPI).odt"
+      }
     ]
   ],
   "stats": {
-    "totalTerms": 313,
+    "totalTerms": 325,
     "studiedTerms": 0,
     "correctAnswers": 0,
     "wrongAnswers": 0
