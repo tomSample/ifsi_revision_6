@@ -1,5 +1,5 @@
 {
-  "exportDate": "2025-10-02T15:02:07.706068",
+  "exportDate": "2025-10-03T11:48:24.943570",
   "courses": [
     [
       "ue_2_2_s1_organisation_de_la_cellule_au_tissu",
@@ -1420,10 +1420,34 @@
         ],
         "filename": "Prescription médicale – fondamentaux.odt"
       }
+    ],
+    [
+      "ue_5_9_s1_lacit_et_systme_de_sant",
+      {
+        "title": "Laïcité et système de santé",
+        "date": "",
+        "ue": "5.9.S1",
+        "author": "",
+        "definitions": [
+          {
+            "definition": "s’applique dans les services publiques dont les hôpitaux. Garantie de neutralité et d’égalité et de liberté de conscience.",
+            "term": "Laïcité"
+          },
+          {
+            "definition": "art 10 DDHC + art 1 loi de 1905 = liberté de conscience. Code fonction publique = neutralité du service public. Art 1 Constitution de 1958 = égalité de traitement.",
+            "term": "Piliers juridiques de la laïcité"
+          },
+          {
+            "definition": "incarnent la neutralité (pas de signes religieux visibles), égalité (soins donnés à tous sans distinction), respect de la liberté de conscience de l’usager",
+            "term": "Soignants et laïcité"
+          }
+        ],
+        "filename": "Laïcité et système de santé.odt"
+      }
     ]
   ],
   "stats": {
-    "totalTerms": 310,
+    "totalTerms": 313,
     "studiedTerms": 0,
     "correctAnswers": 0,
     "wrongAnswers": 0
