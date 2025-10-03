@@ -1,5 +1,22 @@
 {
-  "images": [],
+  "images": [
+    {
+      "id": "img_001",
+      "filename": "97.-Vertebre-cervicale-vue-superieure-1024x694.png",
+      "original_name": "97.-Vertèbre-cervicale-vue-supérieure-1024x694.png",
+      "category": "anatomie-physiologie",
+      "subcategory": "os",
+      "description": "coupe transversale d'une vertèbre",
+      "tags": [
+        "os",
+        "vertèbre",
+        "système nerveux"
+      ],
+      "uploaded_date": "2025-10-03",
+      "size": "108.1KB",
+      "type": "png"
+    }
+  ],
   "categories": {
     "anatomie-physiologie": {
       "name": "Anatomie & Physiologie",
@@ -8,7 +25,7 @@
     },
     "systemes": {
       "name": "Systèmes & Processus",
-      "icon": "⚙️", 
+      "icon": "⚙️",
       "description": "Processus pathologiques et systémiques"
     },
     "normes": {

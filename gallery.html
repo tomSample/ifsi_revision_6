@@ -29,127 +29,6 @@
             text-decoration: underline;
         }
 
-        /* Zone d'upload */
-        .upload-section {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .upload-area {
-            border: 3px dashed #667eea;
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            background: #f8f9fa;
-            transition: all 0.3s ease;
-            margin-bottom: 1rem;
-        }
-
-        .upload-area.dragover {
-            border-color: #28a745;
-            background: #e8f5e8;
-        }
-
-        .upload-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .browse-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            margin: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .browse-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Formulaire métadonnées */
-        .metadata-form {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            display: none;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .form-group {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .form-group select,
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .upload-btn {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .upload-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Aperçu fichier */
-        .file-preview {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .file-preview img {
-            max-width: 100px;
-            max-height: 80px;
-            border-radius: 4px;
-        }
-
-        .pdf-icon {
-            font-size: 3rem;
-            color: #dc3545;
-        }
-
         /* Onglets catégories */
         .category-tabs {
             display: flex;
@@ -339,61 +218,9 @@
         <header>
             <h1>🖼️ Galerie d'Images IFSI Lannion</h1>
             <nav class="breadcrumb">
-                <a href="navigation.html">🏠 Accueil</a> › <a href="index.html">📖 Cours</a> › Galerie d'Images
+                <a href="navigation.html">🏠 Accueil</a> › Galerie d'Images
             </nav>
         </header>
-
-        <!-- Section d'upload -->
-        <section class="upload-section">
-            <h3>📤 Ajouter une nouvelle image</h3>
-            
-            <div class="upload-area" id="uploadArea">
-                <div class="upload-icon">🖼️</div>
-                <h4>Glissez une image ici</h4>
-                <p>Formats acceptés : PNG, JPG, PDF (max 5MB)</p>
-                <button class="browse-btn" onclick="document.getElementById('fileInput').click()">
-                    📁 Parcourir les fichiers
-                </button>
-                <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.pdf" style="display: none;">
-            </div>
-
-            <!-- Formulaire métadonnées -->
-            <div class="metadata-form" id="metadataForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="categorySelect">Catégorie :</label>
-                        <select id="categorySelect">
-                            <option value="">Choisir une catégorie</option>
-                            <option value="anatomie-physiologie">🫀 Anatomie & Physiologie</option>
-                            <option value="systemes">⚙️ Systèmes & Processus</option>
-                            <option value="normes">📋 Normes & Protocoles</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="subcategoryInput">Sous-catégorie :</label>
-                        <input type="text" id="subcategoryInput" placeholder="ex: système cardiovasculaire">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="descriptionInput">Description :</label>
-                        <input type="text" id="descriptionInput" placeholder="Description de l'image">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="tagsInput">Tags (séparés par des virgules) :</label>
-                        <input type="text" id="tagsInput" placeholder="ex: coeur, anatomie, cardiovasculaire">
-                    </div>
-                </div>
-
-                <button class="upload-btn" onclick="uploadImage()">
-                    🚀 Uploader l'image
-                </button>
-            </div>
-        </section>
 
         <!-- Section galerie -->
         <section class="gallery-section">
@@ -418,7 +245,7 @@
                 <div class="empty-state">
                     <div class="empty-state-icon">🖼️</div>
                     <h4>Aucune image pour le moment</h4>
-                    <p>Commencez par uploader votre première image !</p>
+                    <p>Cette galerie sera alimentée par l'administration.</p>
                 </div>
             </div>
         </section>
