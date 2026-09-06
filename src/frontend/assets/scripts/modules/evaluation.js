@@ -3,6 +3,10 @@
 
     const state = {
         terms: [],
+        currentSemester: 'ALL',
+        availableUEs: [],
+        baseUEs: [],
+        selectedBaseUEs: new Set(),
         selectedUEs: new Set(),
         requestedCount: 10,
         questions: [],
@@ -17,7 +21,9 @@
         setupPanel: document.getElementById('setupPanel'),
         quizPanel: document.getElementById('quizPanel'),
         resultsPanel: document.getElementById('resultsPanel'),
-        ueList: document.getElementById('ueList'),
+        semesterButtonsContainer: document.getElementById('semesterButtonsContainer'),
+        ueGroupsContainer: document.getElementById('ueGroupsContainer'),
+        ueSelectAll: document.getElementById('ueSelectAll'),
         availabilityMessage: document.getElementById('availabilityMessage'),
         questionHint: document.getElementById('questionHint'),
         startButton: document.getElementById('startButton'),
@@ -42,6 +48,7 @@
         elements.startButton.addEventListener('click', startEvaluation);
         elements.nextButton.addEventListener('click', handleAnswerAction);
         elements.restartButton.addEventListener('click', resetEvaluation);
+        elements.ueSelectAll.addEventListener('click', selectAllUEs);
 
         try {
             const response = await fetch('../../data/courses.json', { cache: 'no-store' });
@@ -70,22 +77,85 @@
     }
 
     function renderUEs() {
-        const counts = new Map();
-        state.terms.forEach((item) => counts.set(item.ue, (counts.get(item.ue) || 0) + 1));
-        elements.ueList.innerHTML = [...counts.keys()].sort(compareUE).map((ue) => `
-            <label class="ue-option">
-                <input type="checkbox" value="${escapeHtml(ue)}">
-                <span>UE ${escapeHtml(ue)}</span>
-                <small>${counts.get(ue)} termes</small>
-            </label>
-        `).join('');
-        elements.ueList.addEventListener('change', (event) => {
-            if (event.target.matches('input')) {
-                event.target.checked ? state.selectedUEs.add(event.target.value) : state.selectedUEs.delete(event.target.value);
-                updateAvailability();
-            }
-        });
+        state.availableUEs = [...new Set(state.terms.map((item) => item.ue))].sort(compareUE);
+        state.baseUEs = [...new Set(state.availableUEs.map(getBaseUE))].sort(compareUE);
+        state.selectedBaseUEs = new Set(state.baseUEs);
+        renderSemesterButtons();
+        renderBaseUEButtons();
+        updateSelectedUEs();
         elements.availabilityMessage.textContent = 'Sélectionnez une ou plusieurs UE pour composer votre évaluation.';
+    }
+
+    function renderSemesterButtons() {
+        const semesters = [['🌍 Tous', 'ALL'], ['S1', 'S1'], ['S2', 'S2'], ['S3', 'S3'], ['S4', 'S4'], ['S5', 'S5'], ['S6', 'S6']];
+        elements.semesterButtonsContainer.innerHTML = semesters.map(([label, value]) =>
+            `<button type="button" class="semester-btn${value === state.currentSemester ? ' active' : ''}" data-semester="${value}">${label}</button>`
+        ).join('');
+        elements.semesterButtonsContainer.querySelectorAll('.semester-btn').forEach((button) => {
+            button.addEventListener('click', () => {
+                state.currentSemester = button.dataset.semester;
+                renderSemesterButtons();
+                updateSelectedUEs();
+                renderBaseUEButtons();
+                updateAvailability();
+            });
+        });
+    }
+
+    function renderBaseUEButtons() {
+        const visibleUEs = state.availableUEs.filter((ue) =>
+            state.currentSemester === 'ALL' || ue.endsWith(state.currentSemester)
+        );
+        const visibleBaseUEs = [...new Set(visibleUEs.map(getBaseUE))].sort(compareUE);
+        const groups = new Map();
+        visibleBaseUEs.forEach((baseUE) => {
+            const prefix = baseUE.split('.')[0];
+            if (!groups.has(prefix)) groups.set(prefix, []);
+            groups.get(prefix).push(baseUE);
+        });
+        elements.ueGroupsContainer.innerHTML = [...groups.entries()].map(([prefix, ues]) => `
+            <div class="ue-group">
+                <span class="ue-group-label">${escapeHtml(prefix)}.x</span>
+                <div class="ue-group-buttons">${ues.map((baseUE) => `
+                    <button type="button" class="ue-global-btn${state.selectedBaseUEs.has(baseUE) ? ' active' : ''}" data-ue="${escapeHtml(baseUE)}" title="Sélectionner UE ${escapeHtml(baseUE)}">${escapeHtml(baseUE)}</button>
+                `).join('')}</div>
+            </div>
+        `).join('');
+        elements.ueGroupsContainer.querySelectorAll('.ue-global-btn').forEach((button) => {
+            button.addEventListener('click', () => {
+                const baseUE = button.dataset.ue;
+                state.selectedBaseUEs.has(baseUE) ? state.selectedBaseUEs.delete(baseUE) : state.selectedBaseUEs.add(baseUE);
+                updateSelectedUEs();
+                renderBaseUEButtons();
+                updateAvailability();
+            });
+        });
+        elements.ueSelectAll.classList.toggle(
+            'active',
+            visibleBaseUEs.every((baseUE) => state.selectedBaseUEs.has(baseUE))
+        );
+    }
+
+    function selectAllUEs() {
+        const visibleBaseUEs = state.availableUEs
+            .filter((ue) => state.currentSemester === 'ALL' || ue.endsWith(state.currentSemester))
+            .map(getBaseUE);
+        state.selectedBaseUEs = new Set(visibleBaseUEs);
+        updateSelectedUEs();
+        renderBaseUEButtons();
+        updateAvailability();
+    }
+
+    function updateSelectedUEs() {
+        state.selectedUEs = new Set(state.availableUEs.filter((ue) => {
+            const matchesSemester = state.currentSemester === 'ALL' || ue.endsWith(state.currentSemester);
+            return matchesSemester && state.selectedBaseUEs.has(getBaseUE(ue));
+        }));
+    }
+
+    function getBaseUE(ue) {
+        const match = ue.match(/^(\d+\.\d+)\./);
+        return match ? match[1] : ue;
     }
 
     function selectQuestionCount(count) {

@@ -31,10 +31,27 @@
         .hero p { margin: 0; color: rgba(255,255,255,.9); }
         .panel { background: var(--color-bg); border-radius: var(--radius-xl); padding: var(--space-6); box-shadow: var(--shadow-md); }
         .panel h3 { margin-top: 0; }
-        .ue-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--space-2); max-height: 360px; overflow-y: auto; margin: var(--space-4) 0; }
-        .ue-option { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; }
-        .ue-option:has(input:checked) { border-color: var(--color-primary); background: var(--color-primary-lighter); }
-        .ue-option small { margin-left: auto; color: var(--color-text-muted); }
+        .filters-section { --semester-color: var(--color-primary); background: var(--color-bg-lighter); border: 2px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-3); margin: var(--space-4) 0; }
+        .filters-title, .filter-label { color: var(--color-text-dark); font-weight: 700; }
+        .filters-title { margin: 0 0 var(--space-3); }
+        .filter-block { margin-bottom: var(--space-3); }
+        .filter-block:last-child { margin-bottom: 0; }
+        .filter-label { display: block; font-size: var(--font-size-sm); margin-bottom: var(--space-2); }
+        .semester-buttons-container, .ue-group-buttons { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+        .semester-btn, .ue-global-btn, .ue-bulk-btn { padding: var(--space-2) var(--space-3); border: 1.5px solid var(--semester-color); border-radius: var(--radius-md); background: var(--color-bg); color: var(--semester-color); cursor: pointer; font-weight: 600; }
+        .semester-btn.active, .ue-global-btn.active, .ue-bulk-btn.active { background: var(--semester-color); color: white; }
+        .semester-btn[data-semester="ALL"] { --semester-color: #2563EB; }
+        .semester-btn[data-semester="S1"] { --semester-color: #0cb2afff; }
+        .semester-btn[data-semester="S2"] { --semester-color: #a1c65dff; }
+        .semester-btn[data-semester="S3"] { --semester-color: #fac723ff; }
+        .semester-btn[data-semester="S4"] { --semester-color: #f29222ff; }
+        .semester-btn[data-semester="S5"] { --semester-color: #e95e50ff; }
+        .semester-btn[data-semester="S6"] { --semester-color: #936facff; }
+        .ue-bulk-actions { margin-bottom: var(--space-2); }
+        .ue-groups-container { display: grid; gap: var(--space-2); }
+        .ue-group { display: flex; align-items: center; gap: var(--space-2); }
+        .ue-group-label { min-width: 2rem; font-weight: 700; color: var(--color-text-muted); }
+        .ue-global-btn:not(.active) { opacity: .6; }
         .question-options { display: flex; gap: var(--space-3); flex-wrap: wrap; margin: var(--space-4) 0; }
         .question-option { flex: 1; min-width: 120px; padding: var(--space-3); border: 2px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-bg); cursor: pointer; font-weight: 600; }
         .question-option.selected { border-color: var(--color-primary); background: var(--color-primary-lighter); color: var(--color-primary-dark); }
@@ -72,7 +89,20 @@
             <section id="setupPanel" class="panel">
                 <h3>Choisissez vos UE</h3>
                 <p id="availabilityMessage">Chargement des termes disponibles…</p>
-                <div id="ueList" class="ue-list"></div>
+                <div class="filters-section">
+                    <h4 class="filters-title">🔍 Filtres d'évaluation</h4>
+                    <div class="filter-block">
+                        <label class="filter-label">📅 Semestre</label>
+                        <div id="semesterButtonsContainer" class="semester-buttons-container"></div>
+                    </div>
+                    <div class="filter-block">
+                        <label class="filter-label">🎓 Unités d'Enseignement</label>
+                        <div class="ue-bulk-actions">
+                            <button id="ueSelectAll" class="ue-bulk-btn active" type="button">✓ Toutes les UE</button>
+                        </div>
+                        <div id="ueGroupsContainer" class="ue-groups-container"></div>
+                    </div>
+                </div>
                 <h3>Nombre de questions</h3>
                 <div class="question-options" role="group" aria-label="Nombre de questions">
                     <button type="button" class="question-option" data-count="10">10 questions</button>
