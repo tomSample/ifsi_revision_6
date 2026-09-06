@@ -17,6 +17,16 @@
         answerValidated: false
     };
 
+    const SEMESTER_COLORS = {
+        ALL: '#2563EB',
+        S1: '#0cb2afff',
+        S2: '#a1c65dff',
+        S3: '#fac723ff',
+        S4: '#f29222ff',
+        S5: '#e95e50ff',
+        S6: '#936facff'
+    };
+
     const elements = {
         setupPanel: document.getElementById('setupPanel'),
         quizPanel: document.getElementById('quizPanel'),
@@ -88,6 +98,13 @@
 
     function renderSemesterButtons() {
         const semesters = [['🌍 Tous', 'ALL'], ['S1', 'S1'], ['S2', 'S2'], ['S3', 'S3'], ['S4', 'S4'], ['S5', 'S5'], ['S6', 'S6']];
+        const filtersSection = document.querySelector('.filters-section');
+        const semesterColor = SEMESTER_COLORS[state.currentSemester] || SEMESTER_COLORS.ALL;
+        filtersSection.style.setProperty('--semester-color', semesterColor);
+        filtersSection.style.setProperty(
+            '--semester-text-color',
+            ['S3', 'S4', 'S5'].includes(state.currentSemester) ? '#264653' : 'white'
+        );
         elements.semesterButtonsContainer.innerHTML = semesters.map(([label, value]) =>
             `<button type="button" class="semester-btn${value === state.currentSemester ? ' active' : ''}" data-semester="${value}">${label}</button>`
         ).join('');
