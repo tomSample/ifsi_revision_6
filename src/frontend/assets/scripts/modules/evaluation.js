@@ -113,9 +113,8 @@
             if (!groups.has(prefix)) groups.set(prefix, []);
             groups.get(prefix).push(baseUE);
         });
-        elements.ueGroupsContainer.innerHTML = [...groups.entries()].map(([prefix, ues]) => `
+        elements.ueGroupsContainer.innerHTML = [...groups.values()].map((ues) => `
             <div class="ue-group">
-                <span class="ue-group-label">${escapeHtml(prefix)}.x</span>
                 <div class="ue-group-buttons">${ues.map((baseUE) => `
                     <button type="button" class="ue-global-btn${state.selectedBaseUEs.has(baseUE) ? ' active' : ''}" data-ue="${escapeHtml(baseUE)}" title="Sélectionner UE ${escapeHtml(baseUE)}">${escapeHtml(baseUE)}</button>
                 `).join('')}</div>
