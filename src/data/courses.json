@@ -1,5 +1,5 @@
 {
-  "exportDate": "2026-09-04T13:32:18.486841",
+  "exportDate": "2026-09-07T20:26:03.892187",
   "courses": [
     [
       "ue_2_2_s1_organisation_de_la_cellule_au_tissu",
@@ -6566,11 +6566,11 @@
         "author": "PDF",
         "definitions": [
           {
-            "definition": "caractérise les transformations qui se produisent chez l’être humain au cours de sa vie, lié à de multiples adaptations entre l'individu et un environnement donné",
+            "definition": "caractérise les transformations qui se produisent chez l’être humain au cours de sa vie",
             "term": "Développement"
           },
           {
-            "definition": "développement individuel",
+            "definition": "développement individuelle",
             "term": "Ontogenèse"
           },
           {
@@ -6762,7 +6762,7 @@
             "term": "Déterminants de la santé"
           },
           {
-            "definition": "repose sur la conviction qu’il est possible d’agir pour faire évoluer les choses (par opposition au terme « déterminants de la santé ») et pour provoquer des changements favorables à la santé (alimentation, activité physique…). Cela implique d’aller chercher la cause des causes pour agir sur les déterminants environnementaux et les facteurs plus proches de la personne (éducation, compétences psychosociales…)",
+            "definition": "repose sur la conviction qu’il est possible d’agir pour faire évoluer les choses (par opposition au terme « déterminants de la santé) et pour provoquer des changements favorables à la santé (alimentation, activité physique…). Cela implique d’aller chercher la cause des causes pour agir sur les déterminants environnementaux et les facteurs plus proches de la personne (éducation, compétences psychosociales…)",
             "term": "Promotion de la santé"
           }
         ],
@@ -6998,7 +6998,7 @@
             "term": "Hypersyntonie"
           },
           {
-            "definition": "Névrose caractérisée par l’exagération des modalités d’expression psychique et affective = Symptômes d’apparence organiques et par manifestations psychiques pathologiques. (Exemple : Une personne subit un choc émotionnel intense, comme la perte brutale d'un proche ou un accident évité de justesse. Quelques heures plus tard, elle se réveille totalement incapable de bouger la jambe droite.)",
+            "definition": "Névrose caractérisée par l’exagération des modalités d’expression psychique et affective = Symptômes d’apparence organiques et par manifestations psychiques pathologiques. (Exemple : Une personne subit un , comme la perte brutale d'un proche ou un accident évité de justesse. Quelques heures plus tard, elle se réveille totalement .)",
             "term": "Hystérie"
           },
           {
@@ -7382,7 +7382,7 @@
             "term": "TVP - définition"
           },
           {
-            "definition": "Formation d’un thrombus favorisée par la triade de Virchow",
+            "definition": "Formation d’un thrombus favorisée par la",
             "term": "TVP - physiopathologie"
           },
           {
@@ -7662,7 +7662,7 @@
             "term": "Dysfonction sinusale"
           },
           {
-            "definition": "trouble de conduction entre oreillettes et ventricules, classé en I, II (Mobitz 1 et 2) et III.",
+            "definition": "trouble de conduction entre oreillettes et ventricules, classé en I, II (Mobitz 1 et 2) et III.NB :FA/flutter → anticoagulation + contrôle fréquence/rythme + ablation fréquente.",
             "term": "Bloc atrio-ventriculaire (BAV)"
           }
         ],
@@ -7792,10 +7792,522 @@
         ],
         "filename": "Vulnérabilités et facteurs de risque, de protection, résilience.odt"
       }
+    ],
+    [
+      "ue_1_1_s3_troubles_neurodveloppementaux",
+      {
+        "title": "Troubles neurodéveloppementaux",
+        "date": "05/09/2026",
+        "ue": "1.1.S3",
+        "author": "capsule",
+        "definitions": [
+          {
+            "definition": "ensemble des mécanismes qui guident le développement du cerveau. Processus dynamique influencé par des facteurs biologiques, génétiques, socioculturels, affectifs et environnementaux de la période anténatale à l’âge adulte",
+            "term": "Neurodéveloppement"
+          },
+          {
+            "definition": "défaut de développement d’une ou plusieurs compétences cognitives. Ils sont durables et ont un retentissement important sur l’individu . On retrouve les suivant selon le DSM-5 = trouble du spectre autistique, de la communication, du développement intellectuel, spécifiques des apprentissages, moteurs, du déficit de l’attention / hyperactivité, autres.",
+            "term": "Trouble du neurodéveloppement (TND)"
+          },
+          {
+            "definition": "ne nécessitant habituellement pas un effort volontaire pour apprendre = langage oral, programmation motrice, attention, raisonnement, etc.",
+            "term": "Apprentissage implicite"
+          },
+          {
+            "definition": "nécessitant un effort volontaire pour apprendre = écriture, lecture, calcul, etc.",
+            "term": "Apprentissage explicite"
+          },
+          {
+            "definition": "impact sur le fonctionnement de la personne dans la vie quotidienne (scolaire, familiale, professionnelle, sociale)",
+            "term": "Degré de retentissement"
+          },
+          {
+            "definition": "valoriser les parents dans leurs sentiments de compétence et de les placer au cœur de la PEC et de l’éducation de leur enfant",
+            "term": "Guidance parentale"
+          },
+          {
+            "definition": "évaluation clinique, fonctionnelle, développementale individualisée afin de caractériser les secteurs de développement atteints",
+            "term": "Intervention précoce"
+          }
+        ],
+        "filename": "Troubles neurodéveloppementaux.odt"
+      }
+    ],
+    [
+      "ue_2_8_s3_avc_ait",
+      {
+        "title": "AVC - AIT",
+        "date": "04/09/2026",
+        "ue": "2.8.S3",
+        "author": "Dr",
+        "definitions": [
+          {
+            "definition": "Accident vasculaire cérébral = déficit neurologique focal d’apparition brutale, d’origine vasculaire, avec lésion cérébrale (ischémique ou hémorragique)",
+            "term": "AVC - définition"
+          },
+          {
+            "definition": "1/ ischémique (80%) = occlusion artérielle avec nécrose + zone de pénombre. 2/ hémorragique (20%) = rupture artériole + épanchement + œdème",
+            "term": "AVC - physiopathologie"
+          },
+          {
+            "definition": "1/ Permanents âge, sexe masculin, antécédents familiaux. 2/ TransitoiresHTA (principal), tabac, diabète, dyslipidémie, FA, obésité, sédentarité, alcool, alimentation déséquilibrée",
+            "term": "AVC – FDR principaux"
+          },
+          {
+            "definition": "1/ Ischémique = athérosclérose des gros troncs, cardiopathie emboligène (FA principalement), valvulopathie, MVTE états prothrombotiques, microangiopathie (= maladie des petits vaisseaux), dissection. 2/ Hémorragique = HTA chronique, angiopathie amyloïde (= maladie des petits et moyens vaisseaux), anticoagulants ou trouble de la coagulation, malformations vasculaires (anévrisme)",
+            "term": "AVC – étiologie"
+          },
+          {
+            "definition": "Déficit neurologique focal soudain : hémiplégie/hémiparésie, troubles sensitifs, aphasie, cécité uni-bilatérale, hémianopsie latérale homonyme, troubles de l’équilibre",
+            "term": "AVC – tableau clinique"
+          },
+          {
+            "definition": "tous les tableaux qui peuvent donner un changement brutal d’un tableau antérieur ⇒ migraine avec aura visuelle, aura sensitive (engourdissement de membre), tumeur cérébrale, crise d’épilepsie",
+            "term": "AVC – diag différentiels principaux"
+          },
+          {
+            "definition": "Clinique + IRM/scanner TDM pour confirmer ischémie vs hémorragie et localisation",
+            "term": "AVC – Diagnostic"
+          },
+          {
+            "definition": "echodoppler des TSA, angio-IRM, angioscanner, ECG pour rechercher une arythmie",
+            "term": "AVC - Examens complémentaires et marqueurs"
+          },
+          {
+            "definition": "1/ ischémique en phase aiguë = thrombolyse (seulement dan un intervalle de 4h30 après 1ers symptômes) sinon thrombectomie (chirurgical). En préventif = anticoagulation ± chirurgie vasculaire (= endartériectomie) 2/ hémorragique :",
+            "term": "AVC – Traitements"
+          },
+          {
+            "definition": "Décès, handicap moteur/cognitif, troubles du langage, troubles de la déglutition, épilepsie post-AVC, œdème cérébral (ischémie étendue/hémorragie), récidive d’AVC, complications du décubitus",
+            "term": "AVC – Complications"
+          },
+          {
+            "definition": "Accident ischémique transitoire = épisode bref (<1h de déficit neurologique focal d’origine ischémique sans lésion cérébrale en imagerie)",
+            "term": "AIT – définition"
+          },
+          {
+            "definition": "Ischémie focale cérébrale transitoire, sans nécrose tissulaire persistante",
+            "term": "AIT – physiopathologie"
+          },
+          {
+            "definition": "1/ Permanents âge, sexe masculin, antécédents familiaux. 2/ Transitoires HTA, tabac, diabète, dyslipidémie, FA, obésité, sédentarité, alcool, alimentation déséquilibrée",
+            "term": "AIT – FDR principaux"
+          },
+          {
+            "definition": "Idem AVC hémorragique (= athérosclérose, microangiopathie, cardiopathie emboligène, dissection, etc.)",
+            "term": "AIT – étiologie"
+          },
+          {
+            "definition": "Déficit neurologique focal transitoire : amaurose fugace, diplopie binoculaire, aphasie, déficit moteur/sensitif unilatéral face/membre, hémianopsie latérale homonyme",
+            "term": "AIT – tableau clinique"
+          },
+          {
+            "definition": "tous les tableaux qui peuvent donner un changement brutal d’un tableau antérieur ⇒ migraine avec aura visuelle, aura sensitive (engourdissement de membre), tumeur cérébrale, crise d’épilepsie",
+            "term": "AIT – diag différentiels principaux"
+          },
+          {
+            "definition": "Clinique + TDM/IRM pour éliminer un infarctus constitué (= nécrose des tissus)",
+            "term": "AIT – Diagnostic"
+          },
+          {
+            "definition": "bilan étiologique",
+            "term": "AIT - Examens complémentaires et marqueurs"
+          },
+          {
+            "definition": "selon le bilan étiologique et les pathologies pré-existantes",
+            "term": "AIT – Traitements"
+          },
+          {
+            "definition": "dans les jours/semaines suivants (≈ 10% dans le mois sans traitement), récidive d’AIT/AVC",
+            "term": "AIT – Complications"
+          },
+          {
+            "definition": "obstruction d’une artère par un caillot",
+            "term": "AVC ischémique"
+          },
+          {
+            "definition": "rupture d’une artère provocant un saignement dans la zone",
+            "term": "AVC hémorragique"
+          },
+          {
+            "definition": "touchant l’artère sylvienne (artère cérébrale moyenne) ⇒ zones motrice + langage",
+            "term": "AVC sylvien"
+          },
+          {
+            "definition": "trouble du langage acquis entraînant une perte partielle ou totale de la capacité à s’exprimer. Par exemple de Wernicke (lobe temporal = aphasie réceptive, difficulté de compréhension) ou de Broca (lobe frontal gauche = compréhension mais difficulté à la formation du langage)",
+            "term": "Aphasie"
+          }
+        ],
+        "filename": "AVC - AIT.odt"
+      }
+    ],
+    [
+      "ue_4_2_s3_facteurs_influenant_la_communication",
+      {
+        "title": "Facteurs influençant la communication",
+        "date": "07/09/2026",
+        "ue": "4.2.S3",
+        "author": "CCR",
+        "definitions": [
+          {
+            "definition": "1/ psychologiques (= implication personnelle, émotionnelle), 2/ cognitifs (= réalité reconstruite par l’individu dans son système de représentation de soi/des autres/d’une tâche qui va jouer un filtre interprétatif), 3/ sociaux (= filtres induits par les préjugés, les stéréotypes) 3/ systémique (=état de santé, âge...)",
+            "term": "Facteurs intrinsèques"
+          },
+          {
+            "definition": "1/ psychologiques (= poids des mots par exemple) 2/ sociaux (= groupe social et ses codes) 3/ environnementaux (éclairage, bruit…) 4/ autres (différences culturelles, éducation)",
+            "term": "Facteurs extrinsèque"
+          }
+        ],
+        "filename": "Facteurs influençant la communication.odt"
+      }
+    ],
+    [
+      "ue_1_3_s3_droit_dontologie_morale_thique",
+      {
+        "title": "Droit, déontologie, morale, éthique",
+        "date": "07/09/2026",
+        "ue": "1.3.S3",
+        "author": "capsule",
+        "definitions": [
+          {
+            "definition": "ce qui est, décrit un état qui peut être observé",
+            "term": "Fait"
+          },
+          {
+            "definition": "ce qui devrait être ; jugement normatif ou évaluatif",
+            "term": "Valeur"
+          },
+          {
+            "definition": "ensemble des normes juridiques fondamentales et inaliénables (règles fixées par la lois)",
+            "term": "Droit"
+          },
+          {
+            "definition": "règles et prescriptions restreintes à un corps professionnel souvent codifiées dans un code",
+            "term": "Déontologie professionnelle"
+          },
+          {
+            "definition": "ensemble de normes sur le , partagées par une société ou un groupe",
+            "term": "Morale"
+          },
+          {
+            "definition": "sur ce qu’il est  dans une situation donnée, à partir de valeurs et de principes",
+            "term": "Éthique"
+          },
+          {
+            "definition": "chemin entre une incertitude et une décision",
+            "term": "Réflexion éthique"
+          }
+        ],
+        "filename": "Droit, déontologie, morale, éthique.odt"
+      }
+    ],
+    [
+      "ue_1_3_s3_rgle_de_droit_sources_du_droit",
+      {
+        "title": "Règle de droit – Sources du droit",
+        "date": "07/09/2026",
+        "ue": "1.3.S3",
+        "author": "capsule",
+        "definitions": [
+          {
+            "definition": "ensemble de règles de droit – droit «objectif» ou «positif». S’applique en tous lieux indistinctement ou uniformément dans un espace géographique donné et dans un espace temps donné. Elle est impersonnelle (= s’applique à tous les citoyens). Seul l’État a le pouvoir d’instituer ou de déléguer d’instituer des règles de droit.",
+            "term": "le Droit"
+          },
+          {
+            "definition": "relatifs aux individuels – droits «subjectifs»",
+            "term": "Les droits"
+          },
+          {
+            "definition": "règle de droit d’origine populaire forgée par le temps, toujours appliquée aujourd’hui, sans que la volonté de l’État n’intervienne",
+            "term": "Coutume"
+          },
+          {
+            "definition": "obligation de se conformer aux prescriptions de la règle de droit ou s’expose à une sanction",
+            "term": "Force contraignante"
+          },
+          {
+            "definition": "Constitution de 1958 + Assises de la Constitution (DDHC 1789, préambule Constitution 1946, Charte de l’environnement, etc), Droit supranational (droit européen, traités internationaux, jurisprudentiel européen), lois constitutionnelles, organiques et ordinaires (=Parlement), ordonnances (=mesure d’urgence), règlement (décrets, arrêtés qu’ils soient du PM > ministériels > préfectoraux > municipaux)",
+            "term": "Sources du droit"
+          },
+          {
+            "definition": "le Droit français ne reconnaît pas la jurisprudence comme source du Droit. Elle peut guider, aider à l’interprétation le juge.",
+            "term": "Jurisprudence"
+          },
+          {
+            "definition": "écris émanant de juristes, universitaires, praticiens qui permettent d’interpréter le Droit, d’en effectuer des synthèses qui vont assurer les progrès du Droit.",
+            "term": "Doctrine"
+          }
+        ],
+        "filename": "Règle de droit – Sources du droit.odt"
+      }
+    ],
+    [
+      "ue_1_3_s3_organisation_juridictionnelle",
+      {
+        "title": "Organisation juridictionnelle",
+        "date": "07/09/2026",
+        "ue": "1.3.S3",
+        "author": "capsule",
+        "definitions": [
+          {
+            "definition": "Administratif et Judiciaire",
+            "term": "Ordres de juridictions"
+          },
+          {
+            "definition": "étudie les litiges mettant en jeu une règle de droit public opposant les particuliers à l’État ou collectivités (=l’administration est toujours en défense)",
+            "term": "Ordre administratif"
+          },
+          {
+            "definition": "juridiction pénale ou civile.",
+            "term": "Ordre judiciaire"
+          },
+          {
+            "definition": "maintenir l’ordre public et punir les infractions prévues par la loi (contraventions = tribunal de police, délits = tribunal correctionnel, crimes = crimes). Appel possible pour les délits et les crimes.",
+            "term": "Pénal"
+          },
+          {
+            "definition": "réparer un préjudice entre des personnes privées",
+            "term": "Civil"
+          },
+          {
+            "definition": "1er degré = Tribunal judiciaire, prud’hommes, tribunal de commerce / 2e degré = Cour d’appel, 3e degré = Conseil d’État (= pouvoir de cassation sur le fond = étude de conformité) + notamment les juridictions disciplinaires ordinales (Ordres professionnels)",
+            "term": "Juridictions civiles"
+          },
+          {
+            "definition": "1er degré = Tribunal correctionnel, Cour d’assises, 2e degré = Cour d’appel correctionnelle ou d’assises, 3e degré = Cour de cassation",
+            "term": "Juridictions pénales"
+          }
+        ],
+        "filename": "Organisation juridictionnelle.odt"
+      }
+    ],
+    [
+      "ue_1_3_s3_responsabilit_des_professionnels_et_tablissements_de_sant",
+      {
+        "title": "Responsabilité des professionnels et établissements de santé",
+        "date": "07/09/2026",
+        "ue": "1.3.S3",
+        "author": "capsule",
+        "definitions": [
+          {
+            "definition": "engagée du fait d’un acte médical de diagnostic, de traitement, de prévention par un usager ou ses ayants droits",
+            "term": "Responsabilité médicale"
+          },
+          {
+            "definition": "pour les praticiens libéraux, les établissements publics et privés, les salariés",
+            "term": "Obligation d’assurance de resp civile professionnelle"
+          },
+          {
+            "definition": "obligation d’assurance de resp civile professionnelle",
+            "term": "Loi du 4 mars 2002 (Kouchner)"
+          },
+          {
+            "definition": "peut être multiple = pénale, disciplinaire ordinale, disciplinaire statutaire",
+            "term": "Sanction"
+          },
+          {
+            "definition": "selon le préjudice subit = civile, administrative, procédure amiable",
+            "term": "Indemnisation"
+          },
+          {
+            "definition": "elle est toujours personnelle, non assurable, concerne les personnes physiques et morales (sauf l’État). Le comportement reproché doit constituer une infraction prévue (ex : violation secret pro, défaut d’assistance à personne en péril, homicide involontaire…). A une fonction répressive. Possibilité de la victime de demander une indemnisation de son dommage en se constituant partie civile",
+            "term": "Responsabilité pénale"
+          },
+          {
+            "definition": "engagée et jugée suite à une/des plaintes reçues par le conseil départemental de l’Ordre). Si échec de la conciliation ⇒ chambre disciplinaire de 1ere instance (conseil régional) ⇒ appel possible devant la chambre disciplinaire nationale (conseil national de l’Ordre) ⇒ pourvoi en cassation devant le Conseil d’État",
+            "term": "Responsabilité disciplinaire ordinale"
+          },
+          {
+            "definition": "usager apporte la preuve d’un fait générateur (= une faute dans le cas des prof de santé) + de son dommage (atteinte à l’intégrité phy ou psy du patient, perte de chance de guérison, etc) + du lien de cause à effet (qui doit être certain)",
+            "term": "Conditions d’engagement de la responsabilité (3 éléments)"
+          },
+          {
+            "definition": "1/ Voie contentieuse ⇒ resp civile ou administrative engagée selon le statut du professionnel ou de l’établissement 2/ Voie amiable ⇒ repose sur les Commissions de Conciliation et d’Indemnisation (CCI)",
+            "term": "Responsabilité indemnitaire"
+          }
+        ],
+        "filename": "Responsabilité des professionnels et établissements de santé.odt"
+      }
+    ],
+    [
+      "ue_2_6_s3_sectorisation_en_sant_mentale",
+      {
+        "title": "Sectorisation en santé mentale",
+        "date": "04/09/2026",
+        "ue": "2.6.S3",
+        "author": "CCR",
+        "definitions": [
+          {
+            "definition": "dite « des aliénés «  = impose la présence d’un asile d’aliéné par département",
+            "term": "Loi de 1938"
+          },
+          {
+            "definition": "relative à la sectorisation psychiatrique (découpage territoriale)",
+            "term": "Loi de 1985"
+          },
+          {
+            "definition": "aire géo-démographique à l’intérieur duquel une équipe soignante pluri-disciplinaire dont les missions sont : la prévention, le diag précoce, le ttmt intra/extra-hospitalier, le ttmt post-cure des malades. Objectif = garantir la continuité de la PEC. Distinction entre psychiatrie adulte, infanto-juvénile, pénitentiaire.",
+            "term": "Secteur"
+          },
+          {
+            "definition": "CMP (= pivot du soin), UHP, CATTP, HDJ, équipe attachée au SAU, équipes mobiles, hébergements thérapeutiques, réseau (structure d’aval), psychiatrie de liaison (équipe inter service)",
+            "term": "Composition du secteur"
+          },
+          {
+            "definition": "centre médico psychologique (pluridisciplinaire) = accueil, prévention, consultation ⇒ à domicile, consult médecin, entretiens d’accueil et d’orientation, acompagnement social.",
+            "term": "CMP"
+          },
+          {
+            "definition": "Unité d’hospitalisation psychiatrique = accueil, placement, soins (techniques, somatiques, relationnels, d’hygiène et de confort, entretiens, accompagnement)",
+            "term": "UHP"
+          },
+          {
+            "definition": "favoriser l’existence autonome ⇒ activités thérapeutiques, accueil, réseau",
+            "term": "HDJ"
+          },
+          {
+            "definition": "Centre d‘accueil thérapeutique à temps partiel = favoriser les liens sociaux ⇒ accueil, activités thérapeutiques, espace de liberté / de convivialité",
+            "term": "CATTP"
+          },
+          {
+            "definition": "répondre aux besoins des services d’hôpitaux généraux",
+            "term": "Psychiatrie de liaison"
+          },
+          {
+            "definition": "pour les situations d’urgence, rattaché au SAU",
+            "term": "Equipe attachée au SAU"
+          },
+          {
+            "definition": "maison communautaire, hôtel ou appartement associatif dont le suivi est assuré par le CMP",
+            "term": "Hébergements thérapeutiques"
+          },
+          {
+            "definition": "relation, interaction avec les partenaires de la municipalité et du département (sécurité, logement, loisirs, écoles, santé…)",
+            "term": "Réseau"
+          },
+          {
+            "definition": "CAC (centre d’accueil et de crise), structure d’accueil adolescents, unité mère-enfant, équipe mobile de soins, unité de thérapie familiale, centre d’aide et de soins aux toxicomanes ou autres addictions, inter secteur pédopsychiatrie",
+            "term": "Autres structures spécifiques"
+          }
+        ],
+        "filename": "Sectorisation en santé mentale.odt"
+      }
+    ],
+    [
+      "ue_2_6_s3_isolement_soins_sans_consentement",
+      {
+        "title": "Isolement – soins sans consentement",
+        "date": "07/09/2026",
+        "ue": "2.6.S3",
+        "author": "CCR",
+        "definitions": [
+          {
+            "definition": "évolution des reco de 1960 à 2017 ⇒ « Placement du patient à visée de protection lors d’une phase critique de sa PEC dans un espace dont il ne peut sortir librement et qui est séparé des autres patients. Tout isolement ne peut se faire que dans un lieu dédié et adapté »",
+            "term": "Isolement - Réglementation"
+          },
+          {
+            "definition": "Prévention d’une violence imminente avec un risque grave pour l’intégrité du patient ou celle d’autrui. Uniquement lorsque les alternatives on été inefficaces. En dernier recours, pour une durée limitée et proportionnée au risque après une évaluation du patient. Justification clinique.",
+            "term": "Isolement - Indications"
+          },
+          {
+            "definition": "Punition, humiliation. En aucun cas pour résoudre un problème administratif, organisationnel (manque de lit…) . Si inadapté à l’état clinique. Si balance bénéfice-risque désavantageuse (état somatique précaire…)",
+            "term": "Isolement - Contre-indications"
+          },
+          {
+            "definition": "uniquement pour les patients faisant l’objet de soins psychiatriques sans consentement, sur avis du psychiatre (d’emblée ou secondairement = indisponibilité du psy immédiatement), après entretien et examen médical au moment de l’isolement. Si fait sur avis d’un interne ou d’un médecin non psychiatre, cette décision doit être confirmée par un psychiatre. Limitée à 12h, renouvellement possible.",
+            "term": "Isolement - Mise en œuvre"
+          },
+          {
+            "definition": "explications au patient et les critères permettant la levée de l’isolement + sécurité suffisante pour le patient",
+            "term": "Isolement - Conditions de mise en œuvre"
+          },
+          {
+            "definition": "sur décision médicale dès que son maintien n’est plus cliniquement justifié. Proposer au patient de reprendre l’épisode pour en faire l’analyse",
+            "term": "Isolement - Levée de la mesure"
+          },
+          {
+            "definition": "date, heure, nom du psychiatre, nom des professionnels ayant surveillé le patient",
+            "term": "Isolement - Traçabilité de l’épisode"
+          },
+          {
+            "definition": "1/ physique = à l’aide d’une force physique 2/ mécanique = matériel, vêtements (exceptionnel, sur décision médicale, surveillance adaptée, souvent associé à une contention chimique = médicaments car traumatisant) pour une durée max de 6h. Mesure ultime dont les indications, contre-indications, etc sont identiques à l’isolement",
+            "term": "Contentions – Mise en œuvre"
+          },
+          {
+            "definition": "lieu porte ouverte conçu pour procurer un espace de faible stimulation afin de permettre une diminution de la tension interne d’un patient. Utilisation volontaire du patient",
+            "term": "Espace d’apaisement"
+          },
+          {
+            "definition": "« Toute personne a droit à la liberté et à la sûreté, nul ne peut être privé de sa liberté sauf dans les cas décrit par les voies légales »",
+            "term": "Liberté d’aller et venir – principe"
+          },
+          {
+            "definition": "Contrôleur Général des Lieux de Privation de Liberté = autorité administrative veillant à la protection de l’ensemble de droits fondamentaux des personnes privées de liberté",
+            "term": "CGLPL"
+          },
+          {
+            "definition": "énergie, pulsion, force nécessaire à la survie",
+            "term": "Agressivité"
+          },
+          {
+            "definition": "actes ou gestes qui ont pour conséquence de provoquer de l’inconfort ou de la crainte pour soi même ou pour l’entourage",
+            "term": "Agression"
+          },
+          {
+            "definition": "comportement impulsif en rupture avec le comportement général habituel, relativement isolable",
+            "term": "Violence"
+          }
+        ],
+        "filename": "Isolement – soins sans consentement.odt"
+      }
+    ],
+    [
+      "ue_2_6_s3_traitements_non_mdicamenteux",
+      {
+        "title": "Traitements non médicamenteux",
+        "date": "07/09/2026",
+        "ue": "2.6.S3",
+        "author": "CCR",
+        "definitions": [
+          {
+            "definition": "entretiens réguliers avec un psychothérapeute. Elle vise à améliorer l’état de la personne et/ou prévenir des rechutes",
+            "term": "Psychoéducation"
+          },
+          {
+            "definition": "vise à remplacer les idées négatives et les comportements inadaptés (stress, évitements, réactions agressives, phobie, schizophrénie, etc) par des pensées et des réactions en adéquation avec la réalité",
+            "term": "TCC (thérapie comportementale et cognitive)"
+          },
+          {
+            "definition": "faire revenir au niveau conscient les conflits et traumatismes liés au développement de la personne (passé individuel et familial) qui ont été enfouis dans l’inconscient. Objectif = soulager la souffrance psychique et permettre de récupérer la capacité de l’individu à agir et à jouir de l’existence",
+            "term": "Thérapie analytique (Freud)"
+          },
+          {
+            "definition": "méthode de PEC où le patient participe, au sein d’une institution, à sa propre prise en charge et est intégré au tissu social environnant, lui offrant ainsi un meilleur pronostic",
+            "term": "Psychothérapie institutionnelle"
+          },
+          {
+            "definition": "outil de prévention des rechutes, consiste à enseigner au patient à méditer pour « être dans l’instant présent » et ne pas partir dans ses pensées / ruminer",
+            "term": "Médiation de pleine conscience (mindfullness)"
+          },
+          {
+            "definition": "favoriser les échanges entre les membres d’une famille pour dépasser une situation de crise, faire évoluer vers un fonctionnement plus souple",
+            "term": "Thérapie familiale systémique"
+          },
+          {
+            "definition": "stimulation cérébrale par électrochocs, se fait sous AG sous forme de cures répétées",
+            "term": "Sismothérapie / électro-convulsivothérapie"
+          },
+          {
+            "definition": "enveloppement humide, réminiscence, concept Snoezelen, jardin d’agrément, toucher-relationnel, aromathérapie, art-thérapie / musicothérapie, etc.",
+            "term": "Autres techniques"
+          }
+        ],
+        "filename": "Traitements non médicamenteux.odt"
+      }
     ]
   ],
   "stats": {
-    "totalTerms": 1488,
+    "totalTerms": 1586,
     "studiedTerms": 0,
     "correctAnswers": 0,
     "wrongAnswers": 0
