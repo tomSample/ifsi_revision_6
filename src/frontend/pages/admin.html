@@ -397,6 +397,28 @@
             font-size: 0.9rem;
         }
 
+        .course-file-status {
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        .course-file-status-checking {
+            color: #6c757d;
+        }
+
+        .course-file-status-new {
+            color: #198754;
+        }
+
+        .course-file-status-duplicate_no_change,
+        .course-file-status-confirm_update {
+            color: #b7791f;
+        }
+
+        .course-file-status-error {
+            color: #dc3545;
+        }
+
         .remove-file-btn {
             background: #dc3545;
             color: white;
@@ -1177,12 +1199,12 @@
 
             <div class="upload-area" id="courseUploadArea">
                 <div class="upload-icon">📄</div>
-                <h4>Glissez votre fichier .odt ici</h4>
-                <p>ou</p>
+                <h4>Glissez vos fichiers .odt ici</h4>
+                <p>ou sélectionnez plusieurs fichiers</p>
                 <button class="browse-btn" onclick="document.getElementById('courseFileInput').click()">
                     📁 Parcourir les fichiers
                 </button>
-                <input type="file" id="courseFileInput" accept=".odt" style="display: none;">
+                <input type="file" id="courseFileInput" accept=".odt" multiple style="display: none;">
                 <p style="color: #666; margin-top: 1rem;">Seuls les fichiers .odt sont acceptés</p>
             </div>
 
