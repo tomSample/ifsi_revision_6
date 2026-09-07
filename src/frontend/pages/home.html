@@ -256,7 +256,7 @@
 
         @media (min-width: 1025px) {
             .action-cards {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -774,6 +774,24 @@
                         </div>
                         <button class="btn btn-primary btn-sm action-card-btn" onclick="event.preventDefault(); window.location.href='./browse-courses.html'">
                             Explorer →
+                        </button>
+                    </a>
+                </div>
+            </section>
+
+            <section class="action-cards-section evaluation-section">
+                <h2 class="section-title">Évaluez vos connaissances</h2>
+                <div class="action-cards">
+                    <a href="./evaluation.html" class="action-card">
+                        <span class="action-card-icon">📝</span>
+                        <h3>S'évaluer</h3>
+                        <p>Répondez à des questions à choix multiples sur les UE sélectionnées et mesurez votre préparation.</p>
+                        <div class="action-card-meta">
+                            <span class="meta-badge">🎓 Plusieurs UE</span>
+                            <span class="meta-badge">📊 Score final</span>
+                        </div>
+                        <button class="btn btn-primary btn-sm action-card-btn" onclick="event.preventDefault(); window.location.href='./evaluation.html'">
+                            S'évaluer →
                         </button>
                     </a>
                 </div>

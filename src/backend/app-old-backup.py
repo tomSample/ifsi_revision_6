@@ -584,6 +584,66 @@ def extract_odt():
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
+def get_course_duplicate_status(data):
+    """Détermine si un cours existe déjà sans modifier la base de données."""
+    if not data or 'metadata' not in data or 'definitions' not in data:
+        return None, {'error': 'Données invalides'}, 400
+
+    json_data = read_json_file()
+    course_key = generate_course_key(data['metadata'])
+    course_title = data['metadata'].get('title', '').strip()
+    course_filename = f"{course_title}.odt"
+
+    for course in json_data['courses']:
+        existing_key = course[0]
+        existing_data = course[1]
+        existing_title = existing_data.get('title', '').strip()
+        existing_filename = existing_data.get('filename', '').strip()
+
+        existing_course = {
+            'title': existing_data.get('title'),
+            'date': existing_data.get('date'),
+            'author': existing_data.get('author'),
+            'ue': existing_data.get('ue'),
+            'definitions_count': len(existing_data.get('definitions', []))
+        }
+
+        if is_identical_course(existing_data, data):
+            return 'duplicate_no_change', {
+                'status': 'duplicate_no_change',
+                'message': 'Ce fichier de cours est déjà présent',
+                'existing_course': existing_course
+            }, 200
+
+        if (existing_key == course_key or existing_title == course_title or
+                existing_filename == course_filename):
+            return 'confirm_update', {
+                'status': 'confirm_update',
+                'message': 'Cours déjà existant',
+                'existing_course': existing_course,
+                'new_course': {
+                    'title': course_title,
+                    'date': data['metadata'].get('date'),
+                    'author': data['metadata'].get('author'),
+                    'ue': data['metadata'].get('ue'),
+                    'definitions_count': len(data['definitions'])
+                }
+            }, 200
+
+    return 'new', {'status': 'new'}, 200
+
+@app.route('/api/check_course', methods=['POST'])
+def check_course():
+    """Vérifie l'existence d'un cours sans l'ajouter."""
+    try:
+        _, response, status_code = get_course_duplicate_status(request.get_json())
+        return jsonify(response), status_code
+    except Exception as e:
+        print(f"Erreur dans check_course: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/api/add_course', methods=['POST'])
 def add_course():
     """Ajoute un nouveau cours au fichier JSON"""

@@ -2,7 +2,8 @@
 // import { logger } from './logger.js'; // Désactivé temporairement
 
 // Variables globales
-let selectedCourseFile = null;
+let selectedCourseFiles = [];
+const courseFileStates = new Map();
 let selectedImageFile = null;
 let activeTab = 'courses';
 
@@ -49,149 +50,213 @@ function setupCourseUpload() {
     uploadArea.addEventListener('drop', (e) => {
         e.preventDefault();
         uploadArea.classList.remove('dragover');
-        handleCourseFileSelection(e.dataTransfer.files[0]);
+        handleCourseFileSelection(e.dataTransfer.files);
     });
     
     fileInput.addEventListener('change', (e) => {
-        handleCourseFileSelection(e.target.files[0]);
+        handleCourseFileSelection(e.target.files);
     });
 }
 
-function handleCourseFileSelection(file) {
-    if (!file) return;
-    
-    // Vérification du type de fichier
-    if (!file.name.toLowerCase().endsWith('.odt')) {
-        showStatus('Seuls les fichiers .odt sont acceptés pour les cours', 'error');
-        return;
+function handleCourseFileSelection(files) {
+    const newFiles = Array.from(files || []);
+    if (newFiles.length === 0) return;
+
+    const invalidFile = newFiles.find(file => !file.name.toLowerCase().endsWith('.odt'));
+    if (invalidFile) {
+        showStatus(`Le fichier "${invalidFile.name}" n'est pas un fichier .odt`, 'error');
     }
-    
-    selectedCourseFile = file;
-    showCourseFilePreview(file);
+
+    const existingFiles = new Set(
+        selectedCourseFiles.map(file => `${file.name}-${file.size}-${file.lastModified}`)
+    );
+    newFiles
+        .filter(file => file.name.toLowerCase().endsWith('.odt'))
+        .forEach(file => {
+            const fileKey = `${file.name}-${file.size}-${file.lastModified}`;
+            if (!existingFiles.has(fileKey)) {
+                selectedCourseFiles.push(file);
+                existingFiles.add(fileKey);
+            }
+        });
+
+    renderCourseFilePreviews();
     document.getElementById('courseMetadataForm').style.display = 'block';
-    document.getElementById('courseUploadBtn').disabled = false;
+    document.getElementById('courseUploadBtn').disabled = selectedCourseFiles.length === 0;
+    newFiles
+        .filter(file => file.name.toLowerCase().endsWith('.odt'))
+        .forEach(file => checkCourseFile(file));
 }
 
-function showCourseFilePreview(file) {
-    // Supprimer l'ancien aperçu s'il existe
-    const existingPreview = document.querySelector('#courseMetadataForm .file-preview');
-    if (existingPreview) {
-        existingPreview.remove();
+function getCourseFileKey(file) {
+    return `${file.name}-${file.size}-${file.lastModified}`;
+}
+
+async function checkCourseFile(file) {
+    const fileKey = getCourseFileKey(file);
+    if (courseFileStates.has(fileKey)) return;
+
+    courseFileStates.set(fileKey, { status: 'checking' });
+    renderCourseFilePreviews();
+
+    try {
+        const courseData = await extractCourseFile(file);
+        const response = await fetch('/api/check_course', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(courseData)
+        });
+        const result = await parseJsonResponse(response, 'Erreur lors de la vérification du cours');
+        courseFileStates.set(fileKey, { status: result.status, courseData, details: result });
+    } catch (error) {
+        courseFileStates.set(fileKey, { status: 'error', error: error.message });
     }
-    
-    const preview = document.createElement('div');
-    preview.className = 'file-preview';
-    preview.innerHTML = `
-        <div class="file-icon">📄</div>
-        <div class="file-info">
-            <h4>${file.name}</h4>
-            <p>${(file.size/1024).toFixed(1)} KB • Fichier ODT</p>
-            <p>Prêt pour l'extraction et le traitement</p>
-        </div>
-        <button class="remove-file-btn" onclick="removeCourseFilePreview()">✖ Supprimer</button>
-    `;
-    
-    document.getElementById('courseMetadataForm').prepend(preview);
+    renderCourseFilePreviews();
+}
+
+function renderCourseFilePreviews() {
+    const form = document.getElementById('courseMetadataForm');
+    form.querySelectorAll('.course-file-preview').forEach(preview => preview.remove());
+
+    selectedCourseFiles.forEach((file, index) => {
+        const state = courseFileStates.get(getCourseFileKey(file)) || { status: 'checking' };
+        const statusLabels = {
+            checking: '🔄 Vérification en cours...',
+            new: '✅ Cours nouveau — sera ajouté',
+            duplicate_no_change: '⚠️ Doublon identique — ignoré automatiquement',
+            confirm_update: '🔁 Version différente détectée — remplacement à confirmer',
+            error: `❌ ${state.error || 'Vérification impossible'}`
+        };
+        const preview = document.createElement('div');
+        preview.className = 'file-preview course-file-preview';
+        preview.innerHTML = `
+            <div class="file-icon">📄</div>
+            <div class="file-info">
+                <h4>${file.name}</h4>
+                <p>${(file.size / 1024).toFixed(1)} KB • Fichier ODT</p>
+                <p class="course-file-status course-file-status-${state.status}">${statusLabels[state.status]}</p>
+            </div>
+            <button class="remove-file-btn" type="button">✖ Supprimer</button>
+        `;
+        preview.querySelector('.remove-file-btn').addEventListener('click', () => {
+            const [removedFile] = selectedCourseFiles.splice(index, 1);
+            courseFileStates.delete(getCourseFileKey(removedFile));
+            renderCourseFilePreviews();
+            document.getElementById('courseUploadBtn').disabled = selectedCourseFiles.length === 0;
+            if (selectedCourseFiles.length === 0) {
+                document.getElementById('courseMetadataForm').style.display = 'none';
+            }
+        });
+        form.prepend(preview);
+    });
 }
 
 function removeCourseFilePreview() {
-    selectedCourseFile = null;
-    const preview = document.querySelector('#courseMetadataForm .file-preview');
-    if (preview) preview.remove();
+    selectedCourseFiles = [];
+    courseFileStates.clear();
+    document.querySelectorAll('#courseMetadataForm .course-file-preview').forEach(preview => preview.remove());
     document.getElementById('courseMetadataForm').style.display = 'none';
     document.getElementById('courseFileInput').value = '';
     document.getElementById('courseUploadBtn').disabled = true;
 }
 
 async function uploadCourse() {
-    if (!selectedCourseFile) {
+    if (selectedCourseFiles.length === 0) {
         showStatus('Aucun fichier de cours sélectionné', 'error');
         return;
     }
-    
-    const formData = new FormData();
-    formData.append('file', selectedCourseFile);
-    
+
+    const filesToUpload = [...selectedCourseFiles];
+    const uploadButton = document.getElementById('courseUploadBtn');
+    uploadButton.disabled = true;
+    let uploadedCount = 0;
+    let skippedCount = 0;
+
     try {
-        showStatus('Traitement du fichier ODT en cours...', 'info');
-        
-        // D'abord extraire le contenu du fichier
-        const extractResponse = await fetch('/api/extract_odt', {
-            method: 'POST',
-            body: formData
-        });
-        
-        // Vérifier le Content-Type avant de parser
-        const contentType = extractResponse.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-            const text = await extractResponse.text();
-            console.error('Réponse non-JSON reçue:', text.substring(0, 200));
-            throw new Error(`Erreur serveur: Le serveur Flask ne répond pas correctement. Vérifiez que le serveur est démarré avec 'python app.py'`);
+        await Promise.all(filesToUpload.map(file => checkCourseFile(file)));
+        for (const [index, file] of filesToUpload.entries()) {
+            showStatus(`Traitement du fichier ${index + 1}/${filesToUpload.length} : ${file.name}`, 'info');
+            const fileState = courseFileStates.get(getCourseFileKey(file));
+            if (!fileState || fileState.status === 'error') {
+                throw new Error(fileState?.error || `Vérification impossible pour "${file.name}"`);
+            }
+            if (fileState.status === 'duplicate_no_change') {
+                skippedCount++;
+                continue;
+            }
+            const extractResult = fileState.courseData;
+            const addResult = await addCourseData(extractResult);
+
+            if (addResult.success) {
+                uploadedCount++;
+                sessionStorage.removeItem('coursesData_session');
+            } else if (addResult.action_required === 'duplicate_no_change') {
+                skippedCount++;
+            } else if (addResult.action_required === 'confirm_update') {
+                if (confirmDuplicateCourse(addResult)) {
+                    await updateExistingCourse(extractResult, false);
+                    uploadedCount++;
+                } else {
+                    skippedCount++;
+                }
+            } else {
+                throw new Error(addResult.error || `Erreur lors de l'ajout de "${file.name}"`);
+            }
         }
-        
-        const extractResult = await extractResponse.json();
-        
-        if (!extractResponse.ok) {
-            throw new Error(extractResult.error || 'Erreur lors de l\'extraction');
-        }
-        
-        // Vérifier que les données sont valides
-        if (!extractResult.metadata || !extractResult.definitions) {
-            console.error('Données extraites invalides:', extractResult);
-            throw new Error('Format de données invalide. Le fichier ODT n\'a pas pu être correctement parsé.');
-        }
-        
-        // Ensuite ajouter le cours à la base de données
-        const addResponse = await fetch('/api/add_course', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(extractResult)
-        });
-        
-        // Vérifier le Content-Type pour add_course aussi
-        const addContentType = addResponse.headers.get('content-type');
-        if (!addContentType || !addContentType.includes('application/json')) {
-            const text = await addResponse.text();
-            console.error('Réponse non-JSON reçue:', text.substring(0, 200));
-            throw new Error('Erreur serveur lors de l\'ajout du cours');
-        }
-        
-        const addResult = await addResponse.json();
-        
-        if (addResponse.ok && addResult.success) {
-            sessionStorage.removeItem('coursesData_session');
-            showStatus(`✅ Cours "${extractResult.metadata.title}" ajouté avec succès ! (${extractResult.definitions.length} définitions)`, 'success');
-            resetCourseForm();
-        } else if (addResponse.status === 409 && addResult.action_required === 'duplicate_no_change') {
-            showStatus('⚠️ Ce fichier est déjà présent : aucun cours ajouté', 'info');
-            resetCourseForm();
-        } else if (addResponse.status === 409 && addResult.action_required === 'confirm_update') {
-            // Cours déjà existant - demander confirmation
-            handleDuplicateCourse(extractResult, addResult);
-        } else {
-            throw new Error(addResult.error || 'Erreur lors de l\'ajout du cours');
-        }
-        
+
+        showStatus(`✅ Import terminé : ${uploadedCount} cours ajouté(s), ${skippedCount} ignoré(s).`, 'success');
+        resetCourseForm();
     } catch (error) {
         showStatus(`❌ Erreur : ${error.message}`, 'error');
         console.error('Erreur upload cours:', error);
+    } finally {
+        uploadButton.disabled = selectedCourseFiles.length === 0;
     }
 }
 
+async function extractCourseFile(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await fetch('/api/extract_odt', { method: 'POST', body: formData });
+    const result = await parseJsonResponse(response, 'Erreur lors de l\'extraction');
+    if (!result.metadata || !result.definitions) {
+        throw new Error('Format de données invalide. Le fichier ODT n\'a pas pu être correctement parsé.');
+    }
+    return result;
+}
+
+async function addCourseData(courseData) {
+    const response = await fetch('/api/add_course', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(courseData)
+    });
+    return parseJsonResponse(response, 'Erreur lors de l\'ajout du cours', [409]);
+}
+
+async function parseJsonResponse(response, defaultMessage, acceptedStatuses = []) {
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+        throw new Error(defaultMessage);
+    }
+    const result = await response.json();
+    if (!response.ok && !acceptedStatuses.includes(response.status)) {
+        throw new Error(result.error || defaultMessage);
+    }
+    return result;
+}
+
 function resetCourseForm() {
-    selectedCourseFile = null;
+    selectedCourseFiles = [];
+    courseFileStates.clear();
     document.getElementById('courseMetadataForm').style.display = 'none';
     document.getElementById('courseFileInput').value = '';
     document.getElementById('courseUploadBtn').disabled = true;
-    
-    const preview = document.querySelector('#courseMetadataForm .file-preview');
-    if (preview) preview.remove();
+    document.querySelectorAll('#courseMetadataForm .course-file-preview').forEach(preview => preview.remove());
 }
 
 // Gérer les cours en doublon
-function handleDuplicateCourse(newCourseData, duplicateInfo) {
+function confirmDuplicateCourse(duplicateInfo) {
     const existing = duplicateInfo.existing_course;
     const newCourse = duplicateInfo.new_course;
     
@@ -211,16 +276,11 @@ Nouveau fichier :
 
 Voulez-vous remplacer le cours existant ?`;
 
-    if (confirm(confirmMsg)) {
-        updateExistingCourse(newCourseData);
-    } else {
-        showStatus('Upload annulé - le cours existant n\'a pas été modifié', 'info');
-        resetCourseForm();
-    }
+    return confirm(confirmMsg);
 }
 
 // Mettre à jour un cours existant
-async function updateExistingCourse(courseData) {
+async function updateExistingCourse(courseData, resetForm = true) {
     try {
         showStatus('Mise à jour du cours en cours...', 'info');
         
@@ -237,13 +297,14 @@ async function updateExistingCourse(courseData) {
         if (response.ok && result.success) {
             sessionStorage.removeItem('coursesData_session');
             showStatus(`✅ Cours "${courseData.metadata.title}" mis à jour avec succès !`, 'success');
-            resetCourseForm();
+            if (resetForm) resetCourseForm();
         } else {
             throw new Error(result.error || 'Erreur lors de la mise à jour');
         }
     } catch (error) {
         showStatus(`❌ Erreur : ${error.message}`, 'error');
         console.error('Erreur mise à jour cours:', error);
+        throw error;
     }
 }
 

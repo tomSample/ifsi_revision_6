@@ -97,9 +97,19 @@ def extract_odt():
     return _legacy_app.extract_odt()
 
 
+@app.route('/api/check_course', methods=['POST'])
+def check_course():
+    return _legacy_app.check_course()
+
+
 @app.route('/api/add_course', methods=['POST'])
 def add_course():
     return _legacy_app.add_course()
+
+
+@app.route('/api/update_course', methods=['POST'])
+def update_course():
+    return _legacy_app.update_course()
 
 
 @app.route('/api/delete_course', methods=['DELETE'])
